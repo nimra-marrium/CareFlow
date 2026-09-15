@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareFlow</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <main class="login-page">
+        <section class="login-card">
+            <div class="login-logo">
+                <img 
+                    src="../assets/logo/careflow-logo.png" 
+                    alt="CareFlow Logo"
+                    class="login-logo-img"
+                >
+            </div>
+
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to your CareFlow admin account</p>
+            </div>
+
+            <form class="login-form">
+                <div class="form-group">
+                    <label for="email">Email or Username</label>
+                    <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your Email or Username"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required>
+                </div>
+
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Remember Me</span>
+                    </label>
+                    <a href="#" class="forgot-password">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="btn btn-primary login-button">Login</button>
+            </form>
+
+            <p class="login-footer">
+                CareFlow &copy;2026. All rights reserved.
+            </p>
+        </section>
+    </main>
+</body>
+</html>
