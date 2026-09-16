@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareFlow</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img 
+                    src="../assets/logo/careflow-logo.png" 
+                    alt="CareFlow Logo"
+                >
+                <span>CareFlow</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    Dashboard
+                </a>
+                <a href="users.html" class="nav-item">
+                    User Management
+                </a>
+                <a href="roles.html" class="nav-item">
+                    Roles
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="nav-item logout">
+                    Logout
+                </a>
+            </div>
+
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome back, Admin.</p>
+                </div>
+
+            </header>
+
+            <section class="dashboard-cards">
+                <div class="dashboard-card">
+                    <span class="card-label">Total Users</span>
+                    <h2>24</h2>
+                    <p>Registered users</p>
+                </div>
+                <div class="dashboard-card">
+                    <span class="card-label">Active Users</span>
+                    <h2>20</h2>
+                    <p>Currently active</p>
+                </div>
+                <div class="dashboard-card">
+                    <span class="card-label">Roles</span>
+                    <h2>3</h2>
+                    <p>Available roles</p>
+                </div>
+            </section>
+
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2>Quick Actions</h2>
+                    <p>Manage your CareFlow system.</p>
+                </div>
+                <div class="quick-actions">
+                    <a href="create-user.html" class="action-card">
+                        <h3>Create User</h3>
+                        <p>Add a new user to the system.</p>
+                    </a>
+                    <a href="users.html" class="action-card">
+                        <h3>Manage Users</h3>
+                        <p>View and manage registered users.</p>
+                    </a>
+                    <a href="roles.html" class="action-card">
+                        <h3>Manage Roles</h3>
+                        <p>View and manage user roles.</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
