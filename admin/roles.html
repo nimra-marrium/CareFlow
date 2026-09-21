@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareFlow</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../assets/logo/careflow-logo.png" alt="CareFlow Logo">
+                <span>CareFlow</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="users.html" class="nav-item">User Management</a>
+                <a href="roles.html" class="nav-item active">Roles</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="nav-item logout">Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <h1>User Roles</h1>
+                    <p>View the user roles available in CareFlow</p>
+                </div>
+            </header>
+
+            <section class="roles-grid">
+                <div class="role-card">
+                    <div class="role-card-header">
+                        <h2>Admin</h2>
+                        <span class="role-count">2 Users</span>
+                    </div>
+
+                    <p>
+                        Manages users and the CareFlow administration system
+                    </p>
+                </div>
+
+                <div class="role-card">
+                    <div class="role-card-header">
+                        <h2>Doctor</h2>
+                        <span class="role-count">8 Users</span>
+                    </div>
+
+                    <p>
+                        Handles patients, doctors, and appointments
+                    </p>
+                </div>
+
+                <div class="role-card">
+                    <div class="role-card-header">
+                        <h2>Pharmacist</h2>
+                        <span class="role-count">4 Users</span>
+                    </div>
+
+                    <p>
+                        Handles pharmacy and medicine-related activities
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

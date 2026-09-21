@@ -388,3 +388,267 @@ body {
         padding: 20px;
     }
 }
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.page-header p {
+    font-size: 14px;
+    color: #66736F;
+}
+
+.page-header .btn {
+    padding: 11px 18px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.management-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.search-input,
+.filter-select {
+    padding: 11px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+}
+
+.search-input {
+    flex: 1;
+}
+
+.filter-select {
+    min-width: 150px;
+}
+
+.search-input:focus,
+.filter-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+}
+
+.users-table th {
+    color: #53615D;
+    font-weight: 600;
+    background-color: var(--background);
+}
+
+.users-table td {
+    color: var(--text);
+}
+
+.users-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-active {
+    color: var(--success);
+    background-color: #EAF5EF;
+}
+
+.status-inactive {
+    color: var(--danger);
+    background-color: #FBECEC;
+}
+
+.action-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 12px;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
+
+.delete-btn {
+    border: none;
+    background: none;
+    color: var(--danger);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    text-decoration: underline;
+}
+
+.form-card {
+    max-width: 700px;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    outline: none;
+}
+
+.form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.form-actions .btn {
+    padding: 11px 18px;
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background-color: var(--white);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background-color: var(--background);
+}
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.role-card {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+}
+
+.role-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.role-card p {
+    font-size: 13px;
+    color: #66736F;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.role-count {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+@media (max-width: 800px) {
+    .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filter-select {
+        width: 100%;
+    }
+
+    .roles-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .users-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+}

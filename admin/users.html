@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareFlow</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../assets/logo/careflow-logo.png" alt="CareFlow Logo">
+                <span>CareFlow</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="users.html" class="nav-item active">User Management</a>
+                <a href="roles.html" class="nav-item">Roles</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="nav-item logout">Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <h1>User Management</h1>
+                    <p>View and manage CareFlow users</p>
+                </div>
+
+                <a href="create-user.html" class="btn btn-primary">
+                    + Create User
+                </a>
+            </header>
+
+            <section class="dashboard-section">
+                <div class="user-toolbar">
+                    <div class="search-box">
+                        <label for="search">Search Users</label>
+                        <input
+                            type="text"
+                            id="search"
+                            placeholder="Search by name or email"
+                        >
+                    </div>
+
+                    <div class="filter-box">
+                        <label for="role-filter">Role</label>
+                        <select id="role-filter">
+                            <option>All Roles</option>
+                            <option>Admin</option>
+                            <option>Doctor</option>
+                            <option>Pharmacist</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-box">
+                        <label for="status-filter">Status</label>
+                        <select id="status-filter">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Dr. Ali</td>
+                                <td>ali@careflow.com</td>
+                                <td>Doctor</td>
+                                <td>
+                                    <span class="status-badge active-status">
+                                        Active
+                                    </span>
+                                </td>
+                                <td class="table-actions">
+                                    <a href="edit-user.html">Edit</a>
+                                    <button type="button" class="delete-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Sarah</td>
+                                <td>sarah@careflow.com</td>
+                                <td>Pharmacist</td>
+                                <td>
+                                    <span class="status-badge active-status">
+                                        Active
+                                    </span>
+                                </td>
+                                <td class="table-actions">
+                                    <a href="edit-user.html">Edit</a>
+                                    <button type="button" class="delete-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Nimra</td>
+                                <td>nimra@careflow.com</td>
+                                <td>Doctor</td>
+                                <td>
+                                    <span class="status-badge inactive-status">
+                                        Inactive
+                                    </span>
+                                </td>
+                                <td class="table-actions">
+                                    <a href="edit-user.html">Edit</a>
+                                    <button type="button" class="delete-btn">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

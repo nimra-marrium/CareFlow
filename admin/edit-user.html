@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareFlow</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="../assets/logo/careflow-logo.png" alt="CareFlow Logo">
+                <span>CareFlow</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="users.html" class="nav-item active">User Management</a>
+                <a href="roles.html" class="nav-item">Roles</a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <a href="login.html" class="nav-item logout">Logout</a>
+            </div>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-header">
+                <div>
+                    <h1>Edit User</h1>
+                    <p>Update user information</p>
+                </div>
+            </header>
+
+            <section class="form-card">
+                <form>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                value="Dr. Ahmed Khan"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                value="ahmed@careflow.com"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">User Role</label>
+                            <select id="role">
+                                <option>Doctor</option>
+                                <option>Admin</option>
+                                <option>Pharmacist</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status">
+                                <option>Active</option>
+                                <option>Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="users.html" class="btn btn-secondary">Cancel</a>
+
+                        <button type="submit" class="btn btn-primary">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
