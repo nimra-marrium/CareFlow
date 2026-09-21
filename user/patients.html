@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patients | CareFlow HMS</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== SIDEBAR (har page par same) ===== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <img src="assets/logo.png" alt="CareFlow logo">
+      <div><strong>CareFlow</strong><span>Hospital Management</span></div>
+    </div>
+    <nav class="nav">
+      <a href="dashboard.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Dashboard</a>
+      <a href="doctors.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Doctors</a>
+      <a href="patients.html" class="active"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Patients</a>
+      <a href="appointments.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Appointments</a>
+      <a href="pharmacy.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 9.4l-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Pharmacy</a>
+    </nav>
+    <div class="sidebar-foot">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Log out</a>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN AREA ===== -->
+  <div class="main">
+
+    <!-- Top header: page ka naam + profile -->
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <div>
+          <h1>Patients</h1>
+          <p>Register and manage patient records.</p>
+        </div>
+      </div>
+      <div class="profile">
+        <div style="text-align:right"><b>Ayesha Khan</b><small>Receptionist</small></div>
+        <span class="avatar">AK</span>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <div class="panel">
+        <div class="toolbar">
+          <div class="search">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="search" id="searchInput" placeholder="Search patients..." oninput="applyFilters()">
+          </div>
+          <div class="tabs" role="tablist"><button class="tab active" onclick="setTab(this,'all')">All</button><button class="tab" onclick="setTab(this,'active')">Active</button><button class="tab" onclick="setTab(this,'discharged')">Discharged</button></div>
+          <button class="btn btn-primary" onclick="openModal('formModal','Add Patient')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add Patient</button>
+        </div>
+        <div class="table-wrap">
+          <table data-filterable>
+            <thead><tr><th>Patient ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Phone</th><th>Address</th><th>Assigned Doctor</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+            <tr data-status="active">
+              <td class="id">P-101</td>
+              <td><span class="name">Ali Raza</span></td>
+              <td>34</td>
+              <td>Male</td>
+              <td>0311-1112223</td>
+              <td>House 12, Street 4, Peshawar</td>
+              <td>Dr. Imran Malik</td>
+              <td><span class="badge green">Active</span></td>
+              <td><div class="actions">
+                <button class="icon-btn" title="Edit" aria-label="Edit Ali Raza" onclick="openModal('formModal','Edit Patient')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="icon-btn danger" title="Delete" aria-label="Delete Ali Raza" onclick="askDelete(this,'Ali Raza')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr data-status="active">
+              <td class="id">P-102</td>
+              <td><span class="name">Fatima Noor</span></td>
+              <td>28</td>
+              <td>Female</td>
+              <td>0312-2223334</td>
+              <td>Hayatabad Phase 3, Peshawar</td>
+              <td>Dr. Nadia Rehman</td>
+              <td><span class="badge green">Active</span></td>
+              <td><div class="actions">
+                <button class="icon-btn" title="Edit" aria-label="Edit Fatima Noor" onclick="openModal('formModal','Edit Patient')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="icon-btn danger" title="Delete" aria-label="Delete Fatima Noor" onclick="askDelete(this,'Fatima Noor')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr data-status="active">
+              <td class="id">P-103</td>
+              <td><span class="name">Usman Tariq</span></td>
+              <td>9</td>
+              <td>Male</td>
+              <td>0313-3334445</td>
+              <td>University Town, Peshawar</td>
+              <td>Dr. Sana Yousaf</td>
+              <td><span class="badge green">Active</span></td>
+              <td><div class="actions">
+                <button class="icon-btn" title="Edit" aria-label="Edit Usman Tariq" onclick="openModal('formModal','Edit Patient')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="icon-btn danger" title="Delete" aria-label="Delete Usman Tariq" onclick="askDelete(this,'Usman Tariq')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr data-status="discharged">
+              <td class="id">P-104</td>
+              <td><span class="name">Zainab Bibi</span></td>
+              <td>61</td>
+              <td>Female</td>
+              <td>0314-4445556</td>
+              <td>Saddar, Peshawar</td>
+              <td>Dr. Faisal Nawaz</td>
+              <td><span class="badge blue">Discharged</span></td>
+              <td><div class="actions">
+                <button class="icon-btn" title="Edit" aria-label="Edit Zainab Bibi" onclick="openModal('formModal','Edit Patient')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="icon-btn danger" title="Delete" aria-label="Delete Zainab Bibi" onclick="askDelete(this,'Zainab Bibi')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr data-status="active">
+              <td class="id">P-105</td>
+              <td><span class="name">Bilal Ahmed</span></td>
+              <td>45</td>
+              <td>Male</td>
+              <td>0315-5556667</td>
+              <td>Gulbahar, Peshawar</td>
+              <td>Dr. Kamran Ali</td>
+              <td><span class="badge green">Active</span></td>
+              <td><div class="actions">
+                <button class="icon-btn" title="Edit" aria-label="Edit Bilal Ahmed" onclick="openModal('formModal','Edit Patient')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="icon-btn danger" title="Delete" aria-label="Delete Bilal Ahmed" onclick="askDelete(this,'Bilal Ahmed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr data-status="discharged">
+              <td class="id">P-106</td>
+              <td><span class="name">Maryam Iqbal</span></td>
+              <td>23</td>
+              <td>Female</td>
+              <td>0316-6667778</td>
+              <td>Regi Model Town, Peshawar</td>
+              <td>Dr. Hina Shah</td>
+              <td><span class="badge blue">Discharged</span></td>
+              <td><div class="actions">
+                <button class="icon-btn" title="Edit" aria-label="Edit Maryam Iqbal" onclick="openModal('formModal','Edit Patient')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="icon-btn danger" title="Delete" aria-label="Delete Maryam Iqbal" onclick="askDelete(this,'Maryam Iqbal')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            <tr data-status="active">
+              <td class="id">P-107</td>
+              <td><span class="name">Hamza Khan</span></td>
+              <td>52</td>
+              <td>Male</td>
+              <td>0317-7778889</td>
+              <td>Ring Road, Peshawar</td>
+              <td>Dr. Imran Malik</td>
+              <td><span class="badge green">Active</span></td>
+              <td><div class="actions">
+                <button class="icon-btn" title="Edit" aria-label="Edit Hamza Khan" onclick="openModal('formModal','Edit Patient')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+                <button class="icon-btn danger" title="Delete" aria-label="Delete Hamza Khan" onclick="askDelete(this,'Hamza Khan')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>
+              </div></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="empty" id="emptyState">No patients match your search.</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ===== POPUP: Add / Edit form ===== -->
+  <div class="modal-overlay" id="formModal">
+    <div class="modal" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h3>Add Patient</h3>
+        <button class="close" onclick="closeModal('formModal')" aria-label="Close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <form onsubmit="saveForm(event,'formModal')">
+        <div class="modal-body">
+          <div class="form-grid">
+            <div class="field full"><label>Full name</label><input type="text" placeholder="Patient full name" required ></div>
+            <div class="field"><label>Age</label><input type="number" placeholder="e.g. 34" required min="0" max="120"></div>
+            <div class="field"><label>Gender</label><select required><option value="">Choose gender</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+            <div class="field"><label>Phone</label><input type="tel" placeholder="03XX-XXXXXXX" required ></div>
+            <div class="field"><label>Status</label><select required><option value="">Choose status</option><option>Active</option><option>Discharged</option></select></div>
+            <div class="field full"><label>Address</label><input type="text" placeholder="House, street, area" required ></div>
+            <div class="field full"><label>Assigned doctor</label><select><option value="">Choose doctor</option><option>Dr. Imran Malik</option><option>Dr. Sana Yousaf</option><option>Dr. Kamran Ali</option><option>Dr. Nadia Rehman</option><option>Dr. Faisal Nawaz</option><option>Dr. Hina Shah</option></select><span class="hint">Optional: you can assign a doctor later.</span></div>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-secondary" onclick="closeModal('formModal')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== POPUP: Delete confirmation ===== -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal small" role="alertdialog" aria-modal="true">
+      <div class="confirm">
+        <div class="warn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></div>
+        <h3>Delete this record?</h3>
+        <p id="deleteText">This cannot be undone.</p>
+      </div>
+      <div class="modal-foot" style="background:none;border:none;justify-content:center;padding-bottom:24px">
+        <button class="btn btn-secondary" onclick="closeModal('deleteModal')">Keep it</button>
+        <button class="btn btn-danger" onclick="confirmDelete()">Yes, delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>
