@@ -1,95 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareFlow</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>CareFlow</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-    <div class="dashboard-layout">
-        <aside class="sidebar">
-            <div class="sidebar-logo">
-                <img src="../assets/logo/careflow-logo.png" alt="CareFlow Logo">
-                <span>CareFlow</span>
+
+  <div id="sidebar-container"></div>
+  <main class="main">
+
+    <header class="topbar">
+
+      <div style="display:flex; align-items:center; gap:12px;">
+
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+        <div>
+          <h1>Edit User</h1>
+          <p>Update hospital system user information</p>
+        </div>
+
+      </div>
+
+
+      <div class="profile">
+
+        <div class="avatar">A</div>
+
+        <div>
+          <b>Admin</b>
+          <small>Administrator</small>
+        </div>
+
+      </div>
+
+    </header>
+    <section class="content">
+
+      <div class="form-card">
+
+        <div style="margin-bottom:22px;">
+
+          <h2 style="font-size:18px;">
+            User Information
+          </h2>
+
+          <p style="color:var(--muted); font-size:13px; margin-top:4px;">
+            Update the details of the selected user
+          </p>
+
+        </div>
+
+
+        <form onsubmit="saveForm(event, 'editUserModal')">
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label for="userId">
+                User ID
+              </label>
+
+              <input
+                type="text"
+                id="userId"
+                value="CF-1001"
+                readonly
+              >
+
             </div>
 
-            <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item">Dashboard</a>
-                <a href="users.html" class="nav-item active">User Management</a>
-                <a href="roles.html" class="nav-item">Roles</a>
-            </nav>
+            <div class="field">
 
-            <div class="sidebar-bottom">
-                <a href="login.html" class="nav-item logout">Logout</a>
+              <label for="fullName">
+                Full Name
+              </label>
+
+              <input
+                type="text"
+                id="fullName"
+                value="Nimra Marrium"
+                required
+              >
             </div>
-        </aside>
 
-        <main class="dashboard-main">
-            <header class="dashboard-header">
-                <div>
-                    <h1>Edit User</h1>
-                    <p>Update user information</p>
-                </div>
-            </header>
+            <div class="field">
 
-            <section class="form-card">
-                <form>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                value="Dr. Ahmed Khan"
-                                required
-                            >
-                        </div>
+              <label for="email">
+                Email
+              </label>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                value="ahmed@careflow.com"
-                                required
-                            >
-                        </div>
+              <input
+                type="email"
+                id="email"
+                value="nimra@careflow.com"
+                required
+              >
 
-                        <div class="form-group">
-                            <label for="role">User Role</label>
-                            <select id="role">
-                                <option>Doctor</option>
-                                <option>Admin</option>
-                                <option>Pharmacist</option>
-                            </select>
-                        </div>
+            </div>
 
-                        <div class="form-group">
-                            <label for="status">Status</label>
-                            <select id="status">
-                                <option>Active</option>
-                                <option>Inactive</option>
-                            </select>
-                        </div>
-                    </div>
+            <div class="field">
 
-                    <div class="form-actions">
-                        <a href="users.html" class="btn btn-secondary">Cancel</a>
+              <label for="role">
+                Role
+              </label>
 
-                        <button type="submit" class="btn btn-primary">
-                            Save Changes
-                        </button>
-                    </div>
-                </form>
-            </section>
-        </main>
+              <select id="role" required>
+
+                <option value="">
+                  Select role
+                </option>
+
+                <option value="doctor" selected>
+                  Doctor
+                </option>
+
+                <option value="nurse">
+                  Nurse
+                </option>
+
+                <option value="receptionist">
+                  Receptionist
+                </option>
+
+                <option value="pharmacist">
+                  Pharmacist
+                </option>
+
+              </select>
+
+            </div>
+
+            <div class="field">
+
+              <label for="department">
+                Department
+              </label>
+
+              <select id="department" required>
+
+                <option value="">
+                  Select department
+                </option>
+
+                <option value="administration">
+                  Administration
+                </option>
+
+                <option value="cardiology" selected>
+                  Cardiology
+                </option>
+
+                <option value="dermatology">
+                  Dermatology
+                </option>
+
+                <option value="emergency">
+                  Emergency
+                </option>
+
+                <option value="ent">
+                  ENT
+                </option>
+
+                <option value="gastroenterology">
+                  Gastroenterology
+                </option>
+
+                <option value="general-medicine">
+                  General Medicine
+                </option>
+
+                <option value="gynecology">
+                  Gynecology
+                </option>
+
+                <option value="laboratory">
+                  Laboratory
+                </option>
+
+                <option value="neurology">
+                  Neurology
+                </option>
+
+                <option value="oncology">
+                  Oncology
+                </option>
+
+                <option value="orthopedics">
+                  Orthopedics
+                </option>
+
+                <option value="pharmacy">
+                  Pharmacy
+                </option>
+
+                <option value="radiology">
+                  Radiology
+                </option>
+
+                <option value="urology">
+                  Urology
+                </option>
+
+              </select>
+
+            </div>
+
+            <div class="field">
+
+              <label for="status">
+                Status
+              </label>
+
+              <select id="status" required>
+
+                <option value="active" selected>
+                  Active
+                </option>
+
+                <option value="inactive">
+                  Inactive
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+          <div class="form-actions">
+
+            <a
+              href="users.html"
+              class="btn btn-secondary"
+            >
+              Cancel
+            </a>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              Save Changes
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <div class="modal-overlay" id="editUserModal">
+
+    <div class="modal">
+
+      <div class="modal-head">
+
+        <h3>
+          User Updated
+        </h3>
+
+        <button
+          type="button"
+          onclick="closeModal('editUserModal')"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div style="padding:20px;">
+        User information updated successfully.
+      </div>
+
     </div>
+
+  </div>
+
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/admin.js"></script>
+
 </body>
 </html>

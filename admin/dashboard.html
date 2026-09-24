@@ -1,87 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareFlow</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CareFlow</title>
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-    <div class="dashboard-layout">
-        <aside class="sidebar">
-            <div class="sidebar-logo">
-                <img 
-                    src="../assets/logo/careflow-logo.png" 
-                    alt="CareFlow Logo"
-                >
-                <span>CareFlow</span>
-            </div>
 
-            <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item active">Dashboard</a>
-                <a href="users.html" class="nav-item">User Management</a>
-                <a href="roles.html" class="nav-item">Roles</a>
-            </nav>
+  <div id="sidebar-container"></div>
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+        <div>
+          <h1>Dashboard</h1>
+          <p>Overview of your hospital system</p>
+        </div>
+      </div>
 
-            <div class="sidebar-bottom">
-                <a href="login.html" class="nav-item logout">Logout</a>
-            </div>
-        </aside>
+      <div class="profile">
+        <div class="avatar">A</div>
+        <div>
+          <b>Admin</b>
+          <small>Administrator</small>
+        </div>
+      </div>
 
-        <main class="dashboard-main">
-            <header class="dashboard-header">
-                <div>
-                    <h1>Dashboard</h1>
-                    <p>Welcome back, Admin</p>
-                </div>
-            </header>
+    </header>
+    <section class="content">
+      <div style="margin-bottom:24px;">
+        <h2 style="font-size:24px; margin-bottom:4px;">
+          Welcome back, Admin
+        </h2>
+        <p style="color:var(--muted);">
+          Here's an overview of CareFlow today.
+        </p>
+      </div>
 
-            <section class="dashboard-cards">
-                <div class="dashboard-card">
-                    <span class="card-label">Total Users</span>
-                    <h2>24</h2>
-                    <p>Registered users</p>
-                </div>
+      <div class="cards">
+        <div class="stat">
+          <div class="ico">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
 
-                <div class="dashboard-card">
-                    <span class="card-label">Active Users</span>
-                    <h2>20</h2>
-                    <p>Currently active</p>
-                </div>
+          <div>
+            <div class="num">20</div>
+            <div class="lbl">Total Users</div>
+          </div>
 
-                <div class="dashboard-card">
-                    <span class="card-label">Roles</span>
-                    <h2>3</h2>
-                    <p>Available roles</p>
-                </div>
-            </section>
+        </div>
 
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2>Quick Actions</h2>
-                    <p>Manage your CareFlow system.</p>
-                </div>
+        <div class="stat">
+          <div class="ico">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M20 6 9 17l-5-5"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="num">10</div>
+            <div class="lbl">Active Users</div>
+          </div>
 
-                <div class="quick-actions">
-                    <a href="create-user.html" class="action-card">
-                        <h3>Create User</h3>
-                        <p>Add a new user to the system.</p>
-                    </a>
+        </div>
 
-                    <a href="users.html" class="action-card">
-                        <h3>Manage Users</h3>
-                        <p>View and manage registered users.</p>
-                    </a>
+        <div class="stat">
+          <div class="ico">
+            <svg class="icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="7" r="4"></circle>
+              <path d="M5.5 21a6.5 6.5 0 0 1 13 0"></path>
+            </svg>
+          </div>
 
-                    <a href="roles.html" class="action-card">
-                        <h3>Manage Roles</h3>
-                        <p>View and manage user roles.</p>
-                    </a>
-                </div>
-            </section>
-        </main>
-    </div>
-    <script src="../js/admin.js"></script>
+          <div>
+            <div class="num">5</div>
+            <div class="lbl">Doctors</div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="ico">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M3 21h18"></path>
+              <path d="M5 21V5l7-3 7 3v16"></path>
+              <path d="M9 9h2"></path>
+              <path d="M13 9h2"></path>
+              <path d="M9 13h2"></path>
+              <path d="M13 13h2"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="num">10</div>
+            <div class="lbl">Departments</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Quick Actions</h2>
+          </div>
+        </div>
+        <div style="
+          display:flex;
+          gap:12px;
+          flex-wrap:wrap;
+          padding:0 20px 20px;
+        ">
+          <a href="create-user.html" class="btn btn-primary">
+            + Create User
+          </a>
+
+          <a href="users.html" class="btn btn-secondary">
+            Manage Users
+          </a>
+
+          <a href="roles.html" class="btn btn-secondary">
+            Manage Roles
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/admin.js"></script>
 </body>
 </html>

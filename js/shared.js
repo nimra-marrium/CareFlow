@@ -1,11 +1,12 @@
 /* =========================================================
-   CareFlow HMS - User Module
-   Yeh file har page par lagti hai. Isme 5 kaam hain:
+   CareFlow HMS - Shared Module
+   Yeh file admin.js aur user.js dono load karte hain. Isme
+   sirf woh cheezein hain jo dono modules mein use hoti hain:
    1. Popup (modal) kholna / band karna
    2. Delete confirmation
    3. Tabs + Search se table filter karna
-   4. Appointment ka status badalna
-   5. Chota message (toast) dikhana
+   4. Chota message (toast) dikhana
+   5. Mobile sidebar
    ========================================================= */
 
 /* ---------- 1. POPUP KHOLNA / BAND KARNA ----------
@@ -104,21 +105,7 @@ function applyFilters() {
   if (empty) empty.classList.toggle("show", visible === 0);
 }
 
-/* ---------- 4. APPOINTMENT STATUS BADALNA ---------- */
-function setStatus(button, status) {
-  const row = button.closest("tr");
-  const badge = row.querySelector(".badge");
-  const colors = { scheduled: "blue", completed: "green", cancelled: "red" };
-  const labels = { scheduled: "Scheduled", completed: "Completed", cancelled: "Cancelled" };
-
-  row.dataset.status = status;
-  badge.textContent = labels[status];
-  badge.className = "badge " + colors[status];
-  applyFilters();
-  showToast("Appointment marked as " + labels[status].toLowerCase());
-}
-
-/* ---------- 5. TOAST (chota message) ---------- */
+/* ---------- 4. TOAST (chota message) ---------- */
 let toastTimer;
 function showToast(message) {
   const toast = document.getElementById("toast");
@@ -131,25 +118,50 @@ function showToast(message) {
   }, 2600);
 }
 
-/* ---------- Mobile par sidebar kholna ---------- */
+/* ---------- 5. Mobile par sidebar kholna ---------- */
 function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("adminSidebar").classList.toggle("open");
 }
 
-/* ---------- Appointment CANCEL ke liye bhi confirmation ---------- */
-let buttonToCancel = null;
 
-function askCancel(button, patientName) {
-  buttonToCancel = button;
-  document.getElementById("cancelText").textContent =
-    "The appointment for " + patientName + " will be marked as cancelled.";
-  openModal("cancelModal");
-}
+document.addEventListener("DOMContentLoaded", function () {
+  const sidebarContainer = document.getElementById("sidebar-container");
 
-function confirmCancel() {
-  if (buttonToCancel) {
-    setStatus(buttonToCancel, "cancelled");
-    buttonToCancel = null;
+  if (sidebarContainer) {
+    fetch("../components/admin-sidebar.html")
+      .then(response => response.text())
+      .then(data => {
+        sidebarContainer.innerHTML = data;
+
+        /* Highlight the current page */
+        const currentPage = window.location.pathname.split("/").pop();
+
+        document.querySelectorAll(".sidebar .nav a").forEach(function (link) {
+          const linkPage = link.getAttribute("href").split("/").pop();
+
+          link.classList.remove("active");
+
+          if (linkPage === currentPage) {
+            link.classList.add("active");
+          }
+        });
+
+        /* Create User belongs to User Management */
+        if (
+          currentPage === "create-user.html" ||
+          currentPage === "edit-user.html"
+        ) {
+          const usersLink = document.querySelector(
+            '.sidebar .nav a[href*="users.html"]'
+          );
+
+          if (usersLink) {
+            usersLink.classList.add("active");
+          }
+        }
+      })
+      .catch(error => {
+        console.error("Sidebar failed to load:", error);
+      });
   }
-  closeModal("cancelModal");
-}
+});

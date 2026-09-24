@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CareFlow</title>
+
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <div id="sidebar-container"></div>
+
+  <main class="main">
+
+    <!-- Topbar -->
+    <header class="topbar">
+
+      <div style="display:flex; align-items:center; gap:12px;">
+
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+        <div>
+          <h1>Departments</h1>
+          <p>Manage hospital departments</p>
+        </div>
+
+      </div>
+
+      <div class="profile">
+
+        <div class="avatar">A</div>
+
+        <div>
+          <b>Admin</b>
+          <small>Administrator</small>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- Page Content -->
+    <section class="content">
+
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Hospital Departments</h2>
+            <p style="color:var(--muted); font-size:13px;">
+              View and manage departments in CareFlow.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="openModal('departmentModal', 'Add Department')"
+          >
+            + Add Department
+          </button>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Department</th>
+                <th>Code</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr>
+
+                <td>Administration</td>
+
+                <td>ADM</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Cardiology</td>
+
+                <td>CAR</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Dermatology</td>
+
+                <td>DER</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Emergency</td>
+
+                <td>EMR</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>ENT</td>
+
+                <td>ENT</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Gastroenterology</td>
+
+                <td>GAS</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>General Medicine</td>
+
+                <td>GEN</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Gynecology</td>
+
+                <td>GYN</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Neurology</td>
+
+                <td>NEU</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Oncology</td>
+
+                <td>ONC</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Orthopedics</td>
+
+                <td>ORT</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Pharmacy</td>
+
+                <td>PHA</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Radiology</td>
+
+                <td>RAD</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>Urology</td>
+
+                <td>URO</td>
+
+                <td>
+                  <span class="badge green">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    onclick="openModal('departmentModal', 'Edit Department')"
+                  >
+                    Edit
+                  </button>
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- Department Modal -->
+  <div class="modal-overlay" id="departmentModal">
+
+    <div class="modal">
+
+      <div class="modal-head">
+
+        <h3>Add Department</h3>
+
+        <button
+          type="button"
+          onclick="closeModal('departmentModal')"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form onsubmit="saveForm(event, 'departmentModal')">
+
+        <div style="padding:20px;">
+
+          <div class="field">
+
+            <label for="departmentName">
+              Department Name
+            </label>
+
+            <input
+              type="text"
+              id="departmentName"
+              placeholder="Enter department name"
+              required
+            >
+
+          </div>
+
+
+          <div class="field" style="margin-top:16px;">
+
+            <label for="departmentCode">
+              Department Code
+            </label>
+
+            <input
+              type="text"
+              id="departmentCode"
+              placeholder="e.g. CAR"
+              maxlength="5"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeModal('departmentModal')"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              Save Department
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/admin.js"></script>
+
+</body>
+</html>

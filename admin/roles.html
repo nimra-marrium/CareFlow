@@ -1,79 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareFlow</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>CareFlow</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
-    <div class="dashboard-layout">
-        <aside class="sidebar">
-            <div class="sidebar-logo">
-                <img src="../assets/logo/careflow-logo.png" alt="CareFlow Logo">
-                <span>CareFlow</span>
-            </div>
 
-            <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item">Dashboard</a>
-                <a href="users.html" class="nav-item">User Management</a>
-                <a href="roles.html" class="nav-item active">Roles</a>
-            </nav>
+  <div id="sidebar-container"></div>
 
-            <div class="sidebar-bottom">
-                <a href="login.html" class="nav-item logout">Logout</a>
-            </div>
-        </aside>
+  <main class="main">
 
-        <main class="dashboard-main">
-            <header class="dashboard-header">
-                <div>
-                    <h1>User Roles</h1>
-                    <p>View the user roles available in CareFlow</p>
-                </div>
-            </header>
+    <header class="topbar">
 
-            <section class="roles-grid">
-                <div class="role-card">
-                    <div class="role-card-header">
-                        <h2>Admin</h2>
-                        <span class="role-count">2 Users</span>
-                    </div>
+      <div style="display:flex; align-items:center; gap:12px;">
 
-                    <p>
-                        Manages users and the CareFlow administration system
-                    </p>
-                </div>
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
 
-                <div class="role-card">
-                    <div class="role-card-header">
-                        <h2>Doctor</h2>
-                        <span class="role-count">8 Users</span>
-                    </div>
+        <div>
+          <h1>Roles &amp; Permissions</h1>
+          <p>Manage user roles and access permissions</p>
+        </div>
 
-                    <p>
-                        Handles patients, doctors, and appointments
-                    </p>
-                </div>
+      </div>
 
-                <div class="role-card">
-                    <div class="role-card-header">
-                        <h2>Pharmacist</h2>
-                        <span class="role-count">4 Users</span>
-                    </div>
+      <div class="profile">
 
-                    <p>
-                        Handles pharmacy and medicine-related activities
-                    </p>
-                </div>
-            </section>
-        </main>
-    </div>
+        <div class="avatar">A</div>
+
+        <div>
+          <b>Admin</b>
+          <small>Administrator</small>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <!-- Hospital Roles -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Hospital Roles</h2>
+          </div>
+
+        </div>
+
+
+        <div class="roles-grid">
+
+          <!-- Doctor -->
+          <div class="role-card">
+
+            <h3>Doctor</h3>
+
+            <p>
+              Manages patients, appointments and medical information.
+            </p>
+
+            <span class="badge blue">
+              Medical Staff
+            </span>
+
+          </div>
+
+
+          <!-- Receptionist -->
+          <div class="role-card">
+
+            <h3>Receptionist</h3>
+
+            <p>
+              Manages patient registration and appointments.
+            </p>
+
+            <span class="badge amber">
+              Front Desk
+            </span>
+
+          </div>
+
+
+          <!-- Pharmacist -->
+          <div class="role-card">
+
+            <h3>Pharmacist</h3>
+
+            <p>
+              Manages medicines and pharmacy records.
+            </p>
+
+            <span class="badge green">
+              Pharmacy
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Permissions -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Permissions</h2>
+
+            <p style="color:var(--muted); font-size:13px;">
+              Configure what each role can access.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Permission</th>
+                <th>Doctor</th>
+                <th>Receptionist</th>
+                <th>Pharmacist</th>
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <!-- View Patients -->
+              <tr>
+
+                <td>View Patients</td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+              </tr>
+
+
+              <!-- Add Patients -->
+              <tr>
+
+                <td>Add Patients</td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+              </tr>
+
+
+              <!-- Edit Patients -->
+              <tr>
+
+                <td>Edit Patients</td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+              </tr>
+
+
+              <!-- Appointments -->
+              <tr>
+
+                <td>Appointments</td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+              </tr>
+
+
+              <!-- Pharmacy -->
+              <tr>
+
+                <td>Pharmacy</td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+              </tr>
+
+
+              <!-- Reports -->
+              <tr>
+
+                <td>Reports</td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <div class="form-actions" style="padding:0 20px 20px;">
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="showToast('Permissions saved successfully (demo only)')"
+          >
+            Save Permissions
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/admin.js"></script>
+
 </body>
 </html>
