@@ -123,45 +123,54 @@ function toggleSidebar() {
   document.getElementById("adminSidebar").classList.toggle("open");
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
   const sidebarContainer = document.getElementById("sidebar-container");
 
-  if (sidebarContainer) {
-    fetch("../components/admin-sidebar.html")
-      .then(response => response.text())
-      .then(data => {
-        sidebarContainer.innerHTML = data;
+  if (!sidebarContainer) return;
 
-        /* Highlight the current page */
-        const currentPage = window.location.pathname.split("/").pop();
+  const currentFolder = window.location.pathname.includes("/user/")
+    ? "user"
+    : "admin";
 
-        document.querySelectorAll(".sidebar .nav a").forEach(function (link) {
-          const linkPage = link.getAttribute("href").split("/").pop();
+  const sidebarFile =
+    currentFolder === "user"
+      ? "../components/user-sidebar.html"
+      : "../components/admin-sidebar.html";
 
-          link.classList.remove("active");
+  fetch(sidebarFile)
+    .then(response => response.text())
+    .then(data => {
+      sidebarContainer.innerHTML = data;
 
-          if (linkPage === currentPage) {
-            link.classList.add("active");
-          }
-        });
+      /* Highlight the current page */
+      const currentPage = window.location.pathname.split("/").pop();
 
-        /* Create User belongs to User Management */
-        if (
-          currentPage === "create-user.html" ||
-          currentPage === "edit-user.html"
-        ) {
-          const usersLink = document.querySelector(
-            '.sidebar .nav a[href*="users.html"]'
-          );
+      document.querySelectorAll(".sidebar .nav a").forEach(function (link) {
+        const linkPage = link.getAttribute("href").split("/").pop();
 
-          if (usersLink) {
-            usersLink.classList.add("active");
-          }
+        link.classList.remove("active");
+
+        if (linkPage === currentPage) {
+          link.classList.add("active");
         }
-      })
-      .catch(error => {
-        console.error("Sidebar failed to load:", error);
       });
-  }
+
+      /* Create User and Edit User belong to User Management */
+      if (
+        currentFolder === "admin" &&
+        (currentPage === "create-user.html" ||
+          currentPage === "edit-user.html")
+      ) {
+        const usersLink = document.querySelector(
+          '.sidebar .nav a[href*="users.html"]'
+        );
+
+        if (usersLink) {
+          usersLink.classList.add("active");
+        }
+      }
+    })
+    .catch(error => {
+      console.error("Sidebar failed to load:", error);
+    });
 });

@@ -1,220 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Appointments | CareFlow HMS</title>
-  <link rel="icon" href="assets/logo.png">
+
+  <title>CareFlow</title>
+
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 
-  <!-- ===== SIDEBAR (har page par same) ===== -->
-  <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <img src="assets/logo.png" alt="CareFlow logo">
-      <div><strong>CareFlow</strong><span>Hospital Management</span></div>
-    </div>
-    <nav class="nav">
-      <a href="dashboard.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Dashboard</a>
-      <a href="doctors.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Doctors</a>
-      <a href="patients.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Patients</a>
-      <a href="appointments.html" class="active"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Appointments</a>
-      <a href="pharmacy.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 9.4l-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Pharmacy</a>
-    </nav>
-    <div class="sidebar-foot">
-      <a href="index.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Log out</a>
-    </div>
-  </aside>
+  <div id="sidebar-container"></div>
 
-  <!-- ===== MAIN AREA ===== -->
-  <div class="main">
+  <main class="main">
 
-    <!-- Top header: page ka naam + profile -->
     <header class="topbar">
-      <div style="display:flex;align-items:center;gap:12px">
-        <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+
+      <div style="display:flex; align-items:center; gap:12px;">
+
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
         <div>
           <h1>Appointments</h1>
-          <p>Book visits and keep track of their status.</p>
+          <p>View and manage hospital appointments</p>
         </div>
+
       </div>
+
       <div class="profile">
-        <div style="text-align:right"><b>Ayesha Khan</b><small>Receptionist</small></div>
-        <span class="avatar">AK</span>
+
+        <div class="avatar">U</div>
+
+        <div>
+          <b>User</b>
+          <small>Hospital Staff</small>
+        </div>
+
       </div>
+
     </header>
 
-    <main class="content">
+
+    <section class="content">
 
       <div class="panel">
-        <div class="toolbar">
-          <div class="search">
-            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="search" id="searchInput" placeholder="Search appointments..." oninput="applyFilters()">
+
+        <div class="panel-head">
+
+          <div>
+            <h2>All Appointments</h2>
           </div>
-          <div class="tabs" role="tablist"><button class="tab active" onclick="setTab(this,'all')">All</button><button class="tab" onclick="setTab(this,'scheduled')">Scheduled</button><button class="tab" onclick="setTab(this,'completed')">Completed</button><button class="tab" onclick="setTab(this,'cancelled')">Cancelled</button></div>
-          <button class="btn btn-primary" onclick="openModal('formModal','New Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> New Appointment</button>
+
         </div>
+
+
+        <div style="padding:0 20px 20px;">
+
+          <input
+            type="text"
+            id="searchInput"
+            class="input"
+            placeholder="Search appointment by ID or patient..."
+            oninput="applyFilters()"
+          >
+
+        </div>
+
+
         <div class="table-wrap">
+
           <table data-filterable>
-            <thead><tr><th>Appointment ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th></tr></thead>
+
+            <thead>
+              <tr>
+                <th>Appointment ID</th>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Department</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+
             <tbody>
-            <tr data-status="scheduled">
-              <td class="id">A-2001</td>
-              <td><span class="name">Ali Raza</span></td>
-              <td>Dr. Imran Malik</td>
-              <td>20 Sep 2026</td>
-              <td>09:00 AM</td>
-              <td><span class="badge blue">Scheduled</span></td>
-              <td><div class="actions">
-                <button class="icon-btn ok" title="Mark completed" aria-label="Mark completed" onclick="setStatus(this,'completed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></button>
-                <button class="icon-btn" title="Edit" aria-label="Edit appointment" onclick="openModal('formModal','Edit Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="icon-btn danger" title="Cancel appointment" aria-label="Cancel appointment" onclick="askCancel(this,'Ali Raza')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="completed">
-              <td class="id">A-2002</td>
-              <td><span class="name">Fatima Noor</span></td>
-              <td>Dr. Nadia Rehman</td>
-              <td>20 Sep 2026</td>
-              <td>09:30 AM</td>
-              <td><span class="badge green">Completed</span></td>
-              <td><div class="actions">
-                <button class="icon-btn ok" title="Mark completed" aria-label="Mark completed" onclick="setStatus(this,'completed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></button>
-                <button class="icon-btn" title="Edit" aria-label="Edit appointment" onclick="openModal('formModal','Edit Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="icon-btn danger" title="Cancel appointment" aria-label="Cancel appointment" onclick="askCancel(this,'Fatima Noor')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="scheduled">
-              <td class="id">A-2003</td>
-              <td><span class="name">Usman Tariq</span></td>
-              <td>Dr. Sana Yousaf</td>
-              <td>20 Sep 2026</td>
-              <td>10:15 AM</td>
-              <td><span class="badge blue">Scheduled</span></td>
-              <td><div class="actions">
-                <button class="icon-btn ok" title="Mark completed" aria-label="Mark completed" onclick="setStatus(this,'completed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></button>
-                <button class="icon-btn" title="Edit" aria-label="Edit appointment" onclick="openModal('formModal','Edit Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="icon-btn danger" title="Cancel appointment" aria-label="Cancel appointment" onclick="askCancel(this,'Usman Tariq')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="scheduled">
-              <td class="id">A-2004</td>
-              <td><span class="name">Hamza Khan</span></td>
-              <td>Dr. Imran Malik</td>
-              <td>20 Sep 2026</td>
-              <td>11:00 AM</td>
-              <td><span class="badge blue">Scheduled</span></td>
-              <td><div class="actions">
-                <button class="icon-btn ok" title="Mark completed" aria-label="Mark completed" onclick="setStatus(this,'completed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></button>
-                <button class="icon-btn" title="Edit" aria-label="Edit appointment" onclick="openModal('formModal','Edit Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="icon-btn danger" title="Cancel appointment" aria-label="Cancel appointment" onclick="askCancel(this,'Hamza Khan')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="cancelled">
-              <td class="id">A-2005</td>
-              <td><span class="name">Bilal Ahmed</span></td>
-              <td>Dr. Kamran Ali</td>
-              <td>21 Sep 2026</td>
-              <td>10:00 AM</td>
-              <td><span class="badge red">Cancelled</span></td>
-              <td><div class="actions">
-                <button class="icon-btn ok" title="Mark completed" aria-label="Mark completed" onclick="setStatus(this,'completed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></button>
-                <button class="icon-btn" title="Edit" aria-label="Edit appointment" onclick="openModal('formModal','Edit Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="icon-btn danger" title="Cancel appointment" aria-label="Cancel appointment" onclick="askCancel(this,'Bilal Ahmed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="scheduled">
-              <td class="id">A-2006</td>
-              <td><span class="name">Zainab Bibi</span></td>
-              <td>Dr. Faisal Nawaz</td>
-              <td>21 Sep 2026</td>
-              <td>12:30 PM</td>
-              <td><span class="badge blue">Scheduled</span></td>
-              <td><div class="actions">
-                <button class="icon-btn ok" title="Mark completed" aria-label="Mark completed" onclick="setStatus(this,'completed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></button>
-                <button class="icon-btn" title="Edit" aria-label="Edit appointment" onclick="openModal('formModal','Edit Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="icon-btn danger" title="Cancel appointment" aria-label="Cancel appointment" onclick="askCancel(this,'Zainab Bibi')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="completed">
-              <td class="id">A-2007</td>
-              <td><span class="name">Maryam Iqbal</span></td>
-              <td>Dr. Hina Shah</td>
-              <td>19 Sep 2026</td>
-              <td>02:00 PM</td>
-              <td><span class="badge green">Completed</span></td>
-              <td><div class="actions">
-                <button class="icon-btn ok" title="Mark completed" aria-label="Mark completed" onclick="setStatus(this,'completed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></button>
-                <button class="icon-btn" title="Edit" aria-label="Edit appointment" onclick="openModal('formModal','Edit Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="icon-btn danger" title="Cancel appointment" aria-label="Cancel appointment" onclick="askCancel(this,'Maryam Iqbal')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-              </div></td>
-            </tr>
-            <tr data-status="completed">
-              <td class="id">A-2008</td>
-              <td><span class="name">Ali Raza</span></td>
-              <td>Dr. Imran Malik</td>
-              <td>18 Sep 2026</td>
-              <td>11:30 AM</td>
-              <td><span class="badge green">Completed</span></td>
-              <td><div class="actions">
-                <button class="icon-btn ok" title="Mark completed" aria-label="Mark completed" onclick="setStatus(this,'completed')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></button>
-                <button class="icon-btn" title="Edit" aria-label="Edit appointment" onclick="openModal('formModal','Edit Appointment')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
-                <button class="icon-btn danger" title="Cancel appointment" aria-label="Cancel appointment" onclick="askCancel(this,'Ali Raza')"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-              </div></td>
-            </tr>
+
+              <tr data-status="scheduled">
+
+                <td class="id">APT-1001</td>
+
+                <td>Arooj</td>
+
+                <td>Dr. Arooj</td>
+
+                <td>24 Sep 2026</td>
+
+                <td>01:00 PM</td>
+
+                <td>Cardiology</td>
+
+                <td>
+                  <span class="badge blue">Scheduled</span>
+                </td>
+
+              </tr>
+
+
+              <tr data-status="completed">
+
+                <td class="id">APT-1002</td>
+
+                <td>Arooj</td>
+
+                <td>Dr. Arooj</td>
+
+                <td>24 Sep 2026</td>
+
+                <td>01:00 PM</td>
+
+                <td>General Medicine</td>
+
+                <td>
+                  <span class="badge green">Completed</span>
+                </td>
+
+              </tr>
+
+
+              <tr data-status="scheduled">
+
+                <td class="id">APT-1003</td>
+
+                <td>Arooj</td>
+
+                <td>Dr. Arooj</td>
+
+                <td>24 Sep 2026</td>
+
+                <td>01:00 PM</td>
+
+                <td>Orthopedics</td>
+
+                <td>
+                  <span class="badge blue">Scheduled</span>
+                </td>
+
+              </tr>
+
             </tbody>
+
           </table>
-        </div>
-        <div class="empty" id="emptyState">No appointments match your search.</div>
-      </div>
-    </main>
-  </div>
 
-  <!-- ===== POPUP: Add / Edit form ===== -->
-  <div class="modal-overlay" id="formModal">
-    <div class="modal" role="dialog" aria-modal="true">
-      <div class="modal-head">
-        <h3>New Appointment</h3>
-        <button class="close" onclick="closeModal('formModal')" aria-label="Close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      </div>
-      <form onsubmit="saveForm(event,'formModal')">
-        <div class="modal-body">
-          <div class="form-grid">
-            <div class="field"><label>Patient</label><select required><option value="">Choose patient</option><option>Ali Raza</option><option>Fatima Noor</option><option>Usman Tariq</option><option>Zainab Bibi</option><option>Bilal Ahmed</option><option>Maryam Iqbal</option><option>Hamza Khan</option></select></div>
-            <div class="field"><label>Doctor</label><select required><option value="">Choose doctor</option><option>Dr. Imran Malik</option><option>Dr. Sana Yousaf</option><option>Dr. Kamran Ali</option><option>Dr. Nadia Rehman</option><option>Dr. Faisal Nawaz</option><option>Dr. Hina Shah</option></select></div>
-            <div class="field"><label>Date</label><input type="date" placeholder="" required ></div>
-            <div class="field"><label>Time</label><input type="time" placeholder="" required ></div>
-            <div class="field full"><label>Reason for visit</label><textarea placeholder="Short reason, e.g. chest pain, routine check-up" required></textarea></div>
-          </div>
         </div>
-        <div class="modal-foot">
-          <button type="button" class="btn btn-secondary" onclick="closeModal('formModal')">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
-  <!-- ===== POPUP: Cancel appointment confirmation ===== -->
-  <div class="modal-overlay" id="cancelModal">
-    <div class="modal small" role="alertdialog" aria-modal="true">
-      <div class="confirm">
-        <div class="warn"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
-        <h3>Cancel this appointment?</h3>
-        <p id="cancelText">The appointment will be marked as cancelled.</p>
       </div>
-      <div class="modal-foot" style="background:none;border:none;justify-content:center;padding-bottom:24px">
-        <button class="btn btn-secondary" onclick="closeModal('cancelModal')">Go back</button>
-        <button class="btn btn-danger" onclick="confirmCancel()">Cancel appointment</button>
-      </div>
-    </div>
-  </div>
 
-  <div class="toast" id="toast" role="status"></div>
-  <script src="js/main.js"></script>
+    </section>
+
+  </main>
+
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/user.js"></script>
+
 </body>
+
 </html>

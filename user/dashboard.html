@@ -1,145 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard | CareFlow HMS</title>
-  <link rel="icon" href="assets/logo.png">
+
+  <title>CareFlow</title>
+
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 
-  <!-- ===== SIDEBAR (har page par same) ===== -->
-  <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <img src="assets/logo.png" alt="CareFlow logo">
-      <div><strong>CareFlow</strong><span>Hospital Management</span></div>
-    </div>
-    <nav class="nav">
-      <a href="dashboard.html" class="active"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg> Dashboard</a>
-      <a href="doctors.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Doctors</a>
-      <a href="patients.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Patients</a>
-      <a href="appointments.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Appointments</a>
-      <a href="pharmacy.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 9.4l-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Pharmacy</a>
-    </nav>
-    <div class="sidebar-foot">
-      <a href="index.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Log out</a>
-    </div>
-  </aside>
+  <div id="sidebar-container"></div>
 
-  <!-- ===== MAIN AREA ===== -->
-  <div class="main">
+  <main class="main">
 
-    <!-- Top header: page ka naam + profile -->
     <header class="topbar">
-      <div style="display:flex;align-items:center;gap:12px">
-        <button class="menu-btn" onclick="toggleSidebar()" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+
+      <div style="display:flex; align-items:center; gap:12px;">
+
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
         <div>
           <h1>Dashboard</h1>
-          <p>Here is what is happening at the hospital today.</p>
+          <p>Overview of your hospital activities</p>
         </div>
+
       </div>
+
       <div class="profile">
-        <div style="text-align:right"><b>Ayesha Khan</b><small>Receptionist</small></div>
-        <span class="avatar">AK</span>
+
+        <div class="avatar">U</div>
+
+        <div>
+          <b>User</b>
+          <small>Hospital Staff</small>
+        </div>
+
       </div>
+
     </header>
 
-    <main class="content">
 
-      <!-- Summary cards -->
-      <section class="cards">
-        <div class="stat">
-          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <div><div class="num">24</div><div class="lbl">Total Doctors</div></div>
-        </div>
-        <div class="stat">
-          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <div><div class="num">318</div><div class="lbl">Total Patients</div></div>
-        </div>
-        <div class="stat hero">
-          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-          <div><div class="num">4</div><div class="lbl">Today's Appointments</div></div>
-        </div>
-        <div class="stat">
-          <div class="ico"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 9.4l-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-          <div><div class="num">1,240</div><div class="lbl">Available Medicines</div></div>
-        </div>
-      </section>
+    <section class="content">
 
-      <section class="two-col">
-        <div class="panel">
-          <div class="panel-head">
-            <h2>Today's appointments</h2>
-            <a class="btn btn-secondary" href="appointments.html">View all</a>
+      <!-- Welcome -->
+      <div style="margin-bottom:24px;">
+
+        <h2 style="font-size:22px;">
+          Welcome back, User
+        </h2>
+
+        <p style="color:var(--muted); margin-top:4px;">
+          Here's what's happening in the hospital today
+        </p>
+
+      </div>
+
+
+      <!-- Summary Cards -->
+      <div class="cards">
+
+        <div class="stat">
+
+          <span>Total Doctors</span>
+
+          <strong>5</strong>
+
+          <small>Registered doctors</small>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span>Total Patients</span>
+
+          <strong>200</strong>
+
+          <small>Registered patients</small>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span>Today's Appointments</span>
+
+          <strong>20</strong>
+
+          <small>Scheduled for today</small>
+
+        </div>
+
+
+        <div class="stat">
+
+          <span>Available Medicines</span>
+
+          <strong>100</strong>
+
+          <small>Items in pharmacy</small>
+
+        </div>
+
+      </div>
+
+
+      <!-- Quick Actions -->
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Quick Actions</h2>
+
+            <p style="color:var(--muted); font-size:13px;">
+              Access commonly used hospital features
+            </p>
           </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Time</th><th>Patient</th><th>Doctor</th><th>Status</th></tr></thead>
-              <tbody>
-              <tr>
-                <td>09:00 AM</td>
-                <td><span class="name">Ali Raza</span></td>
-                <td>Dr. Imran Malik</td>
-                <td><span class="badge blue">Scheduled</span></td>
-              </tr>
-              <tr>
-                <td>09:30 AM</td>
-                <td><span class="name">Fatima Noor</span></td>
-                <td>Dr. Nadia Rehman</td>
-                <td><span class="badge green">Completed</span></td>
-              </tr>
-              <tr>
-                <td>10:15 AM</td>
-                <td><span class="name">Usman Tariq</span></td>
-                <td>Dr. Sana Yousaf</td>
-                <td><span class="badge blue">Scheduled</span></td>
-              </tr>
-              <tr>
-                <td>11:00 AM</td>
-                <td><span class="name">Hamza Khan</span></td>
-                <td>Dr. Imran Malik</td>
-                <td><span class="badge blue">Scheduled</span></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
+
         </div>
 
-        <div class="panel">
-          <div class="panel-head"><h2>Needs restocking</h2></div>
-          <ul style="list-style:none">
-          <li style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid var(--border)">
-            <div><span class="name" style="font-weight:600">Panadol Syrup</span><span class="sub" style="display:block;font-size:12px;color:var(--muted)">35 left</span></div>
-            <span class="badge amber">Low Stock</span>
-          </li>
-          <li style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid var(--border)">
-            <div><span class="name" style="font-weight:600">Insulin Vial</span><span class="sub" style="display:block;font-size:12px;color:var(--muted)">12 left</span></div>
-            <span class="badge amber">Low Stock</span>
-          </li>
-          <li style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid var(--border)">
-            <div><span class="name" style="font-weight:600">ORS Sachet</span><span class="sub" style="display:block;font-size:12px;color:var(--muted)">0 left</span></div>
-            <span class="badge red">Out of Stock</span>
-          </li>
-          <li style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid var(--border)">
-            <div><span class="name" style="font-weight:600">Cetirizine 10mg</span><span class="sub" style="display:block;font-size:12px;color:var(--muted)">8 left</span></div>
-            <span class="badge amber">Low Stock</span>
-          </li>
-          <li style="display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid var(--border)">
-            <div><span class="name" style="font-weight:600">Vitamin D3</span><span class="sub" style="display:block;font-size:12px;color:var(--muted)">0 left</span></div>
-            <span class="badge red">Out of Stock</span>
-          </li>
-          </ul>
+
+        <div style="padding:0 20px 20px; display:flex; gap:12px; flex-wrap:wrap;">
+
+          <a href="patients.html" class="btn btn-primary">
+            View Patients
+          </a>
+
+          <a href="appointments.html" class="btn btn-secondary">
+            View Appointments
+          </a>
+
+          <a href="doctors.html" class="btn btn-secondary">
+            View Doctors
+          </a>
+
+          <a href="pharmacy.html" class="btn btn-secondary">
+            Pharmacy
+          </a>
+
         </div>
-      </section>
-    </main>
-  </div>
+
+      </div>
+
+    </section>
+
+  </main>
 
 
+  <script src="../js/shared.js"></script>
+  <script src="../js/user.js"></script>
 
-  <div class="toast" id="toast" role="status"></div>
-  <script src="js/main.js"></script>
 </body>
+
 </html>
