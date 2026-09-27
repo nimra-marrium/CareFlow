@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>CareFlow</title>
+  <title>Create User | CareFlow</title>
 
   <link rel="icon" href="../assets/logo/careflow-logo.png">
 
@@ -75,11 +75,11 @@
         </div>
 
 
-        <form
-          onsubmit="saveForm(event, 'createUserModal')"
-        >
+        <form onsubmit="saveForm(event, 'createUserModal')">
 
           <div class="form-grid">
+
+            <!-- User ID -->
 
             <div class="field">
 
@@ -96,6 +96,9 @@
 
             </div>
 
+
+            <!-- Full Name -->
+
             <div class="field">
 
               <label for="fullName">
@@ -108,7 +111,11 @@
                 placeholder="Enter full name"
                 required
               >
+
             </div>
+
+
+            <!-- Email -->
 
             <div class="field">
 
@@ -125,15 +132,57 @@
 
             </div>
 
+
+            <!-- Phone -->
+
             <div class="field">
-            <label for="role">Role</label>
-            <select id="role" required>
-                <option value="">Select role</option>
-                <option value="doctor">Doctor</option>
-                <option value="receptionist">Receptionist</option>
-                <option value="pharmacist">Pharmacist</option>
-            </select>
+
+              <label for="phone">
+                Phone
+              </label>
+
+              <input
+                type="tel"
+                id="phone"
+                placeholder="Enter phone number"
+                required
+              >
+
             </div>
+
+
+            <!-- Role -->
+
+            <div class="field">
+
+              <label for="role">
+                Role
+              </label>
+
+              <select id="role" required>
+
+                <option value="">
+                  Select role
+                </option>
+
+                <option value="doctor">
+                  Doctor
+                </option>
+
+                <option value="receptionist">
+                  Receptionist
+                </option>
+
+                <option value="pharmacist">
+                  Pharmacist
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <!-- Department -->
 
             <div class="field">
 
@@ -146,26 +195,92 @@
                 <option value="">
                   Select department
                 </option>
-                <option value="administration">Administration</option>
-                <option value="cardiology">Cardiology</option>
-                <option value="dermatology">Dermatology</option>
-                <option value="emergency">Emergency</option>
-                <option value="ent">ENT</option>
-                <option value="gastroenterology">Gastroenterology</option>
-                <option value="general-medicine">General Medicine</option>
-                <option value="gynecology">Gynecology</option>
-                <option value="laboratory">Laboratory</option>
-                <option value="neurology">Neurology</option>
-                <option value="oncology">Oncology</option>
-                <option value="orthopedics">Orthopedics</option>
-                <option value="pharmacy">Pharmacy</option>
-                <option value="radiology">Radiology</option>
-                <option value="urology">Urology</option>
+
+                <option value="administration">
+                  Administration
+                </option>
+
+                <option value="cardiology">
+                  Cardiology
+                </option>
+
+                <option value="dermatology">
+                  Dermatology
+                </option>
+
+                <option value="emergency">
+                  Emergency
+                </option>
+
+                <option value="ent">
+                  ENT
+                </option>
+
+                <option value="gastroenterology">
+                  Gastroenterology
+                </option>
+
+                <option value="general-medicine">
+                  General Medicine
+                </option>
+
+                <option value="gynecology">
+                  Gynecology
+                </option>
+
+                <option value="neurology">
+                  Neurology
+                </option>
+
+                <option value="oncology">
+                  Oncology
+                </option>
+
+                <option value="orthopedics">
+                  Orthopedics
+                </option>
+
+                <option value="pharmacy">
+                  Pharmacy
+                </option>
+
+                <option value="radiology">
+                  Radiology
+                </option>
+
+                <option value="urology">
+                  Urology
+                </option>
+
               </select>
 
             </div>
 
+
+            <!-- Specialization -->
+
+            <div
+              class="field"
+              id="specializationField"
+              style="display:none;"
+            >
+
+              <label for="specialization">
+                Specialization
+              </label>
+
+              <input
+                type="text"
+                id="specialization"
+                placeholder="Enter specialization"
+              >
+
+            </div>
+
           </div>
+
+
+          <!-- Form Actions -->
 
           <div class="form-actions">
 
@@ -193,6 +308,9 @@
 
   </main>
 
+
+  <!-- Success Modal -->
+
   <div
     class="modal-overlay"
     id="createUserModal"
@@ -202,7 +320,9 @@
 
       <div class="modal-head">
 
-        <h3>User Created</h3>
+        <h3>
+          User Created
+        </h3>
 
         <button
           type="button"
@@ -224,6 +344,35 @@
 
   <script src="../js/shared.js"></script>
   <script src="../js/admin.js"></script>
+
+  <script>
+
+    const roleSelect = document.getElementById("role");
+    const specializationField = document.getElementById("specializationField");
+    const specializationInput = document.getElementById("specialization");
+
+    function updateSpecializationField() {
+
+      if (roleSelect.value === "doctor") {
+
+        specializationField.style.display = "block";
+        specializationInput.required = true;
+
+      } else {
+
+        specializationField.style.display = "none";
+        specializationInput.required = false;
+        specializationInput.value = "";
+
+      }
+
+    }
+
+    roleSelect.addEventListener("change", updateSpecializationField);
+
+    updateSpecializationField();
+
+  </script>
 
 </body>
 </html>

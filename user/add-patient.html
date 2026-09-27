@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Add Patient | CareFlow</title>
+
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <div id="sidebar-container"></div>
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div style="display:flex; align-items:center; gap:12px;">
+
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+        <div>
+          <h1>Add Patient</h1>
+          <p>Register a new patient in the hospital system</p>
+        </div>
+
+      </div>
+
+      <div class="profile">
+
+        <div class="avatar">U</div>
+
+        <div>
+          <b>User</b>
+          <small>Hospital Staff</small>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <div class="form-card">
+
+        <div class="panel-head">
+          <div>
+            <h2>Patient Information</h2>
+          </div>
+        </div>
+
+
+        <form id="addPatientForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label for="patientId">Patient ID</label>
+
+              <input
+                type="text"
+                id="patientId"
+                readonly
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="fullName">Full Name</label>
+
+              <input
+                type="text"
+                id="fullName"
+                placeholder="Enter patient name"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="age">Age</label>
+
+              <input
+                type="number"
+                id="age"
+                placeholder="Enter age"
+                min="0"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="gender">Gender</label>
+
+              <select id="gender" required>
+
+                <option value="">Select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="phone">Phone</label>
+
+              <input
+                type="text"
+                id="phone"
+                placeholder="03XX-XXXXXXX"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="department">Department</label>
+
+              <select id="department" required>
+
+                <option value="">Select department</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Emergency">Emergency</option>
+                <option value="ENT">ENT</option>
+                <option value="Gastroenterology">Gastroenterology</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Gynecology">Gynecology</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Oncology">Oncology</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Pharmacy">Pharmacy</option>
+                <option value="Radiology">Radiology</option>
+                <option value="Urology">Urology</option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <a
+              href="patients.html"
+              class="btn btn-secondary"
+            >
+              Cancel
+            </a>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              Add Patient
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/user.js"></script>
+
+</body>
+
+</html>

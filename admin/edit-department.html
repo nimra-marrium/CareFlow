@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Edit Department | CareFlow</title>
+
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <div id="sidebar-container"></div>
+
+  <main class="main-content">
+
+    <div class="page-header">
+      <div>
+        <h1>Edit Department</h1>
+        <p>Update department information.</p>
+      </div>
+    </div>
+
+    <section class="form-card">
+
+      <form id="editDepartmentForm">
+
+        <div class="form-grid">
+
+          <div class="field">
+            <label for="departmentName">Department Name</label>
+            <input
+              type="text"
+              id="departmentName"
+              value="Administration"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="departmentCode">Department Code</label>
+            <input
+              type="text"
+              id="departmentCode"
+              value="ADM"
+              maxlength="5"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="departmentStatus">Status</label>
+
+            <select id="departmentStatus" required>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="form-actions">
+
+          <a href="departments.html" class="btn btn-secondary">
+            Cancel
+          </a>
+
+          <button type="submit" class="btn btn-primary">
+            Save Changes
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+  <script src="../js/shared.js"></script>
+
+  <script>
+    document
+      .getElementById("editDepartmentForm")
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Backend/database will be connected later.
+        alert("Department updated successfully.");
+
+        window.location.href = "departments.html";
+      });
+  </script>
+
+</body>
+</html>

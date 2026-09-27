@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>CareFlow</title>
+  <title>Roles & Permissions | CareFlow</title>
 
   <link rel="icon" href="../assets/logo/careflow-logo.png">
 
@@ -17,10 +17,14 @@
 
 <body>
 
+  <!-- Sidebar -->
   <div id="sidebar-container"></div>
 
+
+  <!-- Main -->
   <main class="main">
 
+    <!-- Topbar -->
     <header class="topbar">
 
       <div style="display:flex; align-items:center; gap:12px;">
@@ -41,6 +45,8 @@
 
       </div>
 
+
+      <!-- Admin Profile -->
       <div class="profile">
 
         <div class="avatar">A</div>
@@ -55,9 +61,14 @@
     </header>
 
 
+    <!-- Page Content -->
     <section class="content">
 
-      <!-- Hospital Roles -->
+
+      <!-- =========================
+           HOSPITAL ROLES
+      ========================== -->
+
       <div class="panel">
 
         <div class="panel-head">
@@ -66,10 +77,19 @@
             <h2>Hospital Roles</h2>
           </div>
 
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="addRoleBtn"
+          >
+            + Add Role
+          </button>
+
         </div>
 
 
         <div class="roles-grid">
+
 
           <!-- Doctor -->
           <div class="role-card">
@@ -118,17 +138,23 @@
 
           </div>
 
+
         </div>
 
       </div>
 
 
-      <!-- Permissions -->
+
+      <!-- =========================
+           PERMISSIONS
+      ========================== -->
+
       <div class="panel">
 
         <div class="panel-head">
 
           <div>
+
             <h2>Permissions</h2>
 
             <p style="color:var(--muted); font-size:13px;">
@@ -158,6 +184,27 @@
 
             <tbody>
 
+
+              <!-- View Doctors -->
+              <tr>
+
+                <td>View Doctors</td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+              </tr>
+
+
               <!-- View Patients -->
               <tr>
 
@@ -172,7 +219,7 @@
                 </td>
 
                 <td>
-                  <input type="checkbox" checked>
+                  <input type="checkbox">
                 </td>
 
               </tr>
@@ -184,7 +231,7 @@
                 <td>Add Patients</td>
 
                 <td>
-                  <input type="checkbox">
+                  <input type="checkbox" checked>
                 </td>
 
                 <td>
@@ -218,10 +265,30 @@
               </tr>
 
 
-              <!-- Appointments -->
+              <!-- View Appointments -->
               <tr>
 
-                <td>Appointments</td>
+                <td>View Appointments</td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+              </tr>
+
+
+              <!-- Book Appointment -->
+              <tr>
+
+                <td>Book Appointment</td>
 
                 <td>
                   <input type="checkbox" checked>
@@ -258,10 +325,10 @@
               </tr>
 
 
-              <!-- Reports -->
+              <!-- Add Medicine -->
               <tr>
 
-                <td>Reports</td>
+                <td>Add Medicine</td>
 
                 <td>
                   <input type="checkbox">
@@ -272,10 +339,31 @@
                 </td>
 
                 <td>
-                  <input type="checkbox">
+                  <input type="checkbox" checked>
                 </td>
 
               </tr>
+
+
+              <!-- Edit Medicine -->
+              <tr>
+
+                <td>Edit Medicine</td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+                <td>
+                  <input type="checkbox">
+                </td>
+
+                <td>
+                  <input type="checkbox" checked>
+                </td>
+
+              </tr>
+
 
             </tbody>
 
@@ -284,12 +372,15 @@
         </div>
 
 
-        <div class="form-actions" style="padding:0 20px 20px;">
+        <div
+          class="form-actions"
+          style="padding:0 20px 20px;"
+        >
 
           <button
             type="button"
             class="btn btn-primary"
-            onclick="showToast('Permissions saved successfully (demo only)')"
+            id="savePermissionsBtn"
           >
             Save Permissions
           </button>
@@ -303,8 +394,226 @@
   </main>
 
 
+
+  <!-- =========================
+       ADD ROLE MODAL
+  ========================== -->
+
+  <div
+    class="role-modal"
+    id="addRoleModal"
+  >
+
+    <div class="role-modal-box">
+
+
+      <!-- Modal Header -->
+      <div class="role-modal-header">
+
+        <div>
+
+          <h2>Add Role</h2>
+
+          <p>
+            Create a new role and assign permissions.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="role-modal-close"
+          id="closeRoleModalBtn"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+
+      <!-- Form -->
+      <form id="addRoleForm">
+
+
+        <!-- Role Name -->
+        <div class="role-form-group">
+
+          <label for="roleName">
+            Role Name
+          </label>
+
+          <input
+            type="text"
+            id="roleName"
+            placeholder="Enter role name"
+            required
+          >
+
+        </div>
+
+
+
+        <!-- Permissions -->
+        <div class="role-form-group">
+
+          <label>
+            Permissions
+          </label>
+
+
+          <div class="role-permissions">
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="View Doctors"
+              >
+
+              <span>View Doctors</span>
+
+            </label>
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="View Patients"
+              >
+
+              <span>View Patients</span>
+
+            </label>
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="Add Patients"
+              >
+
+              <span>Add Patients</span>
+
+            </label>
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="Edit Patients"
+              >
+
+              <span>Edit Patients</span>
+
+            </label>
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="View Appointments"
+              >
+
+              <span>View Appointments</span>
+
+            </label>
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="Book Appointment"
+              >
+
+              <span>Book Appointment</span>
+
+            </label>
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="Pharmacy"
+              >
+
+              <span>Pharmacy</span>
+
+            </label>
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="Add Medicine"
+              >
+
+              <span>Add Medicine</span>
+
+            </label>
+
+
+            <label class="role-permission">
+
+              <input
+                type="checkbox"
+                value="Edit Medicine"
+              >
+
+              <span>Edit Medicine</span>
+
+            </label>
+
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Buttons -->
+        <div class="role-modal-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="cancelRoleBtn"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Add Role
+          </button>
+
+        </div>
+
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Scripts -->
   <script src="../js/shared.js"></script>
   <script src="../js/admin.js"></script>
 
 </body>
+
 </html>

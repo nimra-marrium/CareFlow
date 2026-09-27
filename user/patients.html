@@ -61,11 +61,15 @@
 
         <div class="panel-head">
 
-          <div>
-            <h2>All Patients</h2>
-          </div>
+  <div>
+    <h2>All Patients</h2>
+  </div>
 
-        </div>
+  <a href="add-patient.html" class="btn btn-primary">
+    + Add Patient
+  </a>
+
+</div>
 
 
         <div style="padding:0 20px 20px;">
@@ -175,6 +179,301 @@
   </main>
 
 
+  <!-- Add Patient Modal -->
+
+  <div class="modal" id="addPatientModal">
+
+    <div class="modal-box">
+
+      <div class="modal-head">
+
+        <div>
+          <h2>Add Patient</h2>
+          <p>Register a new hospital patient</p>
+        </div>
+
+        <button
+          class="modal-close"
+          type="button"
+          onclick="closeModal('addPatientModal')"
+        >
+          &times;
+        </button>
+
+      </div>
+
+
+      <form
+        onsubmit="saveForm(event, 'addPatientModal', 'Patient added successfully!')"
+      >
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label>Patient ID</label>
+
+            <input
+              type="text"
+              value="PT-1004"
+              readonly
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Full Name</label>
+
+            <input
+              type="text"
+              placeholder="Enter full name"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Age</label>
+
+            <input
+              type="number"
+              placeholder="Enter age"
+              min="0"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Gender</label>
+
+            <select required>
+
+              <option value="">Select gender</option>
+
+              <option>Male</option>
+
+              <option>Female</option>
+
+              <option>Other</option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Phone</label>
+
+            <input
+              type="tel"
+              placeholder="Enter phone number"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Department</label>
+
+            <select required>
+
+              <option value="">Select department</option>
+
+              <option>Administration</option>
+              <option>Cardiology</option>
+              <option>Dermatology</option>
+              <option>Emergency</option>
+              <option>ENT</option>
+              <option>Gastroenterology</option>
+              <option>General Medicine</option>
+              <option>Gynecology</option>
+              <option>Neurology</option>
+              <option>Oncology</option>
+              <option>Orthopedics</option>
+              <option>Pharmacy</option>
+              <option>Radiology</option>
+              <option>Urology</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closeModal('addPatientModal')"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Add Patient
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <div class="modal" id="addPatientModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <div>
+        <h2>Add Patient</h2>
+        <p>Add a new patient to the hospital system.</p>
+      </div>
+
+      <button
+        class="modal-close"
+        type="button"
+        onclick="closeModal('addPatientModal')"
+      >
+        &times;
+      </button>
+
+    </div>
+
+
+    <form>
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label for="patientId">Patient ID</label>
+          <input
+            type="text"
+            id="patientId"
+            value="PT-1004"
+            readonly
+          >
+        </div>
+
+
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter patient name"
+            required
+          >
+        </div>
+
+
+        <div class="field">
+          <label for="age">Age</label>
+          <input
+            type="number"
+            id="age"
+            placeholder="Enter age"
+            min="0"
+            required
+          >
+        </div>
+
+
+        <div class="field">
+          <label for="gender">Gender</label>
+
+          <select id="gender" required>
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+
+        </div>
+
+
+        <div class="field">
+          <label for="phone">Phone</label>
+
+          <input
+            type="text"
+            id="phone"
+            placeholder="03XX-XXXXXXX"
+            required
+          >
+
+        </div>
+
+
+        <div class="field">
+          <label for="department">Department</label>
+
+          <select id="department" required>
+
+            <option value="">Select department</option>
+            <option value="Administration">Administration</option>
+            <option value="Cardiology">Cardiology</option>
+            <option value="Dermatology">Dermatology</option>
+            <option value="Emergency">Emergency</option>
+            <option value="ENT">ENT</option>
+            <option value="Gastroenterology">Gastroenterology</option>
+            <option value="General Medicine">General Medicine</option>
+            <option value="Gynecology">Gynecology</option>
+            <option value="Neurology">Neurology</option>
+            <option value="Oncology">Oncology</option>
+            <option value="Orthopedics">Orthopedics</option>
+            <option value="Pharmacy">Pharmacy</option>
+            <option value="Radiology">Radiology</option>
+            <option value="Urology">Urology</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          class="btn btn-secondary"
+          type="button"
+          onclick="closeModal('addPatientModal')"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="btn btn-primary"
+          type="submit"
+        >
+          Add Patient
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
   <script src="../js/shared.js"></script>
   <script src="../js/user.js"></script>
 

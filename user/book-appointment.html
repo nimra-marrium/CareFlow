@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Book Appointment | CareFlow</title>
+
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <div id="sidebar-container"></div>
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div style="display:flex; align-items:center; gap:12px;">
+
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+        <div>
+          <h1>Book Appointment</h1>
+          <p>Schedule an appointment for a patient</p>
+        </div>
+
+      </div>
+
+      <div class="profile">
+
+        <div class="avatar">U</div>
+
+        <div>
+          <b>User</b>
+          <small>Hospital Staff</small>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <div class="form-card">
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Appointment Information</h2>
+          </div>
+
+        </div>
+
+
+        <form id="bookAppointmentForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label for="appointmentId">Appointment ID</label>
+
+              <input
+                type="text"
+                id="appointmentId"
+                readonly
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="patient">Patient</label>
+
+              <select id="patient" required>
+
+                <option value="">Select patient</option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="doctor">Doctor</label>
+
+              <select id="doctor" required>
+
+                <option value="">Select doctor</option>
+                <option value="Dr. Arooj">Dr. Arooj</option>
+                <option value="Dr. Ahmed">Dr. Ahmed</option>
+                <option value="Dr. Sara">Dr. Sara</option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="department">Department</label>
+
+              <select id="department" required>
+
+                <option value="">Select department</option>
+                <option value="Cardiology">Cardiology</option>
+                <option value="Dermatology">Dermatology</option>
+                <option value="Emergency">Emergency</option>
+                <option value="ENT">ENT</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Gynecology">Gynecology</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Oncology">Oncology</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="Radiology">Radiology</option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="appointmentDate">Appointment Date</label>
+
+              <input
+                type="date"
+                id="appointmentDate"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="appointmentTime">Appointment Time</label>
+
+              <input
+                type="time"
+                id="appointmentTime"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <a
+              href="appointments.html"
+              class="btn btn-secondary"
+            >
+              Cancel
+            </a>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              Book Appointment
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/user.js"></script>
+
+</body>
+
+</html>

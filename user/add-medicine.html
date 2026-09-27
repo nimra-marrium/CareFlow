@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Add Medicine | CareFlow</title>
+
+  <link rel="icon" href="../assets/logo/careflow-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+  <div id="sidebar-container"></div>
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div style="display:flex; align-items:center; gap:12px;">
+
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+        <div>
+          <h1>Add Medicine</h1>
+          <p>Add a new medicine to the pharmacy inventory</p>
+        </div>
+
+      </div>
+
+      <div class="profile">
+
+        <div class="avatar">U</div>
+
+        <div>
+          <b>User</b>
+          <small>Hospital Staff</small>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+      <div class="form-card">
+
+        <div class="panel-head">
+
+          <div>
+            <h2>Medicine Information</h2>
+          </div>
+
+        </div>
+
+
+        <form id="addMedicineForm">
+
+          <div class="form-grid">
+
+            <div class="field">
+
+              <label for="medicineId">Medicine ID</label>
+
+              <input
+                type="text"
+                id="medicineId"
+                readonly
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="medicineName">Medicine Name</label>
+
+              <input
+                type="text"
+                id="medicineName"
+                placeholder="Enter medicine name"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="category">Category</label>
+
+              <select id="category" required>
+
+                <option value="">Select category</option>
+                <option value="Pain Relief">Pain Relief</option>
+                <option value="Antibiotic">Antibiotic</option>
+                <option value="Antiviral">Antiviral</option>
+                <option value="Antiallergic">Antiallergic</option>
+                <option value="Vitamins">Vitamins</option>
+                <option value="Other">Other</option>
+
+              </select>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="quantity">Quantity</label>
+
+              <input
+                type="number"
+                id="quantity"
+                placeholder="Enter quantity"
+                min="0"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="expiryDate">Expiry Date</label>
+
+              <input
+                type="date"
+                id="expiryDate"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="form-actions">
+
+            <a
+              href="pharmacy.html"
+              class="btn btn-secondary"
+            >
+              Cancel
+            </a>
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              Add Medicine
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="../js/shared.js"></script>
+  <script src="../js/user.js"></script>
+
+</body>
+
+</html>
