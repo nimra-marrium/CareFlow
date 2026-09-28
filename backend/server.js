@@ -4,6 +4,8 @@ const cors = require("cors");
 const db = require("./db");
 const usersRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
+const rolesRoute = require("./routes/roles");
+const departmentsRoute = require("./routes/departments");
 
 const app = express();
 const PORT = 5000;
@@ -17,6 +19,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", usersRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/roles", rolesRoute);
+app.use("/api/departments", departmentsRoute);
 
 app.listen(PORT, () => {
     console.log(`CareFlow backend running on http://localhost:${PORT}`);

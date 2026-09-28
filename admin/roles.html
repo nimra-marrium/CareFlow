@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -10,326 +12,198 @@
   <link rel="icon" href="../assets/logo/careflow-logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="../css/style.css">
+
 </head>
 
 <body>
 
   <!-- Sidebar -->
+
   <div id="sidebar-container"></div>
 
-
   <!-- Main -->
+
   <main class="main">
 
-    <!-- Topbar -->
-    <header class="topbar">
+```
+<!-- Topbar -->
 
-      <div style="display:flex; align-items:center; gap:12px;">
+<header class="topbar">
 
-        <button
-          class="menu-btn"
-          id="menuBtn"
-          type="button"
-          aria-label="Open menu"
+  <div style="display:flex; align-items:center; gap:12px;">
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+      aria-label="Open menu"
+    >
+      ☰
+    </button>
+
+
+    <div>
+
+      <h1>Roles &amp; Permissions</h1>
+
+      <p>
+        Manage user roles and access permissions
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- Admin Profile -->
+
+  <div class="profile">
+
+    <div class="avatar">
+      A
+    </div>
+
+    <div>
+
+      <b>Admin</b>
+
+      <small>
+        Administrator
+      </small>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<!-- Page Content -->
+
+<section class="content">
+
+
+  <!-- =========================
+       HOSPITAL ROLES
+  ========================== -->
+
+  <div class="panel">
+
+    <div class="panel-head">
+
+      <div>
+
+        <h2>
+          Hospital Roles
+        </h2>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        id="addRoleBtn"
+      >
+        + Add Role
+      </button>
+
+    </div>
+
+
+    <div
+      class="roles-grid"
+      id="rolesGrid"
+    >
+
+      <!-- Roles loaded from database -->
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================
+       PERMISSIONS
+  ========================== -->
+
+  <div class="panel">
+
+    <div class="panel-head">
+
+      <div>
+
+        <h2>
+          Permissions
+        </h2>
+
+        <p
+          style="color:var(--muted); font-size:13px;"
         >
-          ☰
-        </button>
-
-        <div>
-          <h1>Roles &amp; Permissions</h1>
-          <p>Manage user roles and access permissions</p>
-        </div>
+          Configure what each role can access.
+        </p>
 
       </div>
 
+    </div>
 
-      <!-- Admin Profile -->
-      <div class="profile">
 
-        <div class="avatar">A</div>
+    <div class="table-wrap">
 
-        <div>
-          <b>Admin</b>
-          <small>Administrator</small>
-        </div>
+      <table>
 
-      </div>
-
-    </header>
-
-
-    <!-- Page Content -->
-    <section class="content">
-
-
-      <!-- =========================
-           HOSPITAL ROLES
-      ========================== -->
-
-      <div class="panel">
-
-        <div class="panel-head">
-
-          <div>
-            <h2>Hospital Roles</h2>
-          </div>
-
-          <button
-            type="button"
-            class="btn btn-primary"
-            id="addRoleBtn"
-          >
-            + Add Role
-          </button>
-
-        </div>
-
-
-        <div class="roles-grid">
-
-
-          <!-- Doctor -->
-          <div class="role-card">
-
-            <h3>Doctor</h3>
-
-          </div>
-
-
-          <!-- Receptionist -->
-          <div class="role-card">
-
-            <h3>Receptionist</h3>
-
-          </div>
-
-
-          <!-- Pharmacist -->
-          <div class="role-card">
-
-            <h3>Pharmacist</h3>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =========================
-           PERMISSIONS
-      ========================== -->
-
-      <div class="panel">
-
-        <div class="panel-head">
-
-          <div>
-
-            <h2>Permissions</h2>
-
-            <p style="color:var(--muted); font-size:13px;">
-              Configure what each role can access.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>Permission</th>
-                <th>Doctor</th>
-                <th>Receptionist</th>
-                <th>Pharmacist</th>
-              </tr>
-
-            </thead>
-
-
-            <tbody>
-
-
-              <!-- View Doctors -->
-              <tr>
-
-                <td>View Doctors</td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-              </tr>
-
-
-              <!-- View Patients -->
-              <tr>
-
-                <td>View Patients</td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-              </tr>
-
-
-              <!-- Add Patients -->
-              <tr>
-
-                <td>Add Patients</td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-              </tr>
-
-
-              <!-- View Appointments -->
-              <tr>
-
-                <td>View Appointments</td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-              </tr>
-
-
-              <!-- Book Appointment -->
-              <tr>
-
-                <td>Book Appointment</td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-              </tr>
-
-
-              <!-- Pharmacy -->
-              <tr>
-
-                <td>Pharmacy</td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-              </tr>
-
-
-              <!-- Add Medicine -->
-              <tr>
-
-                <td>Add Medicine</td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-                <td>
-                  <input type="checkbox">
-                </td>
-
-                <td>
-                  <input type="checkbox" checked>
-                </td>
-
-              </tr>
-
-
-            </tbody>
-
-          </table>
-
-        </div>
-
-
-        <div
-          class="form-actions"
-          style="padding:0 20px 20px;"
+        <thead
+          id="permissionsTableHead"
         >
 
-          <button
-            type="button"
-            class="btn btn-primary"
-            id="savePermissionsBtn"
-          >
-            Save Permissions
-          </button>
+          <!-- Roles loaded from database -->
 
-        </div>
+        </thead>
 
-      </div>
 
-    </section>
+        <tbody
+          id="permissionsTableBody"
+        >
+
+          <!-- Permissions loaded from database -->
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <div
+      class="form-actions"
+      style="padding:0 20px 20px;"
+    >
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        id="savePermissionsBtn"
+      >
+        Save Permissions
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+```
 
   </main>
-
-
 
   <!-- =========================
        ADD ROLE MODAL
@@ -340,190 +214,312 @@
     id="addRoleModal"
   >
 
-    <div class="role-modal-box">
+```
+<div class="role-modal-box">
 
 
-      <!-- Modal Header -->
-      <div class="role-modal-header">
+  <!-- Modal Header -->
 
-        <div>
+  <div class="role-modal-header">
 
-          <h2>Add Role</h2>
+    <div>
 
-          <p>
-            Create a new role and assign permissions.
-          </p>
+      <h2>
+        Add Role
+      </h2>
 
-        </div>
-
-
-        <button
-          type="button"
-          class="role-modal-close"
-          id="closeRoleModalBtn"
-          aria-label="Close"
-        >
-          ×
-        </button>
-
-      </div>
-
-
-
-      <!-- Form -->
-      <form id="addRoleForm">
-
-
-        <!-- Role Name -->
-        <div class="role-form-group">
-
-          <label for="roleName">
-            Role Name
-          </label>
-
-          <input
-            type="text"
-            id="roleName"
-            placeholder="Enter role name"
-            required
-          >
-
-        </div>
-
-
-
-        <!-- Permissions -->
-        <div class="role-form-group">
-
-          <label>
-            Permissions
-          </label>
-
-
-          <div class="role-permissions">
-
-
-            <label class="role-permission">
-
-              <input
-                type="checkbox"
-                value="View Doctors"
-              >
-
-              <span>View Doctors</span>
-
-            </label>
-
-
-            <label class="role-permission">
-
-              <input
-                type="checkbox"
-                value="View Patients"
-              >
-
-              <span>View Patients</span>
-
-            </label>
-
-
-            <label class="role-permission">
-
-              <input
-                type="checkbox"
-                value="Add Patients"
-              >
-
-              <span>Add Patients</span>
-
-            </label>
-
-
-            <label class="role-permission">
-
-              <input
-                type="checkbox"
-                value="View Appointments"
-              >
-
-              <span>View Appointments</span>
-
-            </label>
-
-
-            <label class="role-permission">
-
-              <input
-                type="checkbox"
-                value="Book Appointment"
-              >
-
-              <span>Book Appointment</span>
-
-            </label>
-
-
-            <label class="role-permission">
-
-              <input
-                type="checkbox"
-                value="Pharmacy"
-              >
-
-              <span>Pharmacy</span>
-
-            </label>
-
-
-            <label class="role-permission">
-
-              <input
-                type="checkbox"
-                value="Add Medicine"
-              >
-
-              <span>Add Medicine</span>
-
-            </label>
-
-
-          </div>
-
-        </div>
-
-
-
-        <!-- Buttons -->
-        <div class="role-modal-actions">
-
-          <button
-            type="button"
-            class="btn btn-secondary"
-            id="cancelRoleBtn"
-          >
-            Cancel
-          </button>
-
-          <button
-            type="submit"
-            class="btn btn-primary"
-          >
-            Add Role
-          </button>
-
-        </div>
-
-
-      </form>
+      <p>
+        Create a new role and assign permissions.
+      </p>
 
     </div>
+
+
+    <button
+      type="button"
+      class="role-modal-close"
+      id="closeRoleModalBtn"
+      aria-label="Close"
+    >
+      ×
+    </button>
 
   </div>
 
 
 
+  <!-- Form -->
+
+  <form id="addRoleForm">
+
+
+    <!-- Role Name -->
+
+    <div class="role-form-group">
+
+      <label for="roleName">
+        Role Name
+      </label>
+
+      <input
+        type="text"
+        id="roleName"
+        placeholder="Enter role name"
+        required
+      >
+
+    </div>
+
+
+
+    <!-- Permissions -->
+
+    <div class="role-form-group">
+
+      <label>
+        Permissions
+      </label>
+
+
+      <div class="role-permissions">
+
+
+        <label class="role-permission">
+
+          <input
+            type="checkbox"
+            value="View Doctors"
+          >
+
+          <span>
+            View Doctors
+          </span>
+
+        </label>
+
+
+        <label class="role-permission">
+
+          <input
+            type="checkbox"
+            value="View Patients"
+          >
+
+          <span>
+            View Patients
+          </span>
+
+        </label>
+
+
+        <label class="role-permission">
+
+          <input
+            type="checkbox"
+            value="Add Patients"
+          >
+
+          <span>
+            Add Patients
+          </span>
+
+        </label>
+
+
+        <label class="role-permission">
+
+          <input
+            type="checkbox"
+            value="View Appointments"
+          >
+
+          <span>
+            View Appointments
+          </span>
+
+        </label>
+
+
+        <label class="role-permission">
+
+          <input
+            type="checkbox"
+            value="Book Appointment"
+          >
+
+          <span>
+            Book Appointment
+          </span>
+
+        </label>
+
+
+        <label class="role-permission">
+
+          <input
+            type="checkbox"
+            value="View Pharmacy"
+          >
+
+          <span>
+            View Pharmacy
+          </span>
+
+        </label>
+
+
+        <label class="role-permission">
+
+          <input
+            type="checkbox"
+            value="Add Medicine"
+          >
+
+          <span>
+            Add Medicine
+          </span>
+
+        </label>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Buttons -->
+
+    <div class="role-modal-actions">
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        id="cancelRoleBtn"
+      >
+        Cancel
+      </button>
+
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+      >
+        Add Role
+      </button>
+
+    </div>
+
+
+  </form>
+
+</div>
+```
+
+  </div>
+
+  <!-- =========================
+       DELETE ROLE MODAL
+  ========================== -->
+
+  <div
+    class="role-modal"
+    id="deleteRoleModal"
+  >
+
+```
+<div class="role-modal-box">
+
+
+  <div class="role-modal-header">
+
+    <div>
+
+      <h2>
+        Delete Role
+      </h2>
+
+      <p>
+        This action cannot be undone.
+      </p>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="role-modal-close"
+      id="closeDeleteRoleModalBtn"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+
+  <div
+    style="padding:20px;"
+  >
+
+    <p
+      style="color:var(--text); line-height:1.6;"
+    >
+
+      Are you sure you want to delete
+
+      <strong id="deleteRoleName">
+        this role
+      </strong>?
+
+    </p>
+
+
+    <p
+      style="color:var(--muted); font-size:13px; margin-top:8px;"
+    >
+
+      The role and its permissions will be permanently removed.
+
+    </p>
+
+  </div>
+
+
+
+  <div class="role-modal-actions">
+
+    <button
+      type="button"
+      class="btn btn-secondary"
+      id="cancelDeleteRoleBtn"
+    >
+      Cancel
+    </button>
+
+
+    <button
+      type="button"
+      class="btn"
+      id="confirmDeleteRoleBtn"
+      style="background:var(--red); color:white;"
+    >
+      Delete Role
+    </button>
+
+  </div>
+
+
+</div>
+```
+
+  </div>
+
   <!-- Scripts -->
+
   <script src="../js/shared.js"></script>
+
   <script src="../js/admin.js"></script>
 
 </body>

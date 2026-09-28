@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -24,311 +25,244 @@
 
   <main class="main">
 
-    <header class="topbar">
+```
+<header class="topbar">
 
-      <div style="display:flex; align-items:center; gap:12px;">
+  <div style="display:flex; align-items:center; gap:12px;">
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+      aria-label="Open menu"
+    >
+      ☰
+    </button>
+
+    <div>
+      <h1>Edit User</h1>
+      <p>Update hospital system user information</p>
+    </div>
+
+  </div>
+
+  <div class="profile">
+
+    <div class="avatar">A</div>
+
+    <div>
+      <b>Admin</b>
+      <small>Administrator</small>
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="content">
+
+  <div class="form-card">
+
+    <div style="margin-bottom:22px;">
+
+      <h2 style="font-size:18px;">
+        User Information
+      </h2>
+
+      <p style="color:var(--muted); font-size:13px; margin-top:4px;">
+        Update the details of the selected user
+      </p>
+
+    </div>
+
+
+    <form id="editUserForm">
+
+      <div class="form-grid">
+
+        <!-- User ID -->
+
+        <div class="field">
+
+          <label for="userId">
+            User ID
+          </label>
+
+          <input
+            type="text"
+            id="userId"
+            readonly
+          >
+
+        </div>
+
+
+        <!-- Full Name -->
+
+        <div class="field">
+
+          <label for="fullName">
+            Full Name
+          </label>
+
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter full name"
+            required
+          >
+
+        </div>
+
+
+        <!-- Email -->
+
+        <div class="field">
+
+          <label for="email">
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter email address"
+            required
+          >
+
+        </div>
+
+
+        <!-- Phone -->
+
+        <div class="field">
+
+          <label for="phone">
+            Phone
+          </label>
+
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Enter phone number"
+            required
+          >
+
+        </div>
+
+
+        <!-- Role -->
+
+        <div class="field">
+
+          <label for="role">
+            Role
+          </label>
+
+          <select id="role" required>
+
+            <option value="">
+              Select role
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- Department -->
+
+        <div class="field">
+
+          <label for="department">
+            Department
+          </label>
+
+          <select id="department" required>
+
+            <option value="">
+              Select department
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- Specialization -->
+
+        <div
+          class="field"
+          id="specializationField"
+        >
+
+          <label for="specialization">
+            Specialization
+          </label>
+
+          <input
+            type="text"
+            id="specialization"
+            placeholder="Enter specialization"
+          >
+
+        </div>
+
+
+        <!-- Status -->
+
+        <div class="field">
+
+          <label for="status">
+            Status
+          </label>
+
+          <select id="status" required>
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- Form Actions -->
+
+      <div class="form-actions">
+
+        <a
+          href="users.html"
+          class="btn btn-secondary"
+        >
+          Cancel
+        </a>
 
         <button
-          class="menu-btn"
-          id="menuBtn"
-          type="button"
-          aria-label="Open menu"
+          type="submit"
+          class="btn btn-primary"
         >
-          ☰
+          Save Changes
         </button>
 
-        <div>
-          <h1>Edit User</h1>
-          <p>Update hospital system user information</p>
-        </div>
-
       </div>
 
-      <div class="profile">
+    </form>
 
-        <div class="avatar">A</div>
+  </div>
 
-        <div>
-          <b>Admin</b>
-          <small>Administrator</small>
-        </div>
-
-      </div>
-
-    </header>
-
-
-    <section class="content">
-
-      <div class="form-card">
-
-        <div style="margin-bottom:22px;">
-
-          <h2 style="font-size:18px;">
-            User Information
-          </h2>
-
-          <p style="color:var(--muted); font-size:13px; margin-top:4px;">
-            Update the details of the selected user
-          </p>
-
-        </div>
-
-
-        <form id="editUserForm">
-
-          <div class="form-grid">
-
-            <!-- User ID -->
-
-            <div class="field">
-
-              <label for="userId">
-                User ID
-              </label>
-
-              <input
-                type="text"
-                id="userId"
-                readonly
-              >
-
-            </div>
-
-
-            <!-- Full Name -->
-
-            <div class="field">
-
-              <label for="fullName">
-                Full Name
-              </label>
-
-              <input
-                type="text"
-                id="fullName"
-                placeholder="Enter full name"
-                required
-              >
-
-            </div>
-
-
-            <!-- Email -->
-
-            <div class="field">
-
-              <label for="email">
-                Email
-              </label>
-
-              <input
-                type="email"
-                id="email"
-                placeholder="Enter email address"
-                required
-              >
-
-            </div>
-
-
-            <!-- Phone -->
-
-            <div class="field">
-
-              <label for="phone">
-                Phone
-              </label>
-
-              <input
-                type="tel"
-                id="phone"
-                placeholder="Enter phone number"
-                required
-              >
-
-            </div>
-
-
-            <!-- Role -->
-
-            <div class="field">
-
-              <label for="role">
-                Role
-              </label>
-
-              <select id="role" required>
-
-                <option value="">
-                  Select role
-                </option>
-
-                <option value="1">
-                  Doctor
-                </option>
-
-                <option value="2">
-                  Receptionist
-                </option>
-
-                <option value="3">
-                  Pharmacist
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <!-- Department -->
-
-            <div class="field">
-
-              <label for="department">
-                Department
-              </label>
-
-              <select id="department" required>
-
-                <option value="">
-                  Select department
-                </option>
-
-                <option value="DEP-001">
-                  Administration
-                </option>
-
-                <option value="DEP-002">
-                  Cardiology
-                </option>
-
-                <option value="DEP-003">
-                  Dermatology
-                </option>
-
-                <option value="DEP-004">
-                  Emergency
-                </option>
-
-                <option value="DEP-005">
-                  ENT
-                </option>
-
-                <option value="DEP-006">
-                  Gastroenterology
-                </option>
-
-                <option value="DEP-007">
-                  General Medicine
-                </option>
-
-                <option value="DEP-008">
-                  Gynecology
-                </option>
-
-                <option value="DEP-009">
-                  Neurology
-                </option>
-
-                <option value="DEP-010">
-                  Oncology
-                </option>
-
-                <option value="DEP-011">
-                  Orthopedics
-                </option>
-
-                <option value="DEP-012">
-                  Pharmacy
-                </option>
-
-                <option value="DEP-013">
-                  Radiology
-                </option>
-
-                <option value="DEP-014">
-                  Urology
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <!-- Specialization -->
-
-            <div
-              class="field"
-              id="specializationField"
-            >
-
-              <label for="specialization">
-                Specialization
-              </label>
-
-              <input
-                type="text"
-                id="specialization"
-                placeholder="Enter specialization"
-              >
-
-            </div>
-
-
-            <!-- Status -->
-
-            <div class="field">
-
-              <label for="status">
-                Status
-              </label>
-
-              <select id="status" required>
-
-                <option value="Active">
-                  Active
-                </option>
-
-                <option value="Inactive">
-                  Inactive
-                </option>
-
-              </select>
-
-            </div>
-
-          </div>
-
-
-          <!-- Form Actions -->
-
-          <div class="form-actions">
-
-            <a
-              href="users.html"
-              class="btn btn-secondary"
-            >
-              Cancel
-            </a>
-
-            <button
-              type="submit"
-              class="btn btn-primary"
-            >
-              Save Changes
-            </button>
-
-          </div>
-
-        </form>
-
-      </div>
-
-    </section>
+</section>
+```
 
   </main>
-
 
   <!-- Success Modal -->
 
@@ -337,35 +271,36 @@
     id="editUserModal"
   >
 
-    <div class="modal">
+```
+<div class="modal">
 
-      <div class="modal-head">
+  <div class="modal-head">
 
-        <h3>
-          User Updated
-        </h3>
+    <h3>
+      User Updated
+    </h3>
 
-        <button
-          type="button"
-          onclick="closeModal('editUserModal')"
-        >
-          ×
-        </button>
-
-      </div>
-
-      <div style="padding:20px;">
-        User information updated successfully.
-      </div>
-
-    </div>
+    <button
+      type="button"
+      onclick="closeModal('editUserModal')"
+    >
+      ×
+    </button>
 
   </div>
 
+  <div style="padding:20px;">
+    User information updated successfully.
+  </div>
+
+</div>
+```
+
+  </div>
 
   <script src="../js/shared.js"></script>
-  <script src="../js/admin.js"></script>
 
+  <script src="../js/admin.js"></script>
 
   <script>
 
@@ -374,6 +309,9 @@
 
     const roleSelect =
       document.getElementById("role");
+
+    const departmentSelect =
+      document.getElementById("department");
 
     const specializationField =
       document.getElementById("specializationField");
@@ -396,36 +334,175 @@
       urlParams.get("id");
 
 
+    /* =====================================================
+       SPECIALIZATION
+    ===================================================== */
+
     function updateSpecializationField() {
 
       if (roleSelect.value === "1") {
 
-        specializationField.style.display = "block";
+        specializationField.style.display =
+          "block";
 
-        specializationInput.required = true;
+        specializationInput.required =
+          true;
 
       } else {
 
-        specializationField.style.display = "none";
+        specializationField.style.display =
+          "none";
 
-        specializationInput.required = false;
+        specializationInput.required =
+          false;
 
       }
 
     }
 
 
-    /*
-       Load selected user
-    */
+    /* =====================================================
+       LOAD ROLES
+    ===================================================== */
+
+    async function loadRoles() {
+
+      try {
+
+        const response =
+          await fetch(
+            "http://localhost:5000/api/roles"
+          );
+
+
+        const roles =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          alert(
+            "Failed to load roles."
+          );
+
+          return;
+
+        }
+
+
+        roles
+          .filter(role => role.role_name !== "Admin")
+          .forEach(role => {
+
+            const option =
+              document.createElement("option");
+
+            option.value =
+              role.role_id;
+
+            option.textContent =
+              role.role_name;
+
+            roleSelect.appendChild(
+              option
+            );
+
+          });
+
+
+      } catch (error) {
+
+        console.error(
+          "Load roles error:",
+          error
+        );
+
+        alert(
+          "Could not load roles from the CareFlow backend."
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       LOAD DEPARTMENTS
+    ===================================================== */
+
+    async function loadDepartments() {
+
+      try {
+
+        const response =
+          await fetch(
+            "http://localhost:5000/api/departments"
+          );
+
+
+        const departments =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          alert(
+            "Failed to load departments."
+          );
+
+          return;
+
+        }
+
+
+        departments.forEach(department => {
+
+          const option =
+            document.createElement("option");
+
+          option.value =
+            department.department_id;
+
+          option.textContent =
+            department.department_name;
+
+          departmentSelect.appendChild(
+            option
+          );
+
+        });
+
+
+      } catch (error) {
+
+        console.error(
+          "Load departments error:",
+          error
+        );
+
+        alert(
+          "Could not load departments from the CareFlow backend."
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       LOAD SELECTED USER
+    ===================================================== */
 
     async function loadUser() {
 
       if (!userId) {
 
-        alert("No user ID was provided.");
+        alert(
+          "No user ID was provided."
+        );
 
-        window.location.href = "users.html";
+        window.location.href =
+          "users.html";
 
         return;
 
@@ -451,7 +528,8 @@
             "Failed to load user."
           );
 
-          window.location.href = "users.html";
+          window.location.href =
+            "users.html";
 
           return;
 
@@ -502,9 +580,9 @@
     }
 
 
-    /*
-       Save changes
-    */
+    /* =====================================================
+       SAVE CHANGES
+    ===================================================== */
 
     editUserForm.addEventListener(
       "submit",
@@ -613,13 +691,29 @@
         document.getElementById(modalId);
 
       if (modal) {
-        modal.style.display = "none";
+        modal.style.display =
+          "none";
       }
 
     }
 
 
-    loadUser();
+    /* =====================================================
+       INITIALIZE PAGE
+    ===================================================== */
+
+    async function initializeEditPage() {
+
+      await loadRoles();
+
+      await loadDepartments();
+
+      await loadUser();
+
+    }
+
+
+    initializeEditPage();
 
   </script>
 

@@ -184,23 +184,11 @@
 
               <select id="role" required>
 
-                <option value="">
-                  Select role
-                </option>
+    <option value="">
+        Select role
+    </option>
 
-                <option value="doctor">
-                  Doctor
-                </option>
-
-                <option value="receptionist">
-                  Receptionist
-                </option>
-
-                <option value="pharmacist">
-                  Pharmacist
-                </option>
-
-              </select>
+</select>
 
             </div>
 
@@ -215,67 +203,11 @@
 
               <select id="department" required>
 
-                <option value="">
-                  Select department
-                </option>
+    <option value="">
+        Select department
+    </option>
 
-                <option value="administration">
-                  Administration
-                </option>
-
-                <option value="cardiology">
-                  Cardiology
-                </option>
-
-                <option value="dermatology">
-                  Dermatology
-                </option>
-
-                <option value="emergency">
-                  Emergency
-                </option>
-
-                <option value="ent">
-                  ENT
-                </option>
-
-                <option value="gastroenterology">
-                  Gastroenterology
-                </option>
-
-                <option value="general-medicine">
-                  General Medicine
-                </option>
-
-                <option value="gynecology">
-                  Gynecology
-                </option>
-
-                <option value="neurology">
-                  Neurology
-                </option>
-
-                <option value="oncology">
-                  Oncology
-                </option>
-
-                <option value="orthopedics">
-                  Orthopedics
-                </option>
-
-                <option value="pharmacy">
-                  Pharmacy
-                </option>
-
-                <option value="radiology">
-                  Radiology
-                </option>
-
-                <option value="urology">
-                  Urology
-                </option>
-
-              </select>
+</select>
 
             </div>
 
@@ -371,85 +303,182 @@
   <script>
 
     const roleSelect =
-      document.getElementById("role");
+        document.getElementById("role");
+
+    const departmentSelect =
+        document.getElementById("department");
 
     const specializationField =
-      document.getElementById("specializationField");
+        document.getElementById("specializationField");
 
     const specializationInput =
-      document.getElementById("specialization");
+        document.getElementById("specialization");
 
+
+    /* =====================================================
+       LOAD ROLES
+    ===================================================== */
+
+    async function loadRoles() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://localhost:5000/api/roles"
+                );
+
+
+            const roles =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                alert(
+                    "Failed to load roles."
+                );
+
+                return;
+
+            }
+
+
+            roles
+                .filter(role => role.role_name !== "Admin")
+                .forEach(role => {
+
+                    const option =
+                        document.createElement("option");
+
+                    option.value =
+                        role.role_id;
+
+                    option.textContent =
+                        role.role_name;
+
+                    roleSelect.appendChild(option);
+
+                });
+
+
+        } catch (error) {
+
+            console.error(
+                "Load roles error:",
+                error
+            );
+
+            alert(
+                "Could not load roles from the CareFlow backend."
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOAD DEPARTMENTS
+    ===================================================== */
+
+    async function loadDepartments() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "http://localhost:5000/api/departments"
+                );
+
+
+            const departments =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                alert(
+                    "Failed to load departments."
+                );
+
+                return;
+
+            }
+
+
+            departments.forEach(department => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value =
+                    department.department_id;
+
+                option.textContent =
+                    department.department_name;
+
+                departmentSelect.appendChild(option);
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Load departments error:",
+                error
+            );
+
+            alert(
+                "Could not load departments from the CareFlow backend."
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SPECIALIZATION
+    ===================================================== */
 
     function updateSpecializationField() {
 
-      if (roleSelect.value === "doctor") {
+        if (roleSelect.value === "1") {
 
-        specializationField.style.display = "block";
-        specializationInput.required = true;
+            specializationField.style.display =
+                "block";
 
-      } else {
+            specializationInput.required =
+                true;
 
-        specializationField.style.display = "none";
-        specializationInput.required = false;
-        specializationInput.value = "";
+        } else {
 
-      }
+            specializationField.style.display =
+                "none";
+
+            specializationInput.required =
+                false;
+
+            specializationInput.value =
+                "";
+
+        }
 
     }
 
 
     roleSelect.addEventListener(
-      "change",
-      updateSpecializationField
+        "change",
+        updateSpecializationField
     );
 
-    updateSpecializationField();
 
+    loadRoles();
+    loadDepartments();
 
-    function closeModal(modalId) {
-
-      const modal =
-        document.getElementById(modalId);
-
-      if (modal) {
-        modal.style.display = "none";
-      }
-
-    }
-
-  </script>
+</script>
 
 </body>
 </html>
-```
-
-### One small CSS addition
-
-Add this to `css/style.css`:
-
-```css
-.form-helper {
-    display: block;
-    margin-top: 6px;
-    font-size: 12px;
-    color: var(--muted);
-}
-
-.field input[readonly] {
-    background: var(--bg);
-    color: var(--muted);
-    cursor: not-allowed;
-}
-```
-
-That's it. **Don't change `admin.js` or the backend again.**
-
-Your UI should now show:
-
-**User ID**
-
-`[ Auto-generated ]`
-
-*User ID will be generated automatically.*
-
-while the actual `USR-002`, `USR-003`, etc. continues to be generated by the backend.
