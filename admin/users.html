@@ -88,6 +88,7 @@
 
 
         <!-- Search -->
+
         <div style="padding:0 20px 20px;">
 
           <input
@@ -95,16 +96,16 @@
             id="searchInput"
             class="input"
             placeholder="Search user by ID..."
-            oninput="applyFilters()"
           >
 
         </div>
 
 
         <!-- Users Table -->
+
         <div class="table-wrap">
 
-          <table data-filterable>
+          <table>
 
             <thead>
 
@@ -129,93 +130,12 @@
             </thead>
 
 
-            <tbody>
+            <tbody id="usersTableBody">
 
-              <tr data-status="active">
+              <tr>
 
-                <td>CF-1001</td>
-
-                <td>Nimra Marrium</td>
-
-                <td>nimra@careflow.com</td>
-
-                <td>Doctor</td>
-
-                <td>Cardiology</td>
-
-                <td>
-                  <span class="badge badge-success">
-                    Active
-                  </span>
-                </td>
-
-                <td>
-                  <a
-                    href="edit-user.html"
-                    class="btn btn-secondary"
-                  >
-                    Edit
-                  </a>
-                </td>
-
-              </tr>
-
-
-              <tr data-status="active">
-
-                <td>CF-1002</td>
-
-                <td>Nimra Marrium</td>
-
-                <td>nimra@careflow.com</td>
-
-                <td>Receptionist</td>
-
-                <td>Administration</td>
-
-                <td>
-                  <span class="badge badge-success">
-                    Active
-                  </span>
-                </td>
-
-                <td>
-                  <a
-                    href="edit-user.html"
-                    class="btn btn-secondary"
-                  >
-                    Edit
-                  </a>
-                </td>
-
-              </tr>
-
-
-              <tr data-status="inactive">
-
-                <td>CF-1003</td>
-
-                <td>Nimra Marrium</td>
-
-                <td>nimra@careflow.com</td>
-
-                <td>Pharmacist</td>
-
-                <td>Pharmacy</td>
-
-                <td>
-                  <span class="badge badge-warning">
-                    Inactive
-                  </span>
-                </td>
-
-                <td>
-                  <a
-                    href="edit-user.html"
-                    class="btn btn-secondary"
-                  >
-                    Edit
-                  </a>
+                <td colspan="7" style="text-align:center;">
+                  Loading users...
                 </td>
 
               </tr>
@@ -235,6 +155,275 @@
 
   <script src="../js/shared.js"></script>
   <script src="../js/admin.js"></script>
+
+
+  <script>
+
+    let allUsers = [];
+
+
+    // Load users from database
+
+    async function loadUsers() {
+
+      const tableBody =
+        document.getElementById("usersTableBody");
+
+
+      try {
+
+        const response = await fetch(
+          "http://localhost:5000/api/users"
+        );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Failed to load users."
+          );
+
+        }
+
+
+        allUsers = await response.json();
+
+
+        displayUsers(allUsers);
+
+
+      } catch (error) {
+
+        console.error(
+          "Error loading users:",
+          error
+        );
+
+
+        tableBody.innerHTML = `
+
+          <tr>
+
+            <td
+              colspan="7"
+              style="text-align:center;"
+            >
+              Unable to load users.
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+
+    }
+
+
+    // Display users in table
+
+    function displayUsers(users) {
+
+      const tableBody =
+        document.getElementById("usersTableBody");
+
+
+      tableBody.innerHTML = "";
+
+
+      if (users.length === 0) {
+
+        tableBody.innerHTML = `
+
+          <tr>
+
+            <td
+              colspan="7"
+              style="text-align:center;"
+            >
+              No users found.
+            </td>
+
+          </tr>
+
+        `;
+
+        return;
+
+      }
+
+
+      users.forEach(function(user) {
+
+        const row =
+          document.createElement("tr");
+
+
+        const statusClass =
+          user.status === "Active"
+            ? "badge-success"
+            : "badge-warning";
+
+
+        row.innerHTML = `
+
+          <td>
+            ${user.user_id}
+          </td>
+
+          <td>
+            ${user.full_name}
+          </td>
+
+          <td>
+            ${user.email}
+          </td>
+
+          <td>
+            ${user.role_name}
+          </td>
+
+          <td>
+            ${user.department_name}
+          </td>
+
+          <td>
+
+            <span class="badge ${statusClass}">
+              ${user.status}
+            </span>
+
+          </td>
+
+          <td>
+    <div class="table-actions">
+
+        <a
+            href="edit-user.html?id=${encodeURIComponent(user.user_id)}"
+            class="btn btn-secondary btn-small"
+        >
+            Edit
+        </a>
+
+        <button
+            type="button"
+            class="btn btn-danger btn-small"
+            onclick="deleteUser('${user.user_id}')"
+        >
+            Delete
+        </button>
+
+    </div>
+</td>
+
+        `;
+
+
+        tableBody.appendChild(row);
+
+      });
+
+    }
+
+
+    // Search users by User ID
+
+    document
+      .getElementById("searchInput")
+      .addEventListener("input", function() {
+
+        const searchValue =
+          this.value.trim().toLowerCase();
+
+
+        const filteredUsers =
+          allUsers.filter(function(user) {
+
+            return user.user_id
+              .toLowerCase()
+              .includes(searchValue);
+
+          });
+
+
+        displayUsers(filteredUsers);
+
+      });
+
+
+    // Load users when page opens
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      loadUsers
+    );
+
+  </script>
+
+<script>
+
+    async function deleteUser(userId) {
+
+        const confirmed = confirm(
+            "Are you sure you want to delete this user?\n\n" +
+            "User ID: " + userId +
+            "\n\nThis action cannot be undone."
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+
+        try {
+
+            const response = await fetch(
+                `http://localhost:5000/api/users/${encodeURIComponent(userId)}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (!response.ok) {
+
+                alert(
+                    data.message ||
+                    "Failed to delete user."
+                );
+
+                return;
+            }
+
+
+            alert(
+                "User deleted successfully."
+            );
+
+
+            // Reload the users table
+            location.reload();
+
+
+        } catch (error) {
+
+            console.error(
+                "Delete user error:",
+                error
+            );
+
+            alert(
+                "Could not connect to the CareFlow backend."
+            );
+
+        }
+
+    }
+
+</script>
 
 </body>
 </html>

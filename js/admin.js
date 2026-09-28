@@ -4,52 +4,177 @@ document.addEventListener("DOMContentLoaded", () => {
        CREATE USER FORM
     ===================================================== */
 
-    const form = document.querySelector(".form-card form");
+    const createUserForm =
+        document.getElementById("createUserForm");
 
-    if (form) {
+    if (createUserForm) {
 
-        form.addEventListener("submit", (event) => {
+        createUserForm.addEventListener(
+            "submit",
+            async (event) => {
 
-            event.preventDefault();
-
-            const nameElement =
-                document.getElementById("name");
-
-            const emailElement =
-                document.getElementById("email");
-
-            const roleElement =
-                document.getElementById("role");
-
-            const statusElement =
-                document.getElementById("status");
+                event.preventDefault();
 
 
-            const name =
-                nameElement ? nameElement.value : "";
+                const fullName =
+                    document.getElementById("fullName").value.trim();
 
-            const email =
-                emailElement ? emailElement.value : "";
+                const email =
+                    document.getElementById("email").value.trim();
 
-            const role =
-                roleElement ? roleElement.value : "";
+                const phone =
+                    document.getElementById("phone").value.trim();
 
-            const status =
-                statusElement ? statusElement.value : "";
+                const password =
+                    document.getElementById("password").value;
+
+                const role =
+                    document.getElementById("role").value;
+
+                const department =
+                    document.getElementById("department").value;
+
+                const specialization =
+                    document.getElementById("specialization").value.trim();
 
 
-            alert(
-                "User created successfully!\n\n" +
-                "Name: " + name + "\n" +
-                "Email: " + email + "\n" +
-                "Role: " + role + "\n" +
-                "Status: " + status
-            );
+                /* Role names → database role IDs */
 
-        });
+                const roleIds = {
+                    doctor: 1,
+                    receptionist: 2,
+                    pharmacist: 3
+                };
+
+
+                /* Department values → database department IDs */
+
+                const departmentIds = {
+                    administration: "DEP-001",
+                    cardiology: "DEP-002",
+                    dermatology: "DEP-003",
+                    emergency: "DEP-004",
+                    ent: "DEP-005",
+                    gastroenterology: "DEP-006",
+                    "general-medicine": "DEP-007",
+                    gynecology: "DEP-008",
+                    neurology: "DEP-009",
+                    oncology: "DEP-010",
+                    orthopedics: "DEP-011",
+                    pharmacy: "DEP-012",
+                    radiology: "DEP-013",
+                    urology: "DEP-014"
+                };
+
+
+                const roleId =
+                    roleIds[role];
+
+                const departmentId =
+                    departmentIds[department];
+
+
+                if (!roleId || !departmentId) {
+
+                    alert(
+                        "Please select a valid role and department."
+                    );
+
+                    return;
+
+                }
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "http://localhost:5000/api/users",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    full_name: fullName,
+
+                                    email: email,
+
+                                    password: password,
+
+                                    phone: phone,
+
+                                    role_id: roleId,
+
+                                    department_id:
+                                        departmentId,
+
+                                    specialization:
+                                        specialization || null,
+
+                                    status: "Active"
+
+                                })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        alert(
+                            data.message ||
+                            "Failed to create user."
+                        );
+
+                        return;
+
+                    }
+
+
+                    alert(
+                        "User created successfully!\n\n" +
+                        "User ID: " +
+                        data.user_id
+                    );
+
+
+                    createUserForm.reset();
+
+
+                    document.getElementById(
+                        "specializationField"
+                    ).style.display = "none";
+
+
+                    window.location.href =
+                        "users.html";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Create user error:",
+                        error
+                    );
+
+                    alert(
+                        "Could not connect to the CareFlow backend."
+                    );
+
+                }
+
+            }
+        );
 
     }
-
 
 
     /* =====================================================
@@ -72,8 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("cancelRoleBtn");
 
 
-    /* Open Modal */
-
     if (addRoleBtn && addRoleModal) {
 
         addRoleBtn.addEventListener("click", () => {
@@ -92,8 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* Close Modal */
-
     function closeRoleModal() {
 
         if (!addRoleModal) {
@@ -109,8 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* X Button */
-
     if (closeRoleModalBtn) {
 
         closeRoleModalBtn.addEventListener(
@@ -121,8 +240,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* Cancel Button */
-
     if (cancelRoleBtn) {
 
         cancelRoleBtn.addEventListener(
@@ -132,8 +249,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
-    /* Submit Role */
 
     if (addRoleForm) {
 
@@ -164,8 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                /* Role name required */
-
                 if (!roleName) {
 
                     alert(
@@ -176,8 +289,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
-
-                /* Permission required */
 
                 if (
                     selectedPermissions.length === 0
@@ -191,8 +302,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
-
-                /* Demo success */
 
                 alert(
                     "Role added successfully!\n\n" +
@@ -211,8 +320,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
-    /* Click outside modal */
 
     if (addRoleModal) {
 
@@ -234,8 +341,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* Escape Key */
-
     document.addEventListener(
         "keydown",
         (event) => {
@@ -252,7 +357,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
     );
-
 
 
     /* =====================================================

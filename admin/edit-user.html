@@ -9,7 +9,11 @@
   <link rel="icon" href="../assets/logo/careflow-logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -53,6 +57,7 @@
 
     </header>
 
+
     <section class="content">
 
       <div class="form-card">
@@ -69,7 +74,8 @@
 
         </div>
 
-        <form onsubmit="saveForm(event, 'editUserModal')">
+
+        <form id="editUserForm">
 
           <div class="form-grid">
 
@@ -84,7 +90,6 @@
               <input
                 type="text"
                 id="userId"
-                value="CF-1001"
                 readonly
               >
 
@@ -102,7 +107,7 @@
               <input
                 type="text"
                 id="fullName"
-                value="Nimra Marrium"
+                placeholder="Enter full name"
                 required
               >
 
@@ -120,7 +125,7 @@
               <input
                 type="email"
                 id="email"
-                value="nimra@careflow.com"
+                placeholder="Enter email address"
                 required
               >
 
@@ -138,7 +143,6 @@
               <input
                 type="tel"
                 id="phone"
-                value="0300-1234567"
                 placeholder="Enter phone number"
                 required
               >
@@ -160,15 +164,15 @@
                   Select role
                 </option>
 
-                <option value="doctor" selected>
+                <option value="1">
                   Doctor
                 </option>
 
-                <option value="receptionist">
+                <option value="2">
                   Receptionist
                 </option>
 
-                <option value="pharmacist">
+                <option value="3">
                   Pharmacist
                 </option>
 
@@ -191,59 +195,59 @@
                   Select department
                 </option>
 
-                <option value="administration">
+                <option value="DEP-001">
                   Administration
                 </option>
 
-                <option value="cardiology" selected>
+                <option value="DEP-002">
                   Cardiology
                 </option>
 
-                <option value="dermatology">
+                <option value="DEP-003">
                   Dermatology
                 </option>
 
-                <option value="emergency">
+                <option value="DEP-004">
                   Emergency
                 </option>
 
-                <option value="ent">
+                <option value="DEP-005">
                   ENT
                 </option>
 
-                <option value="gastroenterology">
+                <option value="DEP-006">
                   Gastroenterology
                 </option>
 
-                <option value="general-medicine">
+                <option value="DEP-007">
                   General Medicine
                 </option>
 
-                <option value="gynecology">
+                <option value="DEP-008">
                   Gynecology
                 </option>
 
-                <option value="neurology">
+                <option value="DEP-009">
                   Neurology
                 </option>
 
-                <option value="oncology">
+                <option value="DEP-010">
                   Oncology
                 </option>
 
-                <option value="orthopedics">
+                <option value="DEP-011">
                   Orthopedics
                 </option>
 
-                <option value="pharmacy">
+                <option value="DEP-012">
                   Pharmacy
                 </option>
 
-                <option value="radiology">
+                <option value="DEP-013">
                   Radiology
                 </option>
 
-                <option value="urology">
+                <option value="DEP-014">
                   Urology
                 </option>
 
@@ -254,7 +258,10 @@
 
             <!-- Specialization -->
 
-            <div class="field" id="specializationField">
+            <div
+              class="field"
+              id="specializationField"
+            >
 
               <label for="specialization">
                 Specialization
@@ -263,7 +270,6 @@
               <input
                 type="text"
                 id="specialization"
-                value="Cardiologist"
                 placeholder="Enter specialization"
               >
 
@@ -280,11 +286,11 @@
 
               <select id="status" required>
 
-                <option value="active" selected>
+                <option value="Active">
                   Active
                 </option>
 
-                <option value="inactive">
+                <option value="Inactive">
                   Inactive
                 </option>
 
@@ -326,7 +332,10 @@
 
   <!-- Success Modal -->
 
-  <div class="modal-overlay" id="editUserModal">
+  <div
+    class="modal-overlay"
+    id="editUserModal"
+  >
 
     <div class="modal">
 
@@ -357,25 +366,261 @@
   <script src="../js/shared.js"></script>
   <script src="../js/admin.js"></script>
 
+
   <script>
-    const roleSelect = document.getElementById("role");
-    const specializationField = document.getElementById("specializationField");
-    const specializationInput = document.getElementById("specialization");
+
+    const editUserForm =
+      document.getElementById("editUserForm");
+
+    const roleSelect =
+      document.getElementById("role");
+
+    const specializationField =
+      document.getElementById("specializationField");
+
+    const specializationInput =
+      document.getElementById("specialization");
+
+
+    /*
+       Get User ID from the URL
+
+       Example:
+       edit-user.html?id=USR-002
+    */
+
+    const urlParams =
+      new URLSearchParams(window.location.search);
+
+    const userId =
+      urlParams.get("id");
+
 
     function updateSpecializationField() {
-      if (roleSelect.value === "doctor") {
+
+      if (roleSelect.value === "1") {
+
         specializationField.style.display = "block";
+
         specializationInput.required = true;
+
       } else {
+
         specializationField.style.display = "none";
+
         specializationInput.required = false;
-        specializationInput.value = "";
+
       }
+
     }
 
-    roleSelect.addEventListener("change", updateSpecializationField);
 
-    updateSpecializationField();
+    /*
+       Load selected user
+    */
+
+    async function loadUser() {
+
+      if (!userId) {
+
+        alert("No user ID was provided.");
+
+        window.location.href = "users.html";
+
+        return;
+
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            `http://localhost:5000/api/users/${encodeURIComponent(userId)}`
+          );
+
+
+        const user =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          alert(
+            user.message ||
+            "Failed to load user."
+          );
+
+          window.location.href = "users.html";
+
+          return;
+
+        }
+
+
+        document.getElementById("userId").value =
+          user.user_id;
+
+        document.getElementById("fullName").value =
+          user.full_name;
+
+        document.getElementById("email").value =
+          user.email;
+
+        document.getElementById("phone").value =
+          user.phone || "";
+
+        document.getElementById("role").value =
+          user.role_id;
+
+        document.getElementById("department").value =
+          user.department_id;
+
+        document.getElementById("specialization").value =
+          user.specialization || "";
+
+        document.getElementById("status").value =
+          user.status;
+
+
+        updateSpecializationField();
+
+
+      } catch (error) {
+
+        console.error(
+          "Load user error:",
+          error
+        );
+
+        alert(
+          "Could not connect to the CareFlow backend."
+        );
+
+      }
+
+    }
+
+
+    /*
+       Save changes
+    */
+
+    editUserForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+
+        const updatedUser = {
+
+          full_name:
+            document.getElementById("fullName").value.trim(),
+
+          email:
+            document.getElementById("email").value.trim(),
+
+          phone:
+            document.getElementById("phone").value.trim(),
+
+          role_id:
+            document.getElementById("role").value,
+
+          department_id:
+            document.getElementById("department").value,
+
+          specialization:
+            document.getElementById("specialization").value.trim(),
+
+          status:
+            document.getElementById("status").value
+
+        };
+
+
+        try {
+
+          const response =
+            await fetch(
+              `http://localhost:5000/api/users/${encodeURIComponent(userId)}`,
+              {
+                method: "PUT",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify(updatedUser)
+
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          if (!response.ok) {
+
+            alert(
+              data.message ||
+              "Failed to update user."
+            );
+
+            return;
+
+          }
+
+
+          alert(
+            "User updated successfully!"
+          );
+
+
+          window.location.href =
+            "users.html";
+
+
+        } catch (error) {
+
+          console.error(
+            "Update user error:",
+            error
+          );
+
+          alert(
+            "Could not connect to the CareFlow backend."
+          );
+
+        }
+
+      }
+    );
+
+
+    roleSelect.addEventListener(
+      "change",
+      updateSpecializationField
+    );
+
+
+    function closeModal(modalId) {
+
+      const modal =
+        document.getElementById(modalId);
+
+      if (modal) {
+        modal.style.display = "none";
+      }
+
+    }
+
+
+    loadUser();
+
   </script>
 
 </body>

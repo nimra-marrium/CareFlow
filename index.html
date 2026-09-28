@@ -4,122 +4,444 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Log in | CareFlow HMS</title>
-  <link rel="icon" href="../assets/logo/careflow-logo.png">
+  <link rel="icon" href="assets/logo/careflow-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+
   <div class="login-page">
 
     <section class="login-art">
+
       <div class="brand-lg">
-        <span class="logo-tile"><img src="../assets/logo/careflow-logo.png" alt="CareFlow logo"></span>
+        <span class="logo-tile">
+          <img src="assets/logo/careflow-logo.png" alt="CareFlow logo">
+        </span>
+
         <strong>CareFlow</strong>
       </div>
+
       <div>
         <h2>Every patient, doctor and medicine in one place.</h2>
         <p>Log in as an admin or as staff.</p>
       </div>
+
     </section>
 
+
     <section class="login-form-wrap">
+
       <div class="login-form">
 
         <div class="tabs" style="margin-bottom:26px">
-          <button type="button" class="tab active" id="adminTabBtn" onclick="showLogin('admin')">Admin</button>
-          <button type="button" class="tab" id="staffTabBtn" onclick="showLogin('staff')">Staff</button>
+
+          <button
+            type="button"
+            class="tab active"
+            id="adminTabBtn"
+            onclick="showLogin('admin')">
+            Admin
+          </button>
+
+          <button
+            type="button"
+            class="tab"
+            id="staffTabBtn"
+            onclick="showLogin('staff')">
+            Staff
+          </button>
+
         </div>
 
+
+        <!-- ADMIN LOGIN -->
+
         <form id="adminForm">
+
           <h1>Admin Login</h1>
-          <p>Sign in to manage users, roles and the system.</p>
 
-          <div class="error-msg" id="adminError" role="alert">Email or password is incorrect. Please try again.</div>
+          <p>
+            Sign in to manage users, roles and the system.
+          </p>
+
+
+          <div
+            class="error-msg"
+            id="adminError"
+            role="alert">
+            Email or password is incorrect. Please try again.
+          </div>
+
 
           <div class="field">
-            <label for="adminEmail">Email or username</label>
-            <input type="text" id="adminEmail" placeholder="admin@careflow.pk" required>
+
+            <label for="adminEmail">
+              Email or username
+            </label>
+
+            <input
+              type="text"
+              id="adminEmail"
+              placeholder="admin@careflow.pk"
+              required>
+
           </div>
+
+
           <div class="field">
-            <label for="adminPassword">Password</label>
-            <input type="password" id="adminPassword" placeholder="Enter your password" required>
+
+            <label for="adminPassword">
+              Password
+            </label>
+
+            <input
+              type="password"
+              id="adminPassword"
+              placeholder="Enter your password"
+              required>
+
           </div>
+
 
           <div class="row">
-            <label style="display:flex;gap:8px;align-items:center"><input type="checkbox"> Remember me</label>
-            <a href="#">Forgot password?</a>
+
+            <label style="display:flex;gap:8px;align-items:center">
+
+              <input type="checkbox">
+
+              Remember me
+
+            </label>
+
+            <a href="#">
+              Forgot password?
+            </a>
+
           </div>
 
-          <button type="submit" class="btn btn-primary">Log in as Admin</button>
+
+          <button
+            type="submit"
+            class="btn btn-primary">
+
+            Log in as Admin
+
+          </button>
+
         </form>
 
-        <form id="staffForm" style="display:none">
+
+        <!-- STAFF LOGIN -->
+
+        <form
+          id="staffForm"
+          style="display:none">
+
           <h1>Staff Login</h1>
-          <p>Log in with your staff account.</p>
 
-          <div class="error-msg" id="staffError" role="alert">Email or password is incorrect. Please try again.</div>
+          <p>
+            Log in with your staff account.
+          </p>
+
+
+          <div
+            class="error-msg"
+            id="staffError"
+            role="alert">
+            Email or password is incorrect. Please try again.
+          </div>
+
 
           <div class="field">
-            <label for="staffEmail">Email or username</label>
-            <input type="text" id="staffEmail" placeholder="yourname@careflow.pk" required>
+
+            <label for="staffEmail">
+              Email or username
+            </label>
+
+            <input
+              type="text"
+              id="staffEmail"
+              placeholder="yourname@careflow.pk"
+              required>
+
           </div>
+
+
           <div class="field">
-            <label for="staffPassword">Password</label>
-            <input type="password" id="staffPassword" placeholder="Enter your password" required>
+
+            <label for="staffPassword">
+              Password
+            </label>
+
+            <input
+              type="password"
+              id="staffPassword"
+              placeholder="Enter your password"
+              required>
+
           </div>
+
 
           <div class="row">
-            <label style="display:flex;gap:8px;align-items:center"><input type="checkbox"> Remember me</label>
-            <a href="#">Forgot password?</a>
+
+            <label style="display:flex;gap:8px;align-items:center">
+
+              <input type="checkbox">
+
+              Remember me
+
+            </label>
+
+            <a href="#">
+              Forgot password?
+            </a>
+
           </div>
 
-          <button type="submit" class="btn btn-primary">Log in as Staff</button>
+
+          <button
+            type="submit"
+            class="btn btn-primary">
+
+            Log in as Staff
+
+          </button>
+
         </form>
 
       </div>
+
     </section>
+
   </div>
 
+
   <script>
+
     function showLogin(which) {
-      const adminForm = document.getElementById("adminForm");
-      const staffForm = document.getElementById("staffForm");
-      const adminBtn = document.getElementById("adminTabBtn");
-      const staffBtn = document.getElementById("staffTabBtn");
+
+      const adminForm =
+        document.getElementById("adminForm");
+
+      const staffForm =
+        document.getElementById("staffForm");
+
+      const adminBtn =
+        document.getElementById("adminTabBtn");
+
+      const staffBtn =
+        document.getElementById("staffTabBtn");
+
 
       if (which === "admin") {
+
         adminForm.style.display = "block";
+
         staffForm.style.display = "none";
+
         adminBtn.classList.add("active");
+
         staffBtn.classList.remove("active");
+
       } else {
+
         adminForm.style.display = "none";
+
         staffForm.style.display = "block";
+
         staffBtn.classList.add("active");
+
         adminBtn.classList.remove("active");
+
       }
+
     }
 
-    document.getElementById("adminForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const password = document.getElementById("adminPassword").value;
-      if (password.length >= 4) {
-        window.location.href = "admin/dashboard.html";
-      } else {
-        document.getElementById("adminError").classList.add("show");
-      }
-    });
 
-    document.getElementById("staffForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const password = document.getElementById("staffPassword").value;
-      if (password.length >= 4) {
-        window.location.href = "user/dashboard.html";
-      } else {
-        document.getElementById("staffError").classList.add("show");
-      }
-    });
+    // ADMIN LOGIN
+
+    document
+      .getElementById("adminForm")
+      .addEventListener("submit", async function (e) {
+
+        e.preventDefault();
+
+
+        const email =
+          document.getElementById("adminEmail").value.trim();
+
+        const password =
+          document.getElementById("adminPassword").value;
+
+
+        const errorMessage =
+          document.getElementById("adminError");
+
+
+        errorMessage.classList.remove("show");
+
+
+        try {
+
+          const response = await fetch(
+            "http://localhost:5000/api/auth/login",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json"
+              },
+
+              body: JSON.stringify({
+                email: email,
+                password: password
+              })
+            }
+          );
+
+
+          const data = await response.json();
+
+
+          if (!response.ok) {
+
+            errorMessage.textContent =
+              data.message ||
+              "Email or password is incorrect. Please try again.";
+
+            errorMessage.classList.add("show");
+
+            return;
+
+          }
+
+
+          if (data.user.role !== "Admin") {
+
+            errorMessage.textContent =
+              "This account is not an Admin account.";
+
+            errorMessage.classList.add("show");
+
+            return;
+
+          }
+
+
+          window.location.href =
+            "admin/dashboard.html";
+
+        } catch (error) {
+
+          console.error("Login error:", error);
+
+          errorMessage.textContent =
+            "Unable to connect to the server.";
+
+          errorMessage.classList.add("show");
+
+        }
+
+      });
+
+
+    // STAFF LOGIN
+
+    document
+      .getElementById("staffForm")
+      .addEventListener("submit", async function (e) {
+
+        e.preventDefault();
+
+
+        const email =
+          document.getElementById("staffEmail").value.trim();
+
+        const password =
+          document.getElementById("staffPassword").value;
+
+
+        const errorMessage =
+          document.getElementById("staffError");
+
+
+        errorMessage.classList.remove("show");
+
+
+        try {
+
+          const response = await fetch(
+            "http://localhost:5000/api/auth/login",
+            {
+              method: "POST",
+
+              headers: {
+                "Content-Type": "application/json"
+              },
+
+              body: JSON.stringify({
+                email: email,
+                password: password
+              })
+            }
+          );
+
+
+          const data = await response.json();
+
+
+          if (!response.ok) {
+
+            errorMessage.textContent =
+              data.message ||
+              "Email or password is incorrect. Please try again.";
+
+            errorMessage.classList.add("show");
+
+            return;
+
+          }
+
+
+          if (data.user.role === "Admin") {
+
+            errorMessage.textContent =
+              "Please use the Admin login.";
+
+            errorMessage.classList.add("show");
+
+            return;
+
+          }
+
+
+          // Save logged-in user information
+          sessionStorage.setItem(
+            "careflowUser",
+            JSON.stringify(data.user)
+          );
+
+
+          window.location.href =
+            "user/dashboard.html";
+
+        } catch (error) {
+
+          console.error("Login error:", error);
+
+          errorMessage.textContent =
+            "Unable to connect to the server.";
+
+          errorMessage.classList.add("show");
+
+        }
+
+      });
+
   </script>
+
 </body>
 </html>
