@@ -28,182 +28,174 @@
 
   <div id="sidebar-container"></div>
 
+
   <!-- Main -->
 
   <main class="main">
 
-```
-<!-- Topbar -->
+    <!-- Topbar -->
 
-<header class="topbar">
+    <header class="topbar">
 
-  <div style="display:flex; align-items:center; gap:12px;">
+      <div style="display:flex; align-items:center; gap:12px;">
 
-    <button
-      class="menu-btn"
-      id="menuBtn"
-      type="button"
-      aria-label="Open menu"
-    >
-      ☰
-    </button>
-
-
-    <div>
-
-      <h1>Roles &amp; Permissions</h1>
-
-      <p>
-        Manage user roles and access permissions
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <!-- Admin Profile -->
-
-  <div class="profile">
-
-    <div class="avatar">
-      A
-    </div>
-
-    <div>
-
-      <b>Admin</b>
-
-      <small>
-        Administrator
-      </small>
-
-    </div>
-
-  </div>
-
-</header>
-
-
-
-<!-- Page Content -->
-
-<section class="content">
-
-
-  <!-- =========================
-       HOSPITAL ROLES
-  ========================== -->
-
-  <div class="panel">
-
-    <div class="panel-head">
-
-      <div>
-
-        <h2>
-          Hospital Roles
-        </h2>
-
-      </div>
-
-
-      <button
-        type="button"
-        class="btn btn-primary"
-        id="addRoleBtn"
-      >
-        + Add Role
-      </button>
-
-    </div>
-
-
-    <div
-      class="roles-grid"
-      id="rolesGrid"
-    >
-
-      <!-- Roles loaded from database -->
-
-    </div>
-
-  </div>
-
-
-
-  <!-- =========================
-       PERMISSIONS
-  ========================== -->
-
-  <div class="panel">
-
-    <div class="panel-head">
-
-      <div>
-
-        <h2>
-          Permissions
-        </h2>
-
-        <p
-          style="color:var(--muted); font-size:13px;"
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
         >
-          Configure what each role can access.
-        </p>
+          ☰
+        </button>
+
+        <div>
+
+          <h1>Roles &amp; Permissions</h1>
+
+          <p>
+            Manage user roles and access permissions
+          </p>
+
+        </div>
 
       </div>
 
-    </div>
+
+      <!-- Admin Profile -->
+
+      <div class="profile">
+
+        <div class="avatar">
+          A
+        </div>
+
+        <div>
+
+          <b>Admin</b>
+
+          <small>
+            Administrator
+          </small>
+
+        </div>
+
+      </div>
+
+    </header>
 
 
-    <div class="table-wrap">
+    <!-- Page Content -->
 
-      <table>
+    <section class="content">
 
-        <thead
-          id="permissionsTableHead"
+
+      <!-- =========================
+           HOSPITAL ROLES
+      ========================== -->
+
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div>
+
+            <h2>
+              Hospital Roles
+            </h2>
+
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="addRoleBtn"
+          >
+            + Add Role
+          </button>
+
+        </div>
+
+
+        <div
+          class="roles-grid"
+          id="rolesGrid"
         >
 
           <!-- Roles loaded from database -->
 
-        </thead>
+        </div>
+
+      </div>
 
 
-        <tbody
-          id="permissionsTableBody"
+      <!-- =========================
+           PERMISSIONS
+      ========================== -->
+
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <div>
+
+            <h2>
+              Permissions
+            </h2>
+
+            <p
+              style="color:var(--muted); font-size:13px;"
+            >
+              Configure what each role can access.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead id="permissionsTableHead">
+
+              <!-- Roles loaded from database -->
+
+            </thead>
+
+
+            <tbody id="permissionsTableBody">
+
+              <!-- Permissions loaded from database -->
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <div
+          class="form-actions"
+          style="padding:0 20px 20px;"
         >
 
-          <!-- Permissions loaded from database -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="savePermissionsBtn"
+          >
+            Save Permissions
+          </button>
 
-        </tbody>
+        </div>
 
-      </table>
+      </div>
 
-    </div>
-
-
-    <div
-      class="form-actions"
-      style="padding:0 20px 20px;"
-    >
-
-      <button
-        type="button"
-        class="btn btn-primary"
-        id="savePermissionsBtn"
-      >
-        Save Permissions
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-```
+    </section>
 
   </main>
+
 
   <!-- =========================
        ADD ROLE MODAL
@@ -214,209 +206,117 @@
     id="addRoleModal"
   >
 
-```
-<div class="role-modal-box">
+    <div class="role-modal-box">
 
 
-  <!-- Modal Header -->
+      <!-- Modal Header -->
 
-  <div class="role-modal-header">
+      <div class="role-modal-header">
 
-    <div>
+        <div>
 
-      <h2>
-        Add Role
-      </h2>
+          <h2>
+            Add Role
+          </h2>
 
-      <p>
-        Create a new role and assign permissions.
-      </p>
+          <p>
+            Create a new role and assign permissions.
+          </p>
 
-    </div>
-
-
-    <button
-      type="button"
-      class="role-modal-close"
-      id="closeRoleModalBtn"
-      aria-label="Close"
-    >
-      ×
-    </button>
-
-  </div>
+        </div>
 
 
-
-  <!-- Form -->
-
-  <form id="addRoleForm">
-
-
-    <!-- Role Name -->
-
-    <div class="role-form-group">
-
-      <label for="roleName">
-        Role Name
-      </label>
-
-      <input
-        type="text"
-        id="roleName"
-        placeholder="Enter role name"
-        required
-      >
-
-    </div>
-
-
-
-    <!-- Permissions -->
-
-    <div class="role-form-group">
-
-      <label>
-        Permissions
-      </label>
-
-
-      <div class="role-permissions">
-
-
-        <label class="role-permission">
-
-          <input
-            type="checkbox"
-            value="View Doctors"
-          >
-
-          <span>
-            View Doctors
-          </span>
-
-        </label>
-
-
-        <label class="role-permission">
-
-          <input
-            type="checkbox"
-            value="View Patients"
-          >
-
-          <span>
-            View Patients
-          </span>
-
-        </label>
-
-
-        <label class="role-permission">
-
-          <input
-            type="checkbox"
-            value="Add Patients"
-          >
-
-          <span>
-            Add Patients
-          </span>
-
-        </label>
-
-
-        <label class="role-permission">
-
-          <input
-            type="checkbox"
-            value="View Appointments"
-          >
-
-          <span>
-            View Appointments
-          </span>
-
-        </label>
-
-
-        <label class="role-permission">
-
-          <input
-            type="checkbox"
-            value="Book Appointment"
-          >
-
-          <span>
-            Book Appointment
-          </span>
-
-        </label>
-
-
-        <label class="role-permission">
-
-          <input
-            type="checkbox"
-            value="View Pharmacy"
-          >
-
-          <span>
-            View Pharmacy
-          </span>
-
-        </label>
-
-
-        <label class="role-permission">
-
-          <input
-            type="checkbox"
-            value="Add Medicine"
-          >
-
-          <span>
-            Add Medicine
-          </span>
-
-        </label>
-
+        <button
+          type="button"
+          class="role-modal-close"
+          id="closeRoleModalBtn"
+          aria-label="Close"
+        >
+          ×
+        </button>
 
       </div>
 
+
+      <!-- Form -->
+
+      <form id="addRoleForm">
+
+
+        <!-- Role Name -->
+
+        <div class="role-form-group">
+
+          <label for="roleName">
+            Role Name
+          </label>
+
+          <input
+            type="text"
+            id="roleName"
+            placeholder="Enter role name"
+            required
+          >
+
+        </div>
+
+
+        <!-- Permissions -->
+
+        <div class="role-form-group">
+
+          <label>
+            Permissions
+          </label>
+
+
+          <!-- Permissions will be loaded from database -->
+
+          <div
+            class="role-permissions"
+            id="rolePermissions"
+          >
+
+            <p
+              style="color:var(--muted); font-size:13px;"
+            >
+              Loading permissions...
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- Buttons -->
+
+        <div class="role-modal-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="cancelRoleBtn"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Add Role
+          </button>
+
+        </div>
+
+
+      </form>
+
     </div>
-
-
-
-    <!-- Buttons -->
-
-    <div class="role-modal-actions">
-
-      <button
-        type="button"
-        class="btn btn-secondary"
-        id="cancelRoleBtn"
-      >
-        Cancel
-      </button>
-
-
-      <button
-        type="submit"
-        class="btn btn-primary"
-      >
-        Add Role
-      </button>
-
-    </div>
-
-
-  </form>
-
-</div>
-```
 
   </div>
+
 
   <!-- =========================
        DELETE ROLE MODAL
@@ -427,94 +327,89 @@
     id="deleteRoleModal"
   >
 
-```
-<div class="role-modal-box">
+    <div class="role-modal-box">
 
 
-  <div class="role-modal-header">
+      <div class="role-modal-header">
 
-    <div>
+        <div>
 
-      <h2>
-        Delete Role
-      </h2>
+          <h2>
+            Delete Role
+          </h2>
 
-      <p>
-        This action cannot be undone.
-      </p>
+          <p>
+            This action cannot be undone.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="role-modal-close"
+          id="closeDeleteRoleModalBtn"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div style="padding:20px;">
+
+        <p
+          style="color:var(--text); line-height:1.6;"
+        >
+
+          Are you sure you want to delete
+
+          <strong id="deleteRoleName">
+            this role
+          </strong>?
+
+        </p>
+
+
+        <p
+          style="color:var(--muted); font-size:13px; margin-top:8px;"
+        >
+
+          The role and its permissions will be permanently removed.
+
+        </p>
+
+      </div>
+
+
+      <div class="role-modal-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="cancelDeleteRoleBtn"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          type="button"
+          class="btn"
+          id="confirmDeleteRoleBtn"
+          style="background:var(--red); color:white;"
+        >
+          Delete Role
+        </button>
+
+      </div>
+
 
     </div>
 
-
-    <button
-      type="button"
-      class="role-modal-close"
-      id="closeDeleteRoleModalBtn"
-      aria-label="Close"
-    >
-      ×
-    </button>
-
   </div>
 
-
-
-  <div
-    style="padding:20px;"
-  >
-
-    <p
-      style="color:var(--text); line-height:1.6;"
-    >
-
-      Are you sure you want to delete
-
-      <strong id="deleteRoleName">
-        this role
-      </strong>?
-
-    </p>
-
-
-    <p
-      style="color:var(--muted); font-size:13px; margin-top:8px;"
-    >
-
-      The role and its permissions will be permanently removed.
-
-    </p>
-
-  </div>
-
-
-
-  <div class="role-modal-actions">
-
-    <button
-      type="button"
-      class="btn btn-secondary"
-      id="cancelDeleteRoleBtn"
-    >
-      Cancel
-    </button>
-
-
-    <button
-      type="button"
-      class="btn"
-      id="confirmDeleteRoleBtn"
-      style="background:var(--red); color:white;"
-    >
-      Delete Role
-    </button>
-
-  </div>
-
-
-</div>
-```
-
-  </div>
 
   <!-- Scripts -->
 
@@ -525,3 +420,4 @@
 </body>
 
 </html>
+

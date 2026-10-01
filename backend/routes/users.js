@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
         FROM users u
         JOIN roles r
             ON u.role_id = r.role_id
-        JOIN departments d
+        LEFT JOIN departments d
             ON u.department_id = d.department_id
         ORDER BY u.user_id
     `;
@@ -68,7 +68,7 @@ router.get("/:userId", (req, res) => {
         FROM users u
         JOIN roles r
             ON u.role_id = r.role_id
-        JOIN departments d
+        LEFT JOIN departments d
             ON u.department_id = d.department_id
         WHERE u.user_id = ?
     `;

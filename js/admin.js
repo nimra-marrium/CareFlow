@@ -16,7 +16,6 @@ if (createUserForm) {
 
             event.preventDefault();
 
-
             const fullName =
                 document.getElementById("fullName").value.trim();
 
@@ -127,10 +126,18 @@ if (createUserForm) {
                 createUserForm.reset();
 
 
-                document.getElementById(
-                    "specializationField"
-                ).style.display =
-                    "none";
+                const specializationField =
+                    document.getElementById(
+                        "specializationField"
+                    );
+
+
+                if (specializationField) {
+
+                    specializationField.style.display =
+                        "none";
+
+                }
 
 
                 window.location.href =
@@ -175,14 +182,134 @@ const closeRoleModalBtn =
 const cancelRoleBtn =
     document.getElementById("cancelRoleBtn");
 
+const rolePermissions =
+    document.getElementById("rolePermissions");
+
+
+/* =====================================================
+   LOAD PERMISSIONS FOR CREATE ROLE
+===================================================== */
+
+async function loadPermissionsForRole() {
+
+    if (!rolePermissions) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/roles/permissions"
+            );
+
+
+        const permissions =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            rolePermissions.innerHTML = `
+                <p style="color:var(--red);">
+                    Failed to load permissions.
+                </p>
+            `;
+
+            return;
+
+        }
+
+
+        rolePermissions.innerHTML =
+            "";
+
+
+        permissions.forEach(
+            (permission) => {
+
+                const label =
+                    document.createElement("label");
+
+
+                label.className =
+                    "role-permission";
+
+
+                const checkbox =
+                    document.createElement("input");
+
+
+                checkbox.type =
+                    "checkbox";
+
+
+                checkbox.value =
+                    permission.permission_id;
+
+
+                checkbox.dataset.permissionName =
+                    permission.permission_name;
+
+
+                const span =
+                    document.createElement("span");
+
+
+                span.textContent =
+                    permission.permission_name;
+
+
+                label.appendChild(
+                    checkbox
+                );
+
+
+                label.appendChild(
+                    span
+                );
+
+
+                rolePermissions.appendChild(
+                    label
+                );
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Load permissions error:",
+            error
+        );
+
+
+        rolePermissions.innerHTML = `
+            <p style="color:var(--red);">
+                Could not connect to the CareFlow backend.
+            </p>
+        `;
+
+    }
+
+}
+
 
 if (addRoleBtn && addRoleModal) {
 
     addRoleBtn.addEventListener(
         "click",
-        () => {
+        async () => {
 
             addRoleModal.classList.add("show");
+
+
+            await loadPermissionsForRole();
 
 
             const roleName =
@@ -200,6 +327,10 @@ if (addRoleBtn && addRoleModal) {
 
 }
 
+
+/* =====================================================
+   CLOSE ADD ROLE MODAL
+===================================================== */
 
 function closeRoleModal() {
 
@@ -242,6 +373,10 @@ if (cancelRoleBtn) {
 }
 
 
+/* =====================================================
+   CREATE ROLE
+===================================================== */
+
 if (addRoleForm) {
 
     addRoleForm.addEventListener(
@@ -261,14 +396,16 @@ if (addRoleForm) {
                     : "";
 
 
+            /* Get selected permission IDs */
+
             const selectedPermissions =
                 Array.from(
                     addRoleForm.querySelectorAll(
                         'input[type="checkbox"]:checked'
                     )
                 ).map(
-                    checkbox =>
-                        checkbox.value
+                    (checkbox) =>
+                        Number(checkbox.value)
                 );
 
 
@@ -310,8 +447,13 @@ if (addRoleForm) {
                             },
 
                             body: JSON.stringify({
+
                                 role_name:
-                                    roleName
+                                    roleName,
+
+                                permission_ids:
+                                    selectedPermissions
+
                             })
                         }
                     );
@@ -365,6 +507,10 @@ if (addRoleForm) {
 }
 
 
+/* =====================================================
+   CLOSE MODAL BY CLICKING OUTSIDE
+===================================================== */
+
 if (addRoleModal) {
 
     addRoleModal.addEventListener(
@@ -384,6 +530,10 @@ if (addRoleModal) {
 
 }
 
+
+/* =====================================================
+   ESCAPE KEY
+===================================================== */
 
 document.addEventListener(
     "keydown",
@@ -601,32 +751,6 @@ if (confirmDeleteRoleBtn) {
 
 
 /* =====================================================
-   SAVE PERMISSIONS
-===================================================== */
-
-const savePermissionsBtn =
-    document.getElementById(
-        "savePermissionsBtn"
-    );
-
-
-if (savePermissionsBtn) {
-
-    savePermissionsBtn.addEventListener(
-        "click",
-        () => {
-
-            alert(
-                "Permissions saved successfully! (Demo only)"
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
    LOAD ROLES AND PERMISSIONS
 ===================================================== */
 
@@ -656,20 +780,49 @@ if (
 
         try {
 
-            const response =
+            /* =========================================
+               GET ROLES
+            ========================================= */
+
+            const rolesResponse =
                 await fetch(
                     "http://localhost:5000/api/roles"
                 );
 
 
             const roles =
-                await response.json();
+                await rolesResponse.json();
 
 
-            if (!response.ok) {
+            if (!rolesResponse.ok) {
 
                 alert(
                     "Failed to load roles."
+                );
+
+                return;
+
+            }
+
+
+            /* =========================================
+               GET PERMISSIONS
+            ========================================= */
+
+            const permissionsResponse =
+                await fetch(
+                    "http://localhost:5000/api/roles/permissions"
+                );
+
+
+            const permissions =
+                await permissionsResponse.json();
+
+
+            if (!permissionsResponse.ok) {
+
+                alert(
+                    "Failed to load permissions."
                 );
 
                 return;
@@ -711,6 +864,49 @@ if (
                     roleCard.appendChild(
                         roleTitle
                     );
+
+
+                    /*
+                       Show role permissions
+                    */
+
+                    if (
+                        role.permissions &&
+                        role.permissions.length > 0
+                    ) {
+
+                        const permissionList =
+                            document.createElement(
+                                "p"
+                            );
+
+
+                        permissionList.style.color =
+                            "var(--muted)";
+
+
+                        permissionList.style.fontSize =
+                            "13px";
+
+
+                        permissionList.style.marginTop =
+                            "8px";
+
+
+                        permissionList.textContent =
+                            role.permissions
+                                .map(
+                                    permission =>
+                                        permission.permission_name
+                                )
+                                .join(", ");
+
+
+                        roleCard.appendChild(
+                            permissionList
+                        );
+
+                    }
 
 
                     /*
@@ -839,46 +1035,6 @@ if (
                PERMISSION TABLE
             ========================== */
 
-            const permissions = [
-
-                {
-                    id: 1,
-                    name: "View Doctors"
-                },
-
-                {
-                    id: 2,
-                    name: "View Patients"
-                },
-
-                {
-                    id: 3,
-                    name: "Add Patients"
-                },
-
-                {
-                    id: 4,
-                    name: "View Appointments"
-                },
-
-                {
-                    id: 5,
-                    name: "Book Appointment"
-                },
-
-                {
-                    id: 6,
-                    name: "View Pharmacy"
-                },
-
-                {
-                    id: 7,
-                    name: "Add Medicine"
-                }
-
-            ];
-
-
             permissionsTableBody.innerHTML =
                 "";
 
@@ -899,7 +1055,7 @@ if (
 
 
                     nameCell.textContent =
-                        permission.name;
+                        permission.permission_name;
 
 
                     row.appendChild(
@@ -931,12 +1087,14 @@ if (
 
 
                             checkbox.dataset.permission =
-                                permission.id;
+                                permission.permission_id;
 
 
                             const hasPermission =
-                                role.permissions.includes(
-                                    permission.name
+                                role.permissions.some(
+                                    (rolePermission) =>
+                                        rolePermission.permission_id ===
+                                        permission.permission_id
                                 );
 
 
@@ -984,4 +1142,5 @@ if (
     loadRoles();
 
 }
+
 });

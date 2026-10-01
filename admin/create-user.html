@@ -378,36 +378,39 @@
     }
 
 
-    /* =====================================================
-       LOAD DEPARTMENTS
-    ===================================================== */
+  
+/* =====================================================
+   LOAD DEPARTMENTS
+===================================================== */
 
-    async function loadDepartments() {
+async function loadDepartments() {
 
-        try {
+    try {
 
-            const response =
-                await fetch(
-                    "http://localhost:5000/api/departments"
-                );
-
-
-            const departments =
-                await response.json();
+        const response =
+            await fetch(
+                "http://localhost:5000/api/departments"
+            );
 
 
-            if (!response.ok) {
-
-                alert(
-                    "Failed to load departments."
-                );
-
-                return;
-
-            }
+        const departments =
+            await response.json();
 
 
-            departments.forEach(department => {
+        if (!response.ok) {
+
+            alert(
+                "Failed to load departments."
+            );
+
+            return;
+
+        }
+
+
+        departments
+            .filter(department => department.status === "Active")
+            .forEach(department => {
 
                 const option =
                     document.createElement("option");
@@ -423,20 +426,21 @@
             });
 
 
-        } catch (error) {
+    } catch (error) {
 
-            console.error(
-                "Load departments error:",
-                error
-            );
+        console.error(
+            "Load departments error:",
+            error
+        );
 
-            alert(
-                "Could not load departments from the CareFlow backend."
-            );
-
-        }
+        alert(
+            "Could not load departments from the CareFlow backend."
+        );
 
     }
+
+}
+
 
 
     /* =====================================================
