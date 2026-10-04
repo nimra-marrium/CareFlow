@@ -285,6 +285,168 @@
   </div>
 
 
+    <!-- DELETE CONFIRMATION MODAL -->
+
+  <div
+    id="deleteDepartmentModal"
+    style="
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+      z-index:10000;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    "
+  >
+
+    <div
+      style="
+        background:#ffffff;
+        width:100%;
+        max-width:450px;
+        border-radius:12px;
+        box-shadow:0 10px 35px rgba(0,0,0,0.15);
+      "
+    >
+
+      <div
+        style="
+          padding:20px;
+          border-bottom:1px solid var(--border);
+        "
+      >
+
+        <h3 style="margin:0;">
+          Delete Department
+        </h3>
+
+      </div>
+
+
+      <div style="padding:20px;">
+
+        <p
+          id="deleteDepartmentMessage"
+          style="
+            margin:0;
+            color:var(--muted);
+            line-height:1.6;
+          "
+        >
+          Are you sure you want to delete this department?
+        </p>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closeDeleteDepartmentModal()"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            class="btn"
+            id="confirmDeleteDepartmentButton"
+            style="
+              background:var(--red);
+              color:white;
+            "
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- DELETE RESULT MODAL -->
+
+  <div
+    id="deleteResultModal"
+    style="
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+      z-index:10001;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    "
+  >
+
+    <div
+      style="
+        background:#ffffff;
+        width:100%;
+        max-width:450px;
+        border-radius:12px;
+        box-shadow:0 10px 35px rgba(0,0,0,0.15);
+      "
+    >
+
+      <div
+        style="
+          padding:20px;
+          border-bottom:1px solid var(--border);
+        "
+      >
+
+        <h3
+          id="deleteResultTitle"
+          style="margin:0;"
+        >
+          Department Deleted
+        </h3>
+
+      </div>
+
+
+      <div style="padding:20px;">
+
+        <p
+          id="deleteResultMessage"
+          style="
+            margin:0;
+            color:var(--muted);
+            line-height:1.6;
+          "
+        >
+          Department deleted successfully.
+        </p>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="closeDeleteResultModal()"
+          >
+            OK
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  
+
   <!-- SIDEBAR -->
 
   <script src="../js/shared.js"></script>
@@ -390,6 +552,32 @@
 
 
           actionCell.appendChild(editButton);
+
+          const deleteButton =
+  document.createElement("button");
+
+deleteButton.type = "button";
+deleteButton.className = "btn";
+deleteButton.textContent = "Delete";
+
+deleteButton.style.marginLeft = "8px";
+deleteButton.style.background = "var(--red)";
+deleteButton.style.color = "white";
+
+deleteButton.addEventListener(
+  "click",
+  function() {
+
+    openDeleteDepartmentModal(
+      department.department_id,
+      department.department_name
+    );
+
+  }
+);
+
+
+actionCell.appendChild(deleteButton);
 
 
           row.appendChild(departmentCell);
@@ -551,6 +739,159 @@
         "none";
 
     }
+
+    // DELETE DEPARTMENT MODAL
+
+let departmentToDeleteId = null;
+
+
+function openDeleteDepartmentModal(
+  departmentId,
+  departmentName
+) {
+
+  departmentToDeleteId =
+    departmentId;
+
+
+  document.getElementById(
+    "deleteDepartmentMessage"
+  ).textContent =
+    `Are you sure you want to delete ${departmentName}?`;
+
+
+  document.getElementById(
+    "deleteDepartmentModal"
+  ).style.display =
+    "flex";
+
+}
+
+
+function closeDeleteDepartmentModal() {
+
+  document.getElementById(
+    "deleteDepartmentModal"
+  ).style.display =
+    "none";
+
+  departmentToDeleteId = null;
+
+}
+
+
+function closeDeleteResultModal() {
+
+  document.getElementById(
+    "deleteResultModal"
+  ).style.display =
+    "none";
+
+}
+
+
+document
+  .getElementById("confirmDeleteDepartmentButton")
+  .addEventListener(
+    "click",
+    async function() {
+
+      try {
+
+        const response =
+          await fetch(
+            `http://localhost:5000/api/departments/${departmentToDeleteId}`,
+            {
+              method: "DELETE"
+            }
+          );
+
+
+        const result =
+          await response.json();
+
+
+        closeDeleteDepartmentModal();
+
+
+        if (!response.ok) {
+
+          document.getElementById(
+            "deleteResultTitle"
+          ).textContent =
+            "Cannot Delete Department";
+
+
+          document.getElementById(
+            "deleteResultMessage"
+          ).textContent =
+            result.message ||
+            "Failed to delete department.";
+
+
+          document.getElementById(
+            "deleteResultModal"
+          ).style.display =
+            "flex";
+
+          return;
+
+        }
+
+
+        document.getElementById(
+          "deleteResultTitle"
+        ).textContent =
+          "Department Deleted";
+
+
+        document.getElementById(
+          "deleteResultMessage"
+        ).textContent =
+          "Department deleted successfully.";
+
+
+        document.getElementById(
+          "deleteResultModal"
+        ).style.display =
+          "flex";
+
+
+        loadDepartments();
+
+
+      } catch (error) {
+
+        console.error(
+          "Delete department error:",
+          error
+        );
+
+
+        closeDeleteDepartmentModal();
+
+
+        document.getElementById(
+          "deleteResultTitle"
+        ).textContent =
+          "Connection Error";
+
+
+        document.getElementById(
+          "deleteResultMessage"
+        ).textContent =
+          "Could not connect to the CareFlow backend.";
+
+
+        document.getElementById(
+          "deleteResultModal"
+        ).style.display =
+          "flex";
+
+      }
+
+    }
+  );
 
 
     // SAVE DEPARTMENT

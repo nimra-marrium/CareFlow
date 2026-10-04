@@ -64,7 +64,7 @@
           </div>
 
           <div>
-            <div class="num">20</div>
+            <div class="num" id="totalUsers">0</div>
             <div class="lbl">Total Users</div>
           </div>
 
@@ -77,7 +77,7 @@
             </svg>
           </div>
           <div>
-            <div class="num">10</div>
+            <div class="num" id="activeUsers">0</div>
             <div class="lbl">Active Users</div>
           </div>
 
@@ -92,7 +92,7 @@
           </div>
 
           <div>
-            <div class="num">5</div>
+            <div class="num" id="totalDoctors">0</div>
             <div class="lbl">Doctors</div>
           </div>
         </div>
@@ -109,7 +109,7 @@
             </svg>
           </div>
           <div>
-            <div class="num">10</div>
+            <div class="num" id="totalDepartments">0</div>
             <div class="lbl">Departments</div>
           </div>
         </div>
@@ -145,5 +145,85 @@
 
   <script src="../js/shared.js"></script>
   <script src="../js/admin.js"></script>
+
+  <script>
+
+  async function loadDashboardStats() {
+
+    try {
+
+      const usersResponse =
+        await fetch("http://localhost:5000/api/users");
+
+      const departmentsResponse =
+        await fetch("http://localhost:5000/api/departments");
+
+
+      if (!usersResponse.ok || !departmentsResponse.ok) {
+
+        throw new Error("Failed to load dashboard data.");
+
+      }
+
+
+      const users =
+        await usersResponse.json();
+
+      const departments =
+        await departmentsResponse.json();
+
+
+      const totalUsers =
+        users.length;
+
+
+      const activeUsers =
+        users.filter(
+          user => user.status === "Active"
+        ).length;
+
+
+      const totalDoctors =
+        users.filter(
+          user => user.role_name === "Doctor"
+        ).length;
+
+
+      const totalDepartments =
+        departments.length;
+
+
+      document.getElementById("totalUsers").textContent =
+        totalUsers;
+
+      document.getElementById("activeUsers").textContent =
+        activeUsers;
+
+      document.getElementById("totalDoctors").textContent =
+        totalDoctors;
+
+      document.getElementById("totalDepartments").textContent =
+        totalDepartments;
+
+
+    } catch (error) {
+
+      console.error(
+        "Dashboard stats error:",
+        error
+      );
+
+    }
+
+  }
+
+
+  loadDashboardStats();
+
+</script>
+
+
+
+
 </body>
 </html>

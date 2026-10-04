@@ -305,13 +305,15 @@
             Edit
         </a>
 
-        <button
-            type="button"
-            class="btn btn-danger btn-small"
-            onclick="deleteUser('${user.user_id}')"
-        >
-            Delete
-        </button>
+        ${user.role_name !== "Admin" ? `
+    <button
+        type="button"
+        class="btn btn-danger btn-small"
+        onclick="deleteUser('${user.user_id}')"
+    >
+        Delete
+    </button>
+` : ""}
 
     </div>
 </td>

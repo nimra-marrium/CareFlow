@@ -25,7 +25,7 @@
 
   <main class="main">
 
-```
+
 <header class="topbar">
 
   <div style="display:flex; align-items:center; gap:12px;">
@@ -97,142 +97,156 @@
 
         </div>
 
+<!-- Full Name -->
 
-        <!-- Full Name -->
+<div class="field" id="fullNameField">
 
-        <div class="field">
+  <label for="fullName">
+    Full Name
+  </label>
 
-          <label for="fullName">
-            Full Name
-          </label>
+  <input
+    type="text"
+    id="fullName"
+    placeholder="Enter full name"
+    required
+  >
 
-          <input
-            type="text"
-            id="fullName"
-            placeholder="Enter full name"
-            required
-          >
-
-        </div>
-
-
-        <!-- Email -->
-
-        <div class="field">
-
-          <label for="email">
-            Email
-          </label>
-
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter email address"
-            required
-          >
-
-        </div>
+</div>
 
 
-        <!-- Phone -->
+<!-- Email -->
 
-        <div class="field">
+<div class="field">
 
-          <label for="phone">
-            Phone
-          </label>
+  <label for="email">
+    Email
+  </label>
 
-          <input
-            type="tel"
-            id="phone"
-            placeholder="Enter phone number"
-            required
-          >
+  <input
+    type="email"
+    id="email"
+    placeholder="Enter email address"
+    required
+  >
 
-        </div>
-
-
-        <!-- Role -->
-
-        <div class="field">
-
-          <label for="role">
-            Role
-          </label>
-
-          <select id="role" required>
-
-            <option value="">
-              Select role
-            </option>
-
-          </select>
-
-        </div>
+</div>
 
 
-        <!-- Department -->
+<!-- Password -->
 
-        <div class="field">
+<div class="field" id="passwordField">
 
-          <label for="department">
-            Department
-          </label>
+  <label for="password">
+    Password
+  </label>
 
-          <select id="department" required>
+  <input
+    type="password"
+    id="password"
+    placeholder="Enter new password"
+  >
 
-            <option value="">
-              Select department
-            </option>
-
-          </select>
-
-        </div>
+</div>
 
 
-        <!-- Specialization -->
+<!-- Phone -->
 
-        <div
-          class="field"
-          id="specializationField"
-        >
+<div class="field" id="phoneField">
 
-          <label for="specialization">
-            Specialization
-          </label>
+  <label for="phone">
+    Phone
+  </label>
 
-          <input
-            type="text"
-            id="specialization"
-            placeholder="Enter specialization"
-          >
+  <input
+    type="tel"
+    id="phone"
+    placeholder="Enter phone number"
+    required
+  >
 
-        </div>
+</div>
 
 
-        <!-- Status -->
+<!-- Role -->
 
-        <div class="field">
+<div class="field" id="roleField">
 
-          <label for="status">
-            Status
-          </label>
+  <label for="role">
+    Role
+  </label>
 
-          <select id="status" required>
+  <select id="role" required>
 
-            <option value="Active">
-              Active
-            </option>
+    <option value="">
+      Select role
+    </option>
 
-            <option value="Inactive">
-              Inactive
-            </option>
+  </select>
 
-          </select>
+</div>
 
-        </div>
 
-      </div>
+<!-- Department -->
+
+<div class="field" id="departmentField">
+
+  <label for="department">
+    Department
+  </label>
+
+  <select id="department">
+
+    <option value="">
+      No department
+    </option>
+
+  </select>
+
+</div>
+
+
+<!-- Specialization -->
+
+<div
+  class="field"
+  id="specializationField"
+>
+
+  <label for="specialization">
+    Specialization
+  </label>
+
+  <input
+    type="text"
+    id="specialization"
+    placeholder="Enter specialization"
+  >
+
+</div>
+
+
+<!-- Status -->
+
+<div class="field">
+
+  <label for="status">
+    Status
+  </label>
+
+  <select id="status" required>
+
+    <option value="Active">
+      Active
+    </option>
+
+    <option value="Inactive">
+      Inactive
+    </option>
+
+  </select>
+
+</div>
 
 
       <!-- Form Actions -->
@@ -260,7 +274,6 @@
   </div>
 
 </section>
-```
 
   </main>
 
@@ -271,7 +284,7 @@
     id="editUserModal"
   >
 
-```
+
 <div class="modal">
 
   <div class="modal-head">
@@ -294,7 +307,6 @@
   </div>
 
 </div>
-```
 
   </div>
 
@@ -319,6 +331,24 @@
     const specializationInput =
       document.getElementById("specialization");
 
+
+      const fullNameField =
+  document.getElementById("fullNameField");
+
+const phoneField =
+  document.getElementById("phoneField");
+
+const roleField =
+  document.getElementById("roleField");
+
+const departmentField =
+  document.getElementById("departmentField");
+
+const passwordField =
+  document.getElementById("passwordField");
+
+const passwordInput =
+  document.getElementById("password");
 
     /*
        Get User ID from the URL
@@ -493,6 +523,27 @@
        LOAD SELECTED USER
     ===================================================== */
 
+    function applyAdminEditRules(user) {
+
+  if (user.user_id === "USR-001") {
+
+    fullNameField.style.display = "none";
+    phoneField.style.display = "none";
+    roleField.style.display = "none";
+    departmentField.style.display = "none";
+    specializationField.style.display = "none";
+
+    document.getElementById("fullName").required = false;
+    document.getElementById("phone").required = false;
+
+    document.getElementById("role").required = false;
+
+    passwordInput.placeholder =
+      "Enter new password";
+  }
+
+}
+
     async function loadUser() {
 
       if (!userId) {
@@ -559,6 +610,7 @@
 
         document.getElementById("status").value =
           user.status;
+          applyAdminEditRules(user);
 
 
         updateSpecializationField();
@@ -591,30 +643,43 @@
         event.preventDefault();
 
 
-        const updatedUser = {
+        let updatedUser = {
 
-          full_name:
-            document.getElementById("fullName").value.trim(),
+  email:
+    document.getElementById("email").value.trim(),
 
-          email:
-            document.getElementById("email").value.trim(),
+  status:
+    document.getElementById("status").value
 
-          phone:
-            document.getElementById("phone").value.trim(),
+};
 
-          role_id:
-            document.getElementById("role").value,
 
-          department_id:
-            document.getElementById("department").value,
+if (userId !== "USR-001") {
 
-          specialization:
-            document.getElementById("specialization").value.trim(),
+  updatedUser.full_name =
+    document.getElementById("fullName").value.trim();
 
-          status:
-            document.getElementById("status").value
+  updatedUser.phone =
+    document.getElementById("phone").value.trim();
 
-        };
+  updatedUser.role_id =
+    document.getElementById("role").value;
+
+  updatedUser.department_id =
+    document.getElementById("department").value || null;
+
+  updatedUser.specialization =
+    document.getElementById("specialization").value.trim();
+
+}
+
+
+if (passwordInput.value.trim() !== "") {
+
+  updatedUser.password =
+    passwordInput.value.trim();
+
+}
 
 
         try {

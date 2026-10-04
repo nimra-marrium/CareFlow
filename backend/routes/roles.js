@@ -236,6 +236,177 @@ router.post("/", (req, res) => {
 
 
 /* =====================================================
+   UPDATE ROLE PERMISSIONS
+===================================================== */
+
+router.put("/:roleId/permissions", (req, res) => {
+
+    const { roleId } = req.params;
+    const { permission_ids } = req.body;
+
+    if (!roleId) {
+
+        return res.status(400).json({
+            message: "Role ID is required."
+        });
+
+    }
+
+    if (!Array.isArray(permission_ids)) {
+
+        return res.status(400).json({
+            message: "Permission IDs must be an array."
+        });
+
+    }
+
+    /* =================================================
+       CHECK ROLE
+    ================================================= */
+
+    const checkRoleSql = `
+        SELECT
+            role_id,
+            role_name
+        FROM roles
+        WHERE role_id = ?
+    `;
+
+    db.query(
+        checkRoleSql,
+        [roleId],
+        (error, results) => {
+
+            if (error) {
+
+                console.error(
+                    "Error checking role:",
+                    error.message
+                );
+
+                return res.status(500).json({
+                    message: "Failed to check role."
+                });
+
+            }
+
+            if (results.length === 0) {
+
+                return res.status(404).json({
+                    message: "Role not found."
+                });
+
+            }
+
+            /* =========================================
+               DELETE OLD PERMISSIONS
+            ========================================= */
+
+            const deleteSql = `
+                DELETE FROM role_permissions
+                WHERE role_id = ?
+            `;
+
+            db.query(
+                deleteSql,
+                [roleId],
+                (deleteError) => {
+
+                    if (deleteError) {
+
+                        console.error(
+                            "Error removing old permissions:",
+                            deleteError.message
+                        );
+
+                        return res.status(500).json({
+                            message:
+                                "Failed to update role permissions."
+                        });
+
+                    }
+
+                    /* =================================
+                       ADD NEW PERMISSIONS
+                    ================================= */
+
+                    if (permission_ids.length === 0) {
+
+                        return res.json({
+
+                            message:
+                                "Role permissions updated successfully.",
+
+                            role_id:
+                                roleId,
+
+                            permission_ids: []
+
+                        });
+
+                    }
+
+                    const permissionValues =
+                        permission_ids.map(
+                            (permissionId) => [
+                                roleId,
+                                permissionId
+                            ]
+                        );
+
+                    const insertSql = `
+                        INSERT INTO role_permissions
+                        (role_id, permission_id)
+                        VALUES ?
+                    `;
+
+                    db.query(
+                        insertSql,
+                        [permissionValues],
+                        (insertError) => {
+
+                            if (insertError) {
+
+                                console.error(
+                                    "Error saving new permissions:",
+                                    insertError.message
+                                );
+
+                                return res.status(500).json({
+                                    message:
+                                        "Failed to save role permissions."
+                                });
+
+                            }
+
+                            res.json({
+
+                                message:
+                                    "Role permissions updated successfully.",
+
+                                role_id:
+                                    roleId,
+
+                                permission_ids:
+                                    permission_ids
+
+                            });
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+});
+
+
+
+
+/* =====================================================
 DELETE ROLE
 ===================================================== */
 

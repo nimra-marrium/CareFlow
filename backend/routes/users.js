@@ -113,6 +113,13 @@ router.delete("/:userId", (req, res) => {
         });
     }
 
+    // Admin account can never be deleted
+    if (userId === "USR-001") {
+        return res.status(403).json({
+            message: "The Admin account cannot be deleted."
+        });
+    }
+
     const sql = `
         DELETE FROM users
         WHERE user_id = ?
@@ -318,15 +325,15 @@ router.post("/", async (req, res) => {
 
 });
 
-
 // UPDATE user
-router.put("/:userId", (req, res) => {
+router.put("/:userId", async (req, res) => {
 
     const { userId } = req.params;
 
     const {
         full_name,
         email,
+        password,
         phone,
         role_id,
         department_id,
@@ -334,6 +341,172 @@ router.put("/:userId", (req, res) => {
         status
     } = req.body;
 
+
+    // =====================================================
+    // ADMIN ACCOUNT
+    // =====================================================
+
+    if (userId === "USR-001") {
+
+        if (!email || !status) {
+
+            return res.status(400).json({
+                message: "Email and status are required."
+            });
+
+        }
+
+
+        // If a new password was entered
+        if (password && password.trim() !== "") {
+
+            try {
+
+                const hashedPassword =
+                    await bcrypt.hash(password, 10);
+
+
+                const sql = `
+                    UPDATE users
+                    SET
+                        email = ?,
+                        password = ?,
+                        status = ?
+                    WHERE user_id = ?
+                `;
+
+
+                const values = [
+                    email,
+                    hashedPassword,
+                    status,
+                    userId
+                ];
+
+
+                db.query(
+                    sql,
+                    values,
+                    (error, result) => {
+
+                        if (error) {
+
+                            console.error(
+                                "Error updating Admin:",
+                                error.message
+                            );
+
+                            return res.status(500).json({
+                                message:
+                                    "Failed to update Admin."
+                            });
+
+                        }
+
+
+                        if (result.affectedRows === 0) {
+
+                            return res.status(404).json({
+                                message:
+                                    "Admin user not found."
+                            });
+
+                        }
+
+
+                        res.json({
+                            message:
+                                "Admin updated successfully.",
+                            user_id:
+                                userId
+                        });
+
+                    }
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Password hashing error:",
+                    error.message
+                );
+
+                return res.status(500).json({
+                    message:
+                        "Failed to process password."
+                });
+
+            }
+
+        } else {
+
+            // Update only email and status
+            const sql = `
+                UPDATE users
+                SET
+                    email = ?,
+                    status = ?
+                WHERE user_id = ?
+            `;
+
+
+            const values = [
+                email,
+                status,
+                userId
+            ];
+
+
+            db.query(
+                sql,
+                values,
+                (error, result) => {
+
+                    if (error) {
+
+                        console.error(
+                            "Error updating Admin:",
+                            error.message
+                        );
+
+                        return res.status(500).json({
+                            message:
+                                "Failed to update Admin."
+                        });
+
+                    }
+
+
+                    if (result.affectedRows === 0) {
+
+                        return res.status(404).json({
+                            message:
+                                "Admin user not found."
+                        });
+
+                    }
+
+
+                    res.json({
+                        message:
+                            "Admin updated successfully.",
+                        user_id:
+                            userId
+                    });
+
+                }
+            );
+
+        }
+
+        return;
+    }
+
+
+    // =====================================================
+    // NORMAL USERS
+    // =====================================================
 
     if (
         !full_name ||

@@ -294,5 +294,106 @@ router.put("/:departmentId", (req, res) => {
 
 });
 
+// DELETE department
+router.delete("/:departmentId", (req, res) => {
+
+    const { departmentId } = req.params;
+
+
+    // CHECK IF DEPARTMENT IS ASSIGNED TO USERS
+
+    const checkUsersSql = `
+        SELECT COUNT(*) AS userCount
+        FROM users
+        WHERE department_id = ?
+    `;
+
+
+    db.query(
+        checkUsersSql,
+        [departmentId],
+        (userError, userResults) => {
+
+            if (userError) {
+
+                console.error(
+                    "Error checking department users:",
+                    userError.message
+                );
+
+                return res.status(500).json({
+                    message:
+                        "Failed to check department usage."
+                });
+
+            }
+
+
+            if (userResults[0].userCount > 0) {
+
+                return res.status(409).json({
+                    message:
+                        "This department cannot be deleted because it is currently assigned to one or more users."
+                });
+
+            }
+
+
+            // DELETE DEPARTMENT
+
+            const deleteSql = `
+                DELETE FROM departments
+                WHERE department_id = ?
+            `;
+
+
+            db.query(
+                deleteSql,
+                [departmentId],
+                (deleteError, result) => {
+
+                    if (deleteError) {
+
+                        console.error(
+                            "Error deleting department:",
+                            deleteError.message
+                        );
+
+                        return res.status(500).json({
+                            message:
+                                "Failed to delete department."
+                        });
+
+                    }
+
+
+                    if (result.affectedRows === 0) {
+
+                        return res.status(404).json({
+                            message:
+                                "Department not found."
+                        });
+
+                    }
+
+
+                    res.json({
+
+                        message:
+                            "Department deleted successfully.",
+
+                        department_id:
+                            departmentId
+
+                    });
+
+                }
+            );
+
+        }
+    );
+
+});
+
 
 module.exports = router;

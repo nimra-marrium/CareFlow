@@ -1143,4 +1143,91 @@ if (
 
 }
 
+/* =====================================================
+   SAVE ROLE PERMISSIONS
+===================================================== */
+
+const savePermissionsBtn =
+    document.getElementById("savePermissionsBtn");
+
+if (savePermissionsBtn) {
+
+    savePermissionsBtn.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                // Get all roles from the permission table
+                const roleIds = [
+                    ...new Set(
+                        [...document.querySelectorAll(
+                            "#permissionsTableBody input[type='checkbox']"
+                        )].map(
+                            checkbox => checkbox.dataset.role
+                        )
+                    )
+                ];
+
+                // Save permissions for each role
+                for (const roleId of roleIds) {
+
+                    const checkedPermissions = [
+                        ...document.querySelectorAll(
+                            `#permissionsTableBody input[data-role="${roleId}"]:checked`
+                        )
+                    ].map(
+                        checkbox =>
+                            Number(checkbox.dataset.permission)
+                    );
+
+                    const response = await fetch(
+    `http://localhost:5000/api/roles/${roleId}/permissions`,
+                        {
+                            method: "PUT",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                permission_ids: checkedPermissions
+                            })
+                        }
+                    );
+
+                    const text = await response.text();
+
+console.log("STATUS:", response.status);
+console.log("RESPONSE:", text);
+
+const data = text ? JSON.parse(text) : {};
+
+                    if (!response.ok) {
+                        throw new Error(
+                            data.message || "Failed to save permissions"
+                        );
+                    }
+                }
+
+                alert("Permissions saved successfully.");
+
+            } catch (error) {
+
+                console.error(
+                    "Error saving permissions:",
+                    error
+                );
+
+                alert(
+                    error.message ||
+                    "Failed to save permissions."
+                );
+            }
+
+        }
+    );
+
+}
+
 });
