@@ -140,9 +140,15 @@ document.addEventListener("DOMContentLoaded", function () {
   fetch(sidebarFile)
     .then(response => response.text())
     .then(data => {
-      sidebarContainer.innerHTML = data;
+  sidebarContainer.innerHTML = data;
 
-      /* Highlight the current page */
+  if (currentFolder === "user") {
+    document.dispatchEvent(
+      new Event("userSidebarLoaded")
+    );
+  }
+
+  /* Highlight the current page */
       const currentPage = window.location.pathname.split("/").pop();
 
       document.querySelectorAll(".sidebar .nav a").forEach(function (link) {

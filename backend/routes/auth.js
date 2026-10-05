@@ -21,6 +21,7 @@ router.post("/login", (req, res) => {
             u.email,
             u.password,
             u.status,
+            u.role_id,
             r.role_name
         FROM users u
         JOIN roles r ON u.role_id = r.role_id
@@ -65,11 +66,12 @@ router.post("/login", (req, res) => {
         res.json({
             message: "Login successful.",
             user: {
-                user_id: user.user_id,
-                full_name: user.full_name,
-                email: user.email,
-                role: user.role_name
-            }
+    user_id: user.user_id,
+    full_name: user.full_name,
+    email: user.email,
+    role_id: user.role_id,
+    role: user.role_name
+}
         });
 
     });
