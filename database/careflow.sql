@@ -39,7 +39,7 @@ CREATE TABLE `departments` (
 
 LOCK TABLES `departments` WRITE;
 /*!40000 ALTER TABLE `departments` DISABLE KEYS */;
-INSERT INTO `departments` VALUES ('DEP-001','Administration','ADM','Active'),('DEP-002','Cardiology','CAR','Active'),('DEP-003','Dermatology','DER','Active'),('DEP-004','Emergency','EMR','Active'),('DEP-005','ENT','ENT','Active'),('DEP-006','Gastroenterology','GAS','Active'),('DEP-007','General Medicine','GEN','Active'),('DEP-008','Gynecology','GYN','Active'),('DEP-009','Neurology','NEU','Active'),('DEP-010','Oncology','ONC','Active'),('DEP-011','Orthopedics','ORT','Active'),('DEP-012','Pharmacy','PHA','Active'),('DEP-013','Radiology','RAD','Active'),('DEP-014','Urology','URO','Active'),('DEP-015','Zoologyy','ZOO','Inactive');
+INSERT INTO `departments` VALUES ('DEP-001','Administration','ADM','Active'),('DEP-002','Cardiology','CAR','Active'),('DEP-003','Dermatology','DER','Active'),('DEP-004','Emergency','EMR','Active'),('DEP-005','ENT','ENT','Active'),('DEP-006','Gastroenterology','GAS','Active'),('DEP-007','General Medicine','GEN','Active'),('DEP-008','Gynecology','GYN','Active'),('DEP-009','Neurology','NEU','Active'),('DEP-010','Oncology','ONC','Active'),('DEP-011','Orthopedics','ORT','Active'),('DEP-012','Pharmacy','PHA','Active'),('DEP-013','Radiology','RAD','Active');
 /*!40000 ALTER TABLE `departments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `role_permissions` (
 
 LOCK TABLES `role_permissions` WRITE;
 /*!40000 ALTER TABLE `role_permissions` DISABLE KEYS */;
-INSERT INTO `role_permissions` VALUES (1,1),(2,1),(1,2),(2,2),(11,2),(1,3),(2,3),(1,4),(2,4),(11,4),(1,5),(2,5),(1,6),(3,6),(3,7);
+INSERT INTO `role_permissions` VALUES (1,1),(2,1),(4,1),(1,2),(2,2),(4,2),(2,3),(4,3),(1,4),(2,4),(4,4),(2,5),(4,5),(1,6),(3,6),(4,6),(3,7),(4,7);
 /*!40000 ALTER TABLE `role_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +107,7 @@ CREATE TABLE `roles` (
   `role_name` varchar(50) NOT NULL,
   PRIMARY KEY (`role_id`),
   UNIQUE KEY `role_name` (`role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +116,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (4,'Admin'),(1,'Doctor'),(11,'Nurse'),(3,'Pharmacist'),(2,'Receptionist');
+INSERT INTO `roles` VALUES (4,'Admin'),(1,'Doctor'),(3,'Pharmacist'),(2,'Receptionist');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -152,7 +152,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('USR-001','Nimra Marrium','admin@careflow.com','$2b$10$kojwCbG/rrzIlVaTwE1WL..K08KPZR4YMJdUCkUMdDGJJVvt2AB1S','03332275508',4,NULL,'Cardiology','Active'),('USR-003','Ali','123nahgds@gmail.com','$2b$10$07Td4Ezu1U4cL08j0W3F1ug2ISnWJ6MgQjiPSRLbqXwmbMwK.79Bu','03243857204',1,'DEP-012','Cardiology','Active'),('USR-004','Ansa A','ansaan@gmail.com','$2b$10$XTtQvyJedf6A3ZlajkbLa.OMEeH5ZEMP8u9aKot.I0IXl6IkFLK3.','04535284392',3,'DEP-014',NULL,'Active'),('USR-005','Nimra Marrium','nimramarriummm@gmail.com','$2b$10$3/q/XhQ2UPBHPCMivZM3c.4mAbkOjsi9lrILo74aH.JuGH/T.NFpC','03332275508',1,'DEP-011','Cardiology','Active');
+INSERT INTO `users` VALUES ('USR-001','Admin','admin@careflow.com','$2b$10$kojwCbG/rrzIlVaTwE1WL..K08KPZR4YMJdUCkUMdDGJJVvt2AB1S','03332275508',4,'DEP-001','Cardiology','Active'),('USR-002','Nimra Marrium','nimramarrium@gmail.com','$2b$10$2aWnrxIKtX1Sb/gaSBfaaepxzB2kt6wR4e8r/dBBX1t0h3WVk/tLe','03332275508',1,'DEP-005','ENT','Active'),('USR-003','Ansa','ansaanwaar38@gmail.com','$2b$10$whUy7tmrm7v5Iz1k/17kcuo4dddQm1w8jkkfXbLmaGiDLztt58qGW','03134275506',2,'DEP-009',NULL,'Active'),('USR-004','Ali','ali@gmail.com','$2b$10$DuE0FKJeRXdb5g8bwBnJ4OlbbYJcopoxgjGvjgvNP.A5hd8DAiUfa','02335275408',3,'DEP-009',NULL,'Active'),('USR-005','Arooj','arooj@gmail.com','$2b$10$P8qqk.RCZUtu8jluXjQEQOy85tTrqSeMn2PgrIuTtC6ffXPhm3ZuW','04257829426',1,'DEP-010','Oncologist','Active');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -165,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-10-01 13:07:28
+-- Dump completed on 2026-10-06 11:58:12
