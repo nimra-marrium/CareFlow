@@ -11,6 +11,8 @@ const authRoute = require("./routes/auth");
 const rolesRoute = require("./routes/roles");
 const departmentsRoute = require("./routes/departments");
 const patientsRoute = require("./routes/patients");
+const appointmentsRoute = require("./routes/appointments");
+const medicinesRoute = require("./routes/medicines");
 
 const app = express();
 const PORT = 5000;
@@ -27,6 +29,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/roles", rolesRoute);
 app.use("/api/departments", departmentsRoute);
 app.use("/api/patients", patientsRoute);
+app.use("/api/appointments", appointmentsRoute);
+app.use("/api/medicines", medicinesRoute);
 
 app.listen(PORT, () => {
     console.log(`CareFlow backend running on http://localhost:${PORT}`);
