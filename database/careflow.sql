@@ -166,3 +166,134 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2026-10-06 12:18:38
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+USE careflow;
+SHOW TABLES;
+
+USE careflow;
+
+SHOW CREATE TABLE users;
+SHOW CREATE TABLE departments;
+
+USE careflow;
+
+DESCRIBE users;
+DESCRIBE departments;
+
+SELECT role_id, role_name FROM roles;
+
+SHOW TABLES;
+
+
+USE careflow;
+
+CREATE TABLE patients (
+    patient_id VARCHAR(10) NOT NULL PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    age INT NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    address TEXT DEFAULT NULL,
+    assigned_doctor_id VARCHAR(10) DEFAULT NULL,
+    department_id VARCHAR(10) DEFAULT NULL,
+    status ENUM('Active', 'Inactive') NOT NULL DEFAULT 'Active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (assigned_doctor_id)
+        REFERENCES users(user_id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (department_id)
+        REFERENCES departments(department_id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+
+
+USE careflow;
+SHOW TABLES;
+
+
+
+CREATE TABLE appointments (
+    appointment_id VARCHAR(10) NOT NULL,
+    patient_id VARCHAR(10) NOT NULL,
+    doctor_id VARCHAR(10) NOT NULL,
+    department_id VARCHAR(10) DEFAULT NULL,
+    appointment_date DATE NOT NULL,
+    appointment_time TIME NOT NULL,
+    reason TEXT DEFAULT NULL,
+    status ENUM(
+        'Scheduled',
+        'Completed',
+        'Cancelled'
+    ) NOT NULL DEFAULT 'Scheduled',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (appointment_id),
+
+    INDEX idx_appointments_patient (patient_id),
+    INDEX idx_appointments_doctor (doctor_id),
+    INDEX idx_appointments_date (appointment_date),
+
+    CONSTRAINT fk_appointments_patient
+        FOREIGN KEY (patient_id)
+        REFERENCES patients(patient_id),
+
+    CONSTRAINT fk_appointments_doctor
+        FOREIGN KEY (doctor_id)
+        REFERENCES users(user_id),
+
+    CONSTRAINT fk_appointments_department
+        FOREIGN KEY (department_id)
+        REFERENCES departments(department_id)
+        ON DELETE SET NULL
+        ON UPDATE CASCADE
+);
+
+SHOW TABLES;
+
+USE careflow;
+SHOW TABLES;
+
+
+
+USE careflow;
+
+CREATE TABLE medicines (
+    medicine_id VARCHAR(10) NOT NULL,
+    medicine_name VARCHAR(100) NOT NULL,
+    category VARCHAR(50) DEFAULT NULL,
+    quantity INT NOT NULL DEFAULT 0,
+    unit_price DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
+    expiry_date DATE DEFAULT NULL,
+    status ENUM('Available', 'Out of Stock', 'Expired')
+        NOT NULL DEFAULT 'Available',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (medicine_id)
+);
+
+
+SHOW TABLES;
