@@ -942,7 +942,6 @@ function formatTime(time) {
     hour = 12;
   }
 
-
   return `${hour}:${minutes} ${ampm}`;
 
 }
