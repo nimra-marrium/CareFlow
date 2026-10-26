@@ -16,9 +16,10 @@ router.get("/", (req, res) => {
             u.email,
             u.phone,
             u.specialization,
-            u.status,
-            r.role_name,
-            d.department_name
+u.status,
+r.role_name,
+u.department_id,
+d.department_name
         FROM users u
         JOIN roles r
             ON u.role_id = r.role_id

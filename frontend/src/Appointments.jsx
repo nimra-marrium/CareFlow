@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { DashboardLayout } from "./Dashboard";
 
@@ -93,7 +94,11 @@ function Appointments() {
       setAppointments(appointmentsData);
 
       setPatients(
-        patientsData.filter((patient) => patient.status === "Active")
+        patientsData.filter(
+          (patient) =>
+            patient.status === "Active" ||
+            patient.status === "Inactive"
+        ).filter((patient) => patient.status === "Active")
       );
 
       setDoctors(
@@ -124,6 +129,23 @@ function Appointments() {
   function handleChange(event) {
     const { name, value } = event.target;
 
+    // Selecting a patient automatically fills their doctor and department.
+    if (name === "patient_id") {
+      const selectedPatient = patients.find(
+        (patient) => String(patient.patient_id) === value
+      );
+
+      setForm((previous) => ({
+        ...previous,
+        patient_id: value,
+        doctor_id: String(selectedPatient?.assigned_doctor_id || ""),
+        department_id: String(selectedPatient?.department_id || ""),
+      }));
+
+      return;
+    }
+
+    // Selecting a doctor updates the department to match that doctor.
     if (name === "doctor_id") {
       const selectedDoctor = doctors.find(
         (doctor) => String(doctor.user_id) === value
@@ -464,8 +486,9 @@ function Appointments() {
                       value={form.department_id}
                       onChange={handleChange}
                       required
+                      disabled
                     >
-                      <option value="">Select department</option>
+                      <option value="">Select patient or doctor first</option>
 
                       {departments.map((department) => (
                         <option

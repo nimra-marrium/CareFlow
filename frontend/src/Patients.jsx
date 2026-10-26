@@ -115,10 +115,34 @@ function Patients() {
     loadFormOptions();
   }, [canView]);
 
+
   function handleChange(event) {
     const { name, value } = event.target;
-    setForm((previous) => ({ ...previous, [name]: value }));
+
+    setForm((previous) => {
+      if (name === "department_id") {
+        const selectedDoctor = doctors.find(
+          (doctor) =>
+            String(doctor.user_id) === String(previous.assigned_doctor_id)
+        );
+
+        const doctorMatchesDepartment =
+          selectedDoctor &&
+          String(selectedDoctor.department_id) === String(value);
+
+        return {
+          ...previous,
+          department_id: value,
+          assigned_doctor_id: doctorMatchesDepartment
+            ? previous.assigned_doctor_id
+            : "",
+        };
+      }
+
+      return { ...previous, [name]: value };
+    });
   }
+
 
   function openAddForm() {
     setEditingPatient(null);
@@ -231,6 +255,12 @@ function Patients() {
     }
   }
 
+  const filteredDoctors = doctors.filter(
+    (doctor) =>
+      String(doctor.department_id) === String(form.department_id) &&
+      form.department_id !== ""
+  );
+
   const filteredPatients = patients.filter((patient) => {
     const search = searchValue.trim().toLowerCase();
 
@@ -271,12 +301,15 @@ function Patients() {
 
             {canAdd && (
               <button
-                type="button"
-                className="btn btn-primary"
-                onClick={showForm ? cancelForm : openAddForm}
-              >
-                {showForm ? "Cancel" : "+ Add Patient"}
-              </button>
+  type="button"
+  className="btn btn-primary"
+  onClick={() => {
+    console.log("Add Patient clicked");
+    openAddForm();
+  }}
+>
+  + Add Patient
+</button>
             )}
           </div>
 
@@ -427,8 +460,12 @@ function Patients() {
                         value={form.assigned_doctor_id}
                         onChange={handleChange}
                       >
-                        <option value="">Select doctor</option>
-                        {doctors.map((doctor) => (
+                        <option value="">
+                          {form.department_id
+                            ? "Select doctor"
+                            : "Select department first"}
+                        </option>
+                        {filteredDoctors.map((doctor) => (
                           <option key={doctor.user_id} value={doctor.user_id}>
                             {doctor.full_name}
                           </option>

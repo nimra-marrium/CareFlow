@@ -47,37 +47,56 @@ router.post("/", (req, res) => {
         });
     }
 
-    const appointment_id = "APT-" + Date.now().toString().slice(-6);
-
-    const sql = `
-        INSERT INTO appointments (
-            appointment_id, patient_id, doctor_id, department_id,
-            appointment_date, appointment_time, reason, status
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?, 'Scheduled')
+    // Generate the next sequential appointment ID
+    const getNextIdSql = `
+        SELECT COALESCE(
+            MAX(CAST(SUBSTRING(appointment_id, 5) AS UNSIGNED)),
+            1000
+        ) AS max_id
+        FROM appointments
+        WHERE appointment_id REGEXP '^APT-[0-9]+$'
     `;
 
-    const values = [
-        appointment_id,
-        patient_id,
-        doctor_id,
-        department_id || null,
-        appointment_date,
-        appointment_time,
-        reason || null
-    ];
-
-    db.query(sql, values, (error) => {
-        if (error) {
-            console.error("Book appointment error:", error);
+    db.query(getNextIdSql, (idError, rows) => {
+        if (idError) {
+            console.error("Generate appointment ID error:", idError);
             return res.status(500).json({
-                message: "Failed to book appointment"
+                message: "Failed to generate appointment ID"
             });
         }
 
-        res.status(201).json({
-            message: "Appointment booked successfully",
-            appointment_id
+        const appointment_id = `APT-${Number(rows[0].max_id) + 1}`;
+
+        const sql = `
+            INSERT INTO appointments (
+                appointment_id, patient_id, doctor_id, department_id,
+                appointment_date, appointment_time, reason, status
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, 'Scheduled')
+        `;
+
+        const values = [
+            appointment_id,
+            patient_id,
+            doctor_id,
+            department_id || null,
+            appointment_date,
+            appointment_time,
+            reason || null
+        ];
+
+        db.query(sql, values, (error) => {
+            if (error) {
+                console.error("Book appointment error:", error);
+                return res.status(500).json({
+                    message: "Failed to book appointment"
+                });
+            }
+
+            res.status(201).json({
+                message: "Appointment booked successfully",
+                appointment_id
+            });
         });
     });
 });

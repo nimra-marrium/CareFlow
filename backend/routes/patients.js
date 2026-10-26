@@ -64,38 +64,66 @@ router.post("/", (req, res) => {
         });
     }
 
-    const patient_id = "PAT-" + Date.now().toString().slice(-6);
-
-    const sql = `
-        INSERT INTO patients
-        (patient_id, full_name, age, gender, phone, address,
-         assigned_doctor_id, department_id, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    // Generate the next sequential patient ID
+    const getNextIdSql = `
+        SELECT COALESCE(
+            MAX(CAST(SUBSTRING(patient_id, 5) AS UNSIGNED)),
+            1000
+        ) AS max_id
+        FROM patients
+        WHERE patient_id REGEXP '^PAT-[0-9]+$'
     `;
 
-    const values = [
-        patient_id,
-        full_name.trim(),
-        Number(age),
-        gender,
-        phone.trim(),
-        address || null,
-        assigned_doctor_id || null,
-        department_id || null,
-        status || "Active"
-    ];
-
-    db.query(sql, values, (error) => {
-        if (error) {
-            console.error(error);
+    db.query(getNextIdSql, (idError, rows) => {
+        if (idError) {
+            console.error(idError);
             return res.status(500).json({
-                message: "Failed to add patient"
+                message: "Failed to generate patient ID"
             });
         }
 
-        res.status(201).json({
-            message: "Patient added successfully",
-            patient_id
+        const patient_id = `PAT-${Number(rows[0].max_id) + 1}`;
+
+        const sql = `
+            INSERT INTO patients
+            (
+                patient_id,
+                full_name,
+                age,
+                gender,
+                phone,
+                address,
+                assigned_doctor_id,
+                department_id,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        const values = [
+            patient_id,
+            full_name.trim(),
+            Number(age),
+            gender,
+            phone.trim(),
+            address || null,
+            assigned_doctor_id || null,
+            department_id || null,
+            status || "Active"
+        ];
+
+        db.query(sql, values, (error) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).json({
+                    message: "Failed to add patient"
+                });
+            }
+
+            res.status(201).json({
+                message: "Patient added successfully",
+                patient_id
+            });
         });
     });
 });

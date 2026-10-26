@@ -35,58 +35,79 @@ router.post("/", (req, res) => {
 
     if (
         !medicine_name ||
+        !medicine_name.trim() ||
         quantity === undefined ||
         unit_price === undefined ||
         quantity === "" ||
         unit_price === "" ||
-        Number(quantity) < 0 ||
-        Number(unit_price) < 0 ||
         !Number.isInteger(Number(quantity)) ||
-        !Number.isFinite(Number(unit_price))
+        Number(quantity) < 0 ||
+        !Number.isFinite(Number(unit_price)) ||
+        Number(unit_price) < 0
     ) {
         return res.status(400).json({
             message: "Enter a valid medicine name, quantity and unit price"
         });
     }
 
-    const medicine_id = "MED-" + Date.now().toString().slice(-6);
-    const status =
-        Number(quantity) === 0 ? "Out of Stock" : "Available";
-
-    const sql = `
-        INSERT INTO medicines (
-            medicine_id,
-            medicine_name,
-            category,
-            quantity,
-            unit_price,
-            expiry_date,
-            status
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+    // Generate the next sequential medicine ID
+    const getNextIdSql = `
+        SELECT COALESCE(
+            MAX(CAST(SUBSTRING(medicine_id, 5) AS UNSIGNED)),
+            1000
+        ) AS max_id
+        FROM medicines
+        WHERE medicine_id REGEXP '^MED-[0-9]+$'
     `;
 
-    const values = [
-        medicine_id,
-        medicine_name.trim(),
-        category || null,
-        Number(quantity),
-        Number(unit_price),
-        expiry_date || null,
-        status
-    ];
-
-    db.query(sql, values, (error) => {
-        if (error) {
-            console.error("Add medicine error:", error);
+    db.query(getNextIdSql, (idError, rows) => {
+        if (idError) {
+            console.error("Generate medicine ID error:", idError);
             return res.status(500).json({
-                message: "Failed to add medicine"
+                message: "Failed to generate medicine ID"
             });
         }
 
-        res.status(201).json({
-            message: "Medicine added successfully",
-            medicine_id
+        const medicine_id = `MED-${Number(rows[0].max_id) + 1}`;
+
+        const status =
+            Number(quantity) === 0 ? "Out of Stock" : "Available";
+
+        const sql = `
+            INSERT INTO medicines (
+                medicine_id,
+                medicine_name,
+                category,
+                quantity,
+                unit_price,
+                expiry_date,
+                status
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        `;
+
+        const values = [
+            medicine_id,
+            medicine_name.trim(),
+            category || null,
+            Number(quantity),
+            Number(unit_price),
+            expiry_date || null,
+            status
+        ];
+
+        db.query(sql, values, (error) => {
+            if (error) {
+                console.error("Add medicine error:", error);
+                return res.status(500).json({
+                    message: "Failed to add medicine"
+                });
+            }
+
+            res.status(201).json({
+                message: "Medicine added successfully",
+                medicine_id
+            });
         });
     });
 });
